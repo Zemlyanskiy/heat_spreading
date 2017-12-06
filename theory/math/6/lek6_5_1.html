@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка. Неявная разностная схема. Характеристика.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Неявная разностная схема с аппроксимацией производной по координате первого порядка центральной конечной разностью.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1. Характеристика.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Неявная разностная схема для уравнения <a href="lek6_1.html#6_1">(6.1)</a> при <a href="../2/lek2_2_1.html">аппроксимации</a> 
+производной по координате первого порядка <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a> имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_1.gif" border="0"></td>
+<td align=right width=100>(6.8)</td></tr></table>
+Учитывая <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> разностных операторов, составляющих данную разностную схему, легко видеть, 
+что она аппроксимирует дифференциальное уравнение <a href="lek6_1.html#6_1">(6.1)</a> с первым порядком по времени, 
+и со вторым - по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> разностной схемы (6.8) с помощью <a href="../3/lek3_2.html">спектрального метода</a>. 
+Для этого отбрасываем член <IMG src="6_5_1_3.gif" style="vertical-align: middle">, наличие которого, <a href="../3/lek3_4.html">как известно</a>, 
+не оказывает влияния на устойчивость разностной схемы, и представляем решение в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="6_5_1_5.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Группируя члены, содержащие <IMG src="../lyambda.gif" style="vertical-align: middle">, 
+в левой части уравнения, выразим величину, обратную <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Определим модуль полученного комплексного числа:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_5_1_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, собственные числа <a href="../3/lek3_3.html#2">оператора перехода</a>, удовлетворяют условию устойчивости разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a>. 
+Следовательно, неявная разностная схема с аппроксимацией производной по координате первого порядка 
+центральной конечной разностью (6.8) <a href="../3/lek3_5.html#bottom">абсолютно устойчива</a>, причём вне зависимости от знака параметра <em>v</em>.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Аппроксимация дифференциальных операторов.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Аппроксимация дифференциальных операторов.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Используя <a href="lek7_2.html#1">введённые обозначения</a>, запишем <a href="../2/lek2_2_1.html">аппроксимацию</a> дифференциальных 
+операторов, составляющих уравнение <a href="lek7_2.html">(7.1)</a>, в точке <IMG src="7_3_1.gif" style="vertical-align: middle">. Для аппроксимации производной функции <em>u</em> 
+по времени обычно используется <a href="../2/lek2_2_1.html#1">правая конечная разность</a> (со стабилизацией значения независимой переменной 
+<em>х</em> в точке с порядковым номером <em>j</em>, а значения независимой переменной <em>y</em> в точке 
+с порядковым номером <em>k</em>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_2.gif" border="0"></td>
+<td></td></tr></table>
+Для аппроксимации второй производной функции <em>u</em> по координате <em>х</em> будем использовать 
+разностный оператор <a href="../2/lek2_2_3.html#2_12">(2.12)</a> (со стабилизацией значения независимой переменной <em>y</em> в точке с 
+порядковым номером <em>k</em>, а значения независимой переменной <em>t</em> в точке с порядковым номером <em>n</em>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_3.gif" border="0"></td>
+<td></td></tr></table>
+Для аппроксимации второй производной функции <em>u</em> по координате <em>y</em> также будем использовать разностный оператор
+ <a href="../2/lek2_2_3.html#2_12">(2.12)</a> (со стабилизацией значения независимой переменной <em>х</em> в точке с порядковым номером <em>j</em>, 
+а значения независимой переменной <em>t</em> в точке с порядковым номером <em>n</em>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_4.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_2" id="#7_2"></a>Подставляя записанные разностные операторы в дифференциальное уравнение <a href="lek7_2.html">(7.1)</a>, 
+получаем явную разностную схему, аппроксимирующую уравнение <a href="lek7_2.html">(7.1)</a> в точке <IMG src="7_3_1.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_5.gif" border="0"></td>
+<td>(7.2)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_3" id="#7_3"></a>Рассматривая аппроксимацию обеих производных второго порядка на (<em>n</em> + 1)-ом шаге по времени, получаем неявную разностную схему:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_6.gif" border="0"></td>
+<td>(7.3)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Учитывая <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> разностных операторов, использованных при составлении 
+разностных схем (7.2), (7.3), легко видеть, что они имеют первый порядок аппроксимации по 
+времени и второй - по каждой из координат:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_3_7.gif" border="0"></td>
+<td></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

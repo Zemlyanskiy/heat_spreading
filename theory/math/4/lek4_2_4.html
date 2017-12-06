@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Неявная разностная схема. Определение решения на правой границе.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявная разностная схема</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4. Определение решения на правой границе</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Итак, используя левое граничное условие и 
+соотношения <a href="lek4_2_2.html#4_13">(4.13)</a>, можно определить 
+значения <a href="lek4_2_2.html#4_11">прогоночных коэффициентов</a> на любом шаге по координате <em>х</em>. 
+Однако рекуррентное прогоночное соотношение <a href="lek4_2_2.html#4_11">(4.11)</a> позволит рассчитать значение 
+функции <em>u</em> в точке <IMG src="4_2_4_10.gif" style="vertical-align: middle">, только если будет известно значение функции <em>u</em> 
+в точке <IMG src="4_2_4_11.gif" style="vertical-align: middle">, т.е. в соседней справа точке на <a href="../2/lek2_3_1.html#1">разностной сетке</a>. Следовательно, необходимо знать 
+значение функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени в крайней 
+справа точке, которое можно определить из правого граничного условия <a href="lek4_2_1.html#4_7">(4.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Однако вместо граничных условий 1-го рода <a href="lek4_2_1.html#4_5">(4.5)</a> могут 
+быть заданы <a href="../1/lek1_5.html#2">граничные условия 2-го или 3-го рода</a>. Для расчёта решения на правой границе 
+в этом случае используют рекуррентное прогоночное соотношение <a href="lek4_2_2.html#4_11">(4.11)</a>, записанное 
+для <em>j</em> = <em>N</em> - 1:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_2.gif" border="0"></td>
+<td align=right width=100>(4.15)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Пусть задано правое граничное условие 2-го рода:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Запишем <a href="../2/lek2_3_4.html#3">его аппроксимацию</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя соотношение (4.15) в данное равенство и выражая <IMG src="4_2_4_5.gif" style="vertical-align: middle">, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Пусть задано правое граничное условие 3-го рода:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Запишем <a href="../2/lek2_3_4.html#4">его аппроксимацию</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя соотношение (4.15) в данное равенство и выражая <IMG src="4_2_4_5.gif" style="vertical-align: middle">, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_4_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

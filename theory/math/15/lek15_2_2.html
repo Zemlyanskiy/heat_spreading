@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Решение сложных систем уравнений. Решение математической модели процесса массовой кристаллизации из растворов. Разностные схемы и рекуррентные соотношения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение сложных систем уравнений.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Решение математической модели процесса массовой кристаллизации из растворов.</FONT></FONT></FONT>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2. Разностные схемы и рекуррентные соотношения.</FONT></EM></B></FONT>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Система уравнений <a href="lek15_2_1.html#15_2">(15.2)-(15.8)</a>, описывающих процесс массовой кристаллизации 
+из растворов в емкостном кристаллизаторе, включает два интегро-дифференциальных уравнения <a href="lek15_2_1.html#15_3">(15.2) и (15.3)</a>, 
+дифференциальное уравнение в частных производных 1-го порядка <a href="lek15_2_1.html#15_4">(15.4)</a>, а также два алгебраических уравнения 
+<a href="lek15_2_1.html#15_5">(15.5)</a> и <a href="lek15_2_1.html#bottom">(15.8)</a>, начальные условия <a href="lek15_2_1.html#15_6">(15.6)</a> и граничные условия <a href="lek15_2_1.html#15_7">(15.7)</a>. Рассмотрим метод численного решения 
+системы <a href="lek15_2_1.html#15_2">(15.2)-(15.8)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#15_9" id="#15_9"></a>Методика составления разностных схем для уравнений <a href="lek15_2_1.html#15_3">(15.2) и (15.3)</a> была подробно рассмотрена <a href="../14/lek14_3_1.html">в разделе 14.3.1</a>; разностные схемы для данных уравнений имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_1.gif" border="0"></td>
+<td align=right width=100>(15.9)</td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+где <em>n</em> - порядковый номер точки деления по оси <em>t</em>, <em>j</em> - порядковый номер точки деления по оси <em>r</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рекуррентные соотношения для определения концентрации раствора и температуры имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#15_10" id="#15_10"></a>Разностная схема для уравнения <a href="lek15_2_1.html#15_4">(15.4)</a> записывается с учётом <a href="../5/lek5_8.html#1">правила 
+выбора конечной разности</a> для аппроксимации производной по <em>r</em> и <a href="../13/lek13_1_2.html">принципа замороженных коэффициентов</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_4.gif" border="0"></td>
+<td align=right width=100>(15.10)</td></tr></table>
+Рекуррентное соотношение для определения функции плотности распределения кристаллов по размерам имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Уравнения <a href="lek15_2_1.html#15_5">(15.5)-(15.8)</a> в разностном виде записываются следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_2_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

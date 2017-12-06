@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Сравнительная характеристика изученных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">9. Сравнительная характеристика изученных разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём сравнительную характеристику <a href="../2/lek2_3_2.html#1">разностных схем</a>, 
+аппроксимирующих <a href="../1/lek1_2.html#bottom">трёхмерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a>, не содержащее первых 
+производных по координатам <em>x</em>, <em>y</em> и <em>z</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_9_1.gif" border="0"></td>
+<td></td></tr></table>
+При записи разностных схем использованы обозначения <a href="lek9_3.html#9_2">(9.2)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Явная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_9_2.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="9_9_3.gif" style="vertical-align: middle">
+<li></li><a href="lek9_4_1.html">Условно устойчива</a>  <IMG src="9_9_4.gif" style="vertical-align: middle">
+<li></li>Решается с помощью рекуррентного соотношения <a href="lek9_4_2.html">(9.6)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. <a href="lek9_6.html">Схема расщепления</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_9_5.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="9_9_6.gif" style="vertical-align: middle">.
+<li></li><a href="../3/lek3_5.html#bottom">Абсолютно устойчива</a>.
+<li></li>Каждая подсхема решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. <a href="lek9_7.html">Схема со стабилизирующей поправкой</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_9_7.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="9_9_8.gif" style="vertical-align: middle">
+<li></li>Абсолютно устойчива.
+<li></li>Каждая подсхема решается с помощью метода прогонки.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. <a href="lek9_8_1.html">Схема предиктор-корректор</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_9_9.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="9_9_10.gif" style="vertical-align: middle">
+<li></li>Абсолютно устойчива.
+<li></li>Каждая из подсхем предиктора решается с помощью метода прогонки; 
+корректор (четвёртая подсхема) - с помощью рекуррентного соотношения <a href="lek9_8_2.html#9_21">(9.21)</a>.
+
+
+
+
+
+<p align="justify">
+
+
+
+
+<p align="justify">
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

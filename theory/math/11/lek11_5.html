@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений эллиптического типа. Метод установления с использованием схемы переменных направлений.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений эллиптического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Метод установления с использованием схемы переменных направлений.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek11_2.html#11_2">(11.2)</a> схему переменных направлений:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=120>&nbsp;</td>
+<td align=left><IMG alt="" src="11_5_1.gif" border="0"></td>
+</tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td align=left><IMG alt="" src="11_5_2.gif" border="0"></td>
+<td align=right width=120>(11.8)</td></tr></table>
+Как и схема расщепления <a href="lek11_4.html">(11.7)</a>, схема переменных направлений (11.8) является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>, 
+что обеспечивает возможность произвольного выбора значения <a href="lek11_2.html#bottom">шага итерации</a>. Однако схема переменных направлений 
+(11.8) имеет более высокий (второй) <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> по времени, что позволяет использовать при её 
+решении более грубый шаг итерации, чем при решении схемы расщепления <a href="lek11_4.html">(11.7)</a>, для получения результатов 
+с такой же точностью; а это в свою очередь способствует ускорению сходимости <a href="lek11_2.html#bottom">итерационного процесса</a> 
+и уменьшению количества <a href="lek11_2.html#bottom">итераций</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_5_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Каждая из подсхем схемы переменных направлений (11.8) решается 
+с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<li></li>для первой подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_5_4.gif" border="0"></td>
+<td align=right></td></tr></table>
+<li></li>для второй подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_5_5.gif" border="0"></td>
+<td align=right></td></tr></table>
+<div align="justify">
+Легко видеть, что для обеих подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется. 
+Алгоритм решения схемы (11.8) аналогичен <a href="../7/lek7_6_3.html">алгоритму решения</a> схемы расщепления 
+<a href="../7/lek7_6.html#7_7">(7.7), (7.8)</a>, аппроксимирующей <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1">параболического типа</a>; методики определения <a href="../4/lek4_2_2.html#4_11">прогоночных коэффициентов</a> 
+и <a href="../4/lek4_2_4.html">решения на правой границе</a> аналогичны описанным ранее в разделах <a href="../4/lek4_2_3.html">4.2.3</a>-<a href="../4/lek4_2_4.html">4.2.4</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Также как и в случае <a href="lek11_3_1.html">метода простой итерации</a>, в качестве нулевой итерации (<a href="../1/lek1_4.html">начального условия</a>, 
+необходимого для решения в связи с <a href="lek11_2.html#11_2">введением фиктивной производной по времени</a>) обычно задают 
+свободный член:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_5_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций следует продолжать до тех пор, пока итерационный процесс не сойдётся, 
+т.е. пока не будет выполняться условие <a href="lek11_2.html#11_3">(11.3)</a>, в разностном представлении соответствующее неравенству:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_5_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В качестве итерационного выражения служит прогоночное соотношение <a href="../4/lek4_2_2.html#4_11">(4.11)</a>, имеющее вид:
+<li></li>для первой подсхемы <IMG src="11_5_8.gif" style="vertical-align: middle">
+<li></li>для второй подсхемы <IMG src="11_5_9.gif" style="vertical-align: middle">
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

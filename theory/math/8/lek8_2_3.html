@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Неявные разностные схемы. Метод решения с использованием схемы расщепления.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявные разностные схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.3. Метод решения с использованием схемы расщепления.</FONT></EM></B>
+<p align="justify">
+<table align=right cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_1.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для решения неявных разностных схем <a href="lek8_2_1.html">(8.8)-(8.11)</a>, аппроксимирующих 
+дифференциальное уравнение <a href="lek8_1_1.html">(8.1)</a>, используется <a href="../7/lek7_6.html">метод дробных шагов</a>, подробно рассмотренный нами 
+при изучении <a href="../7/lek7_10.html">методов решения двумерных дифференциальных уравнений параболического типа</a>. Суть метода 
+дробных шагов заключается в расщеплении интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> пополам (<em>см. рисунок</em>), что позволяет представить 
+неявную разностную схему в виде двух подсхем, каждая из которых имеет более простой метод решения. 
+Рассмотрим методику решения неявных разностных схем <a href="lek8_2_1.html">(8.8)-(8.11)</a> на примере разностной схемы <a href="lek8_2_1.html">(8.8)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#8_12" id="#8_12"></a>Преобразуем с помощью метода дробных шагов неявную разностную схему <a href="lek8_2_1.html">(8.8)</a> в схему расщепления:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_2.gif" border="0"></td><td>(8.12)</td></tr></table>
+Первая подсхема аппроксимируется на первом полушаге интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> и является неявной по координате <em>x</em>. 
+Вторая подсхема аппроксимируется на втором полушаге интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> и является неявной по координате <em>y</em>. 
+Складывая обе подсхемы, получаем соотношение, отличающееся от разностной схемы <a href="lek8_2_1.html">(8.8)</a> только тем, 
+что производная по координате <em>x</em> аппроксимируется в нём не на (<em>n</em> + 1)-ом шаге по времени, 
+а на шаге (<em>n</em> + 1/2):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_3.gif" border="0"></td><td></td></tr></table>
+Данное соотношение показывает, что схема расщепления (8.12) имеет, как и неявная разностная схема <a href="lek8_2_1.html">(8.8)</a>, 
+первый <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> и по времени, и по каждой из координат:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_4.gif" border="0"></td><td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#8_13" id="#8_13"></a>Каждая из подсхем схемы расщепления (8.12), 
+являясь аналогом <a href="../5/lek5_8.html#2">неявной разностной схемы для одномерного дифференциального уравнения в частных производных первого порядка</a>, 
+абсолютно устойчива и решается с помощью соответствующего рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_5.gif" border="0"></td><td>(8.13)</td></tr></table>
+Для реализации рекуррентных соотношений (8.13) требуется знать значения <IMG src="8_2_3_6.gif" style="vertical-align: middle">, 
+определяемые с помощью <a href="../1/lek1_4.html">граничных условий</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_3_7.gif" border="0"></td><td></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

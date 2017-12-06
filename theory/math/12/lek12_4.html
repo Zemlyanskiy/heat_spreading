@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений первого порядка. Семейство методов Рунге-Кутта второго порядка.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Семейство методов Рунге-Кутта второго порядка.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Заменим в выражении для <em>k</em><sub>2</sub> <a href="lek12_3.html#12_7">(12.7)</a> коэффициенты при <IMG src="12_4_2.gif" style="vertical-align: middle"> 
+неизвестными параметрами <IMG src="12_4_1.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Разностную схему для уравнения <a href="lek12_1.html">(12.1)</a> представим в виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#12_8" id="#12_8"></a>Тогда решение на (<em>n</em> + 1)-ом шаге по времени будет определяться рекуррентным соотношением:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_5.gif" border="0"></td>
+<td align=right width=100>(12.8)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разложим функцию <em>k</em><sub>2</sub> в ряд Тейлора:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставим данное выражение в рекуррентное соотношение (12.8):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_7.gif" border="0"></td>
+<td align=right width=100>(12.9)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разложим функцию <IMG src="12_4_8.gif" style="vertical-align: middle"> в ряд Тейлора:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данная формула с учётом равенств
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_10.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+примет следующий вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_11.gif" border="0"></td>
+<td align=right width=100>(12.10)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Сравнивая  соотношения  (12.9) и (12.10), получаем следующую систему уравнений:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_12.gif" border="0"></td>
+<td align=right width=100>(12.11)</td></tr></table>
+Система (12.11) состоит из трёх уравнений с четырьмя неизвестными, поэтому она не может иметь 
+однозначного решения. Для определения значений неизвестных параметров необходимо задать значение 
+одного из них (обычно задают значение параметра <IMG src="12_4_13.gif" style="vertical-align: middle">); тогда значения остальных параметров можно 
+определить из уравнений системы (12.11):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_14.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+По этой причине принято говорить не о методе Рунге-Кутта второго порядка, а о семействе методов 
+Рунге-Кутта второго порядка, поскольку в зависимости от выбранного значения параметра <IMG src="12_4_13.gif" style="vertical-align: middle">
+мы получим тот или иной вид рекуррентного соотношения <a href="lek12_4.html#12_8">(12.8)</a>.
+<br><a name="#1" id="#1"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;На практике используются, как правило, два случая:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_15.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_4_16.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что первый случай совпадает с <a href="lek12_3.html">методом Рунге-Кутта второго порядка, 
+рассмотренным в предыдущем разделе</a>.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

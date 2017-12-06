@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Сравнительная характеристика изученных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Сравнительная характеристика изученных разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приведём сравнительную характеристику <a href="../2/lek2_3_2.html#1">разностных схем</a>, 
+аппроксимирующих <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение в частных производных первого порядка:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_1.gif" border="0"></td><td></td></tr></table>
+Для определённости рассмотрим случай <IMG src="8_3_2.gif" style="vertical-align: middle">.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Явная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_3.gif" border="0"></td><td></td></tr></table>
+<li>Имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="8_1_1_6.gif" style="vertical-align: middle">
+<li><a href="lek8_1_2.html">Условно устойчива</a> <IMG src="8_3_4.gif" style="vertical-align: middle">
+<li>Решается с помощью рекуррентного соотношения <a href="lek8_1_3.html">(8.7)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. <a href="lek8_2_3.html#8_12">Схема расщепления</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_5.gif" border="0"></td><td></td></tr></table>
+<li>Имеет порядок аппроксимации <IMG src="8_2_1_5.gif" style="vertical-align: middle">
+<li><a href="../3/lek3_5.html#bottom">Абсолютно устойчива</a>.
+<li>Решается с помощью рекуррентных соотношений <a href="lek8_2_3.html#8_13">(8.13)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. <a href="lek8_2_5.html">Схема переменных направлений</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_6.gif" border="0"></td><td></td></tr></table>
+<li>Имеет порядок аппроксимации <IMG src="8_3_11.gif" style="vertical-align: middle">
+<li>Абсолютно устойчива.
+<li>Решается с помощью рекуррентных соотношений <a href="lek8_2_5.html#bottom">(8.15)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. <a href="lek8_2_6.html">Схема предиктор-корректор</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_7.gif" border="0"></td><td></td></tr></table>
+<li>Имеет порядок аппроксимации <IMG src="8_3_11.gif" style="vertical-align: middle">
+<li>Абсолютно устойчива.
+<li>Решается с помощью рекуррентных соотношений <a href="lek8_2_6.html#bottom">(8.17)</a>.
+<p align="justify">
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Напомним, что в случае <IMG src="8_3_8.gif" style="vertical-align: middle"> для <a href="../2/lek2_2_1.html">аппроксимации</a> производной 
+по координате <em>x</em> следует использовать <a href="../2/lek2_2_1.html#1">правую конечную разность</a> и для реализации расчётного 
+алгоритма задать правое <a href="../1/lek1_4.html">граничное условие</a> по <em>x</em>; в случае <IMG src="8_3_9.gif" style="vertical-align: middle"> для аппроксимации производной 
+по координате <em>y</em> следует использовать правую конечную разность и для реализации расчётного 
+алгоритма задать правое граничное условие по <em>y</em>. Поэтому в случае <IMG src="8_3_8.gif" style="vertical-align: middle">  
+и(или) <IMG src="8_3_9.gif" style="vertical-align: middle">  вид рекуррентных 
+соотношений изменится и для их расчёта потребуется задать циклы в расчётных алгоритмах следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_3_10.gif" border="0"></td><td></td></tr></table>
+Порядок аппроксимации и устойчивость перечисленных разностных схем при этом останутся таким же.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

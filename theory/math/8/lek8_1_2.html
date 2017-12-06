@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Явные разностные схемы. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Явные разностные схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2. Исследование устойчивости.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> явной разностной схемы <a href="lek8_1_1.html#8_2">(8.2)</a>, аппроксимирующей 
+дифференциальное уравнение <a href="lek8_1_1.html">(8.1)</a>, с помощью <a href="../3/lek3_2.html">спектрального метода</a>.  Для этого отбрасываем член <IMG src="8_1_2_3.gif" style="vertical-align: middle">, 
+наличие которого, <a href="../3/lek3_4.html">как известно</a>, не оказывает влияния на устойчивость разностной схемы, и представляем 
+решение в виде гармоники:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_1.gif" border="0"><br>
+<IMG alt="" src="8_1_2_2.gif" border="0">
+</td>
+<td></td></tr></table>
+Упрощаем данное выражение, деля левую и правую его части на <IMG src="8_1_2_4.gif" style="vertical-align: middle">, 
+и выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_5.gif" border="0"></td>
+<td></td></tr></table>
+Напомним, что если собственные числа <a href="../3/lek3_3.html#2">оператора перехода</a> имеют комплексный вид, то согласно 
+необходимому условию устойчивости разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a> требуется, чтобы они были расположены внутри 
+или на границе <a href="../5/lek5_3_1.html#5_6">круга радиусом 1</a>, центр которого находится в начале координат комплексной плоскости.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём следующие обозначения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_6.gif" border="0"></td>
+<td></td></tr></table>
+Данное выражение трудно анализировать, поскольку оно содержит две переменные величины - <IMG src="../alfa.gif" style="vertical-align: middle"> 
+и <IMG src="../beta.gif" style="vertical-align: middle">. Рассмотрим наиболее простой случай, когда <IMG src="../alfa.gif" style="vertical-align: middle">=<IMG src="../beta.gif" style="vertical-align: middle">:
+<table align=right cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_7.gif" border="0"></td>
+<td></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_8.gif" border="0"></td>
+<td></td></tr></table>
+Полученное выражение свидетельствует о том, что собственные числа оператора перехода расположены 
+на комплексной плоскости на окружности с центром в точке (1 - <em>r</em>; 0) и радиусом:
+<table cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_9.gif" border="0"></td>
+<td></td></tr></table>
+Сравнивая расположение этой окружности на комплексной плоскости с условием <a href="../3/lek3_3.html#bottom">(3.8)</a>, получаем 
+три различных варианта (<em>см. рисунок</em>). Видно, что окружность, соответствующая собственным 
+числам оператора перехода, при <em>r</em> < 1 находится внутри круга, соответствующего условию <a href="../3/lek3_3.html#bottom">(3.8)</a>; 
+при <em>r</em> > 1 - вне этого круга; а при <em>r</em> = 1 совпадает с его границей. Таким образом, 
+в случае <IMG src="../alfa.gif" style="vertical-align: middle">=<IMG src="../beta.gif" style="vertical-align: middle">
+явная разностная схема <a href="lek8_1_1.html#8_2">(8.2)</a> будет устойчива при выполнении следующего условия:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_10.gif" border="0"></td>
+<td>(8.6)</td></tr></table>
+Можно доказать, что выражение (8.6) также будет являться условием устойчивости явной разностной схемы <br><a href="lek8_1_1.html#8_2">(8.2)</a> 
+и в случае <IMG src="8_1_2_11.gif" style="vertical-align: middle">, однако в силу сложности это доказательство рассматривать не будем.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследование устойчивости разностных схем <a href="lek8_1_1.html#8_2">(8.3)-(8.5)</a> проводится 
+по аналогичной методике и позволяет в итоге получить обобщённое условие устойчивости для всех 
+четырёх явных разностных схем <a href="lek8_1_1.html#8_2">(8.2)-(8.5)</a>, аппроксимирующих дифференциальное уравнение <a href="lek8_1_1.html">(8.1)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_1_2_12.gif" border="0"></td>
+<td></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

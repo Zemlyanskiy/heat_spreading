@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка. Явная разностная схема. Порядок аппроксимации. Метод решения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Явная разностная схема.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2. Порядок аппроксимации. Метод решения.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для определения <a href="../2/lek2_2_2.html#1">порядка аппроксимации</a> явной разностной схемы <a href="lek6_2_1.html#6_2">(6.2)</a> подставим в неё 
+выражения <a href="../2/lek2_3_3.html">(2.16)-(2.18)</a>, описывающие разложение значений <IMG src="6_2_2_1.gif" style="vertical-align: middle"> 
+в ряд Тейлора относительно точки <IMG src="6_2_2_2.gif" style="vertical-align: middle"> на <a href="../2/lek2_3_1.html#1">разностной сетке</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_2_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Так как ошибка <em>O</em>(<em>h</em>) является более грубой, чем <IMG src="6_2_2_8.gif" style="vertical-align: middle">, явная разностная схема <a href="lek6_2_1.html#6_2">(6.2)</a> аппроксимирует исходное 
+дифференциальное уравнение <a href="lek6_1.html#6_1">(6.1)</a> с первым порядком и по времени, и по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br><table align=right><tr><td><IMG alt="" src="6_2_2_5.gif" border="0"></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#6_4" id="#6_4"></a><a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> 
+(<em>см. рисунок</em>), характеризующий явную разностную схему <a href="lek6_2_1.html#6_2">(6.2)</a>, свидетельствует о том, что она содержит 
+одну неизвестную величину - значение функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени. 
+Выражая эту величину из разностной схемы, получаем рекуррентное соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_2_6.gif" border="0"></td>
+<td align=right width=100>(6.4)</td></tr></table>
+позволяющее рассчитать все значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени 
+(при известных значениях функции <em>u</em> на <em>n</em>-ом шаге), кроме значений <IMG src="6_2_2_7.gif" style="vertical-align: middle">, 
+определяемых с помощью <a href="../1/lek1_4.html">граничных условий</a>. Если заданы граничные условия <a href="../1/lek1_5.html#1">1-го рода</a>, 
+то значения <IMG src="6_2_2_7.gif" style="vertical-align: middle"> определяются непосредственно из их <a href="../2/lek2_3_4.html#2">разностной аппроксимации</a>; если <a href="../1/lek1_5.html#2">2-го или 3-го рода</a>, 
+то - с помощью соотношений <a href="../4/lek4_1_2.html#4_4a">(4.4a)</a> и <a href="../4/lek4_1_2.html#4_4b">(4.4b)</a>. Таким образом, алгоритм решения явной разностной схемы <a href="lek6_2_1.html#6_2">(6.2)</a> 
+аналогичен <a href="../4/lek4_1_3.html">алгоритму решения</a> явной разностной схемы <a href="../4/lek4_1_1.html">(4.2)</a>, аппроксимирующей дифференциальное 
+уравнение <a href="../1/lek1_3.html#1">параболического типа</a>, не содержащее производную по координате первого порядка.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

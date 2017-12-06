@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Задания для самоконтроля.</title>
+<script language="JavaScript">
+   function dataBase(test) {
+     if ((test.r3.checked) & (test.r5.checked) & (!test.r1.checked) & (!test.r2.checked) & (!test.r4.checked)) {test.otv.value='Поздравляем ! Вы ответили правильно!';  }
+	 else if (((test.r3.checked) || (test.r5.checked)) & (!test.r1.checked) & (!test.r2.checked) & (!test.r4.checked)) {test.otv.value='Ответ неполный.';  }
+	 else  {test.otv.value='Ответ неправильный!';  }
+   }
+</script>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px">
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">Задания для самоконтроля</FONT></FONT>&nbsp;&nbsp;&nbsp;
+<a href="test7_5.html"><IMG alt="Предыдущий тест" src="../back.gif" border=0 style="vertical-align: middle"></a>&nbsp;&nbsp;
+<a href="test7_7.html"><IMG alt="Следующий тест" src="../forward.gif" border=0 style="vertical-align: middle"></a>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<form action="" method="post" name="test">
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Отметьте разностные схемы, имеющие второй порядок аппроксимации по времени.
+<br>
+<table align=center width="85%" cellpadding=2 cellspacing=2>
+<tr>
+<td>Явная разностная схема</td>
+<td width=10 valign=top><input name="r1" type="radio" value="11"></td>
+</tr>
+<tr>
+<td>Схема расщепления</td>
+<td width=10 valign=top><input name="r2" type="radio" value="11"></td>
+</tr>
+<tr>
+<td>Схема переменных направлений</td>
+<td width=10 valign=top><input name="r3" type="radio" value="11"></td>
+</tr>
+<tr>
+<td>Схема со стабилизирующей поправкой</td>
+<td width=10 valign=top><input name="r4" type="radio" value="11"></td>
+</tr>
+<tr>
+<td>Схема предиктор-корректор</td>
+<td width=10 valign=top><input name="r5" type="radio" value="11"></td>
+</tr>
+
+</table>
+<hr size=-1 color="#1a1a6f" width="99%">
+<table align="center">
+<tr>
+ <td><strong><input name="check" onclick="dataBase(this.form)" type="button" value="Ответить"  class=but></strong></td>
+ <td><strong><input type="reset" value="Очистить"  class=but></strong></td>
+</tr>
+</table>
+<center><input size="50"  name=otv style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12pt; BORDER-LEFT: medium none; FONT-weight: bold; COLOR: #156B1D; BORDER-BOTTOM: medium none; TEXT-ALIGN: center"></center>
+</form>
+<hr size=-1 color="#1a1a6f" width="99%">
+</div>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Неявные разностные схемы. Метод решения с использованием схемы предиктор-корректор.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявные разностные схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.6. Метод решения с использованием схемы предиктор-корректор.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#8_16" id="#8_16"></a>Преобразуем с помощью <a href="../7/lek7_6.html">метода дробных шагов</a> неявную разностную схему <a href="lek8_2_1.html">(8.8)</a> 
+в <a href="../7/lek7_9_1.html">схему предиктор-корректор</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_6_1.gif" border="0"></td><td>(8.16)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Первые две подсхемы в схеме предиктор-корректор (8.16) составляют предиктор. 
+Первая подсхема в составе предиктора аппроксимируется на шаге по времени (<em>n</em> + 1/4) и является неявной 
+по координате <em>x</em>. Вторая подсхема - аппроксимируется на шаге по времени (<em>n</em> + 1/2) и является неявной по 
+координате <em>y</em>. Обе подсхемы <a href="../3/lek3_5.html#bottom">абсолютно устойчивы</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Третья подсхема в схеме предиктор-корректор (8.16) является корректором. Поскольку корректор 
+аппроксимируется относительно точки <IMG src="8_2_6_2.gif" style="vertical-align: middle">, разностный оператор, аппроксимирующий производную функции <em>u</em> 
+по времени, является <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a> которая, <a href="../2/lek2_2_2.html#bottom">как известно</a>, имеет второй 
+<a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>. Таким образом, схема предиктор-корректор (8.16), имея порядок аппроксимации
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_6_3.gif" border="0"></td><td></td></tr></table>
+является более точной по сравнению со схемой расщепления <a href="lek8_2_3.html#8_12">(8.12)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Каждая из подсхем в схеме предиктор-корректор (8.16) решается с помощью 
+соответствующего рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_6_4.gif" border="0"></td><td>(8.17)</td></tr></table>
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

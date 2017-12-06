@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Схема расщепления. Характеристика первой подсхемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Схема расщепления.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.1. Характеристика первой подсхемы.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Первая подсхема <a href="lek7_6.html#7_7">(7.7)</a> схемы расщепления, являясь аналогом 
+<a href="../4/lek4_5.html#2">неявной разностной схемы для одномерного дифференциального уравнения параболического типа</a>, 
+обладает всеми свойствами последней: она <a href="../3/lek3_5.html">абсолютно устойчива</a>, решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приведём подсхему <a href="lek7_6.html#7_7">(7.7)</a> к виду <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, удобному для использования метода прогонки:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_2.gif" border="0"></td>
+<td></td></tr></table>
+Следовательно, коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_3.gif" border="0"></td>
+<td></td></tr></table>
+Легко видеть, что для первой подсхемы <a href="lek7_6.html#7_7">(7.7)</a> схемы расщепления достаточное условие 
+сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_4.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../4/lek4_2_2.html#4_11">Рекуррентное прогоночное соотношение</a> для первой подсхемы <a href="lek7_6.html#7_7">(7.7)</a> имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_5.gif" border="0"></td>
+<td align=right>(7.9)</td></tr></table>
+<a href="../4/lek4_2_2.html#4_11">Прогоночные коэффициенты</a> определяются согласно соотношениям <a href="../4/lek4_2_2.html#4_13">(4.13)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_6.gif" border="0"></td>
+<td align=right>(7.10)</td></tr></table>
+Для определения значений <a href="../4/lek4_2_3.html">прогоночных коэффициентов на 1-м шаге</a>, т.е. <IMG src="7_6_1_7.gif" style="vertical-align: middle">, 
+и <a href="../4/lek4_2_4.html">решения на правой границе</a> используются <a href="../1/lek1_4.html">граничные условия</a> по координате <em>x</em>. 
+Методики определения, а также последовательность вычислений (<a href="../4/lek4_2_5.html">метод прогонки</a>) аналогичны описанным ранее. Отличие состоит лишь в том, 
+что соотношения (7.9) и (7.10) включают переменную <em>k</em>, поэтому необходимо задать внешний цикл 
+по этой переменной:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_1_8.gif" border="0"></td>
+<td></td></tr></table>
+следовательно, при решении первой подсхемы <a href="lek7_6.html#7_7">(7.7)</a> (т.е. на первом полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle">) метод прогонки 
+будет использован <IMG src="7_6_1_9.gif" style="vertical-align: middle"> раза. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Результатом решения первой подсхемы <a href="lek7_6.html#7_7">(7.7)</a> схемы расщепления являются 
+значения функции <em>u</em> на шаге по времени (<em>n</em> + 1/2), необходимые для решения 
+второй подсхемы <a href="lek7_6.html#7_8">(7.8)</a>. Однако следует отметить, что поскольку каждая из подсхем <a href="lek7_6.html#7_7">(7.7), (7.8)</a> 
+по отдельности не <a href="../2/lek2_2_1.html">аппроксимирует</a> исходное дифференциальное уравнение <a href="lek7_2.html">(7.1)</a> (аппроксимация 
+достигается только в результате последовательного решения обеих подсхем), оценка <a href="../3/lek3_2.html#3">погрешности</a> 
+значений функции <em>u</em> на шаге по времени (<em>n</em> + 1/2) не представляется возможной. Близость к истинным 
+значениям может быть гарантирована только для значений функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени. 
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

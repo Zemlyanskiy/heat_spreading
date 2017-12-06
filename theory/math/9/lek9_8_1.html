@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Схема предиктор-корректор. Методика записи уравнений схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">8. Схема предиктор-корректор.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.1. Методика записи уравнений схемы.</FONT></EM></B>
+<p align="justify">
+<table align=right cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_1_1.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Преобразуем с помощью <a href="lek9_6.html">метода дробных шагов</a> неявную разностную схему <a href="lek9_3.html#9_4">(9.4)</a> 
+в схему предиктор-корректор. Данная схема требует особого способа расщепления интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> (<em>см. рисунок</em>): 
+интервал <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> между точками <IMG src="9_8_1_2.gif" style="vertical-align: middle"> 
+и <IMG src="9_8_1_3.gif" style="vertical-align: middle"> на <a href="lek9_2.html#1">разностной сетке</a> расщепляется пополам (полученная промежуточная точка 
+обозначена, как <IMG src="9_8_1_4.gif" style="vertical-align: middle">); интервал <IMG src="9_8_1_5.gif" style="vertical-align: middle"> 
+между точками <IMG src="9_8_1_2.gif" style="vertical-align: middle"> и <IMG src="9_8_1_6.gif" style="vertical-align: middle"> расщепляется на три равные части (полученные промежуточные 
+точки обозначены, как <IMG src="9_8_1_7.gif" style="vertical-align: middle"> и <IMG src="9_8_1_8.gif" style="vertical-align: middle">).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_17" id="#9_17">На первой трети</a> интервала <IMG src="9_8_1_5.gif" style="vertical-align: middle"> записывается неявная разностная схема, 
+в которой учитывается только производная второго порядка по координате <em>x</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_1_9.gif" border="0"></td>
+<td align=right>(9.17)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_18" id="#9_18">На второй трети</a> интервала <IMG src="9_8_1_5.gif" style="vertical-align: middle"> записывается неявная разностная схема, в которой учитывается 
+только производная второго порядка по координате <em>y</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_1_10.gif" border="0"></td>
+<td align=right>(9.18)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_19" id="#9_19">На последней трети</a> интервала <IMG src="9_8_1_5.gif" style="vertical-align: middle"> записывается неявная 
+разностная схема, в которой учитывается только производная второго порядка по координате <em>z</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_1_11.gif" border="0"></td>
+<td align=right>(9.19)</td></tr></table>
+Результатом последовательного решения подсхем (9.17)-(9.19), называемых в совокупности <strong>предиктором</strong>, 
+являются значения функции <em>u</em> на шаге по времени (<em>n</em> + 1/2). Для завершения расчётов 
+на всём интервале <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> используется поправочное разностное соотношение (<strong>корректор</strong>), имеющее вид с учётом 
+обозначений <a href="lek9_3.html#9_2">(9.2)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_1_12.gif" border="0"></td>
+<td align=right>(9.20)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, схема предиктор-корректор в случае <a href="../1/lek1_2.html#bottom">трёхмерных</a> задач состоит из четырёх подсхем.
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

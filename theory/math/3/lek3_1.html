@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Понятие устойчивости разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 0px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Понятие устойчивости разностных схем</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#top" id="#top">При численном</a> решении дифференциальных уравнений 
+неизбежно возникают ошибки, приводящие к некоторому отличию результатов численного 
+решения от истинных значений искомой функции, причём существует два типа источников этих 
+ошибок. Как уже отмечалось в разделе "<a href="../2/lek2_2_2.html">Понятие порядка аппроксимации</a>", одним источником 
+ошибок является сама <a href="../2/lek2_2_1.html">аппроксимация</a>, т.е. замена производных в исходных дифференциальных 
+уравнениях конечными разностями. Другой источник ошибок связан с погрешностью вычислений. 
+Ошибки могут возникать при неточности вычислений как самой <a href="../2/lek2_3_2.html#1">разностной схемы</a>, так и 
+<a href="../2/lek2_3_4.html">начальных и граничных условий</a>. В зависимости от особенностей вычислительного алгоритма эти 
+ошибки в процессе расчёта могут затухать или возрастать. Если они не возрастают, то говорят, 
+что разностная схема <strong>устойчива</strong>, если же возрастают, то - <strong>неустойчива</strong>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем дифференциальную краевую задачу в виде символьного равенства:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_1_1.gif" border="0"></td>
+<td align=right width=100>(3.1)</td></tr></table>
+<font size="2">где <em>L</em> - дифференциальный оператор; <em>u</em> - искомая функция; <em>f</em> - правая часть дифференциального уравнения. </font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Тогда <a href="../2/lek2_3_2.html#1">разностную схему</a> кратко можно представить в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_1_2.gif" border="0"></td>
+<td align=right width=100>(3.2)</td></tr></table>
+<font size="2">где <em>L<sub>h</sub></em> - разностный оператор, действующий на сеточную функцию <em>u</em><sup>(<em>h</em>)</sup>, 
+являющуюся результатом решения разностной задачи; <em>f</em>&nbsp;<sup>(<em>h</em>)</sup> - проекция на <a href="../2/lek2_3_1.html#1">разностную сетку</a> непрерывной функции <em>f</em>.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><em>Теорема 1.</em></strong> 
+Разностная схема (3.2) с линейным оператором <em>L<sub>h</sub></em> устойчива, 
+если при любом  <IMG src="3_1_3.gif" style="vertical-align: middle"> уравнение (3.2) имеет единственное решение <IMG src="3_1_4.gif" style="vertical-align: middle">, причём 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<font size="2">где <em>с</em> - константа, <em>U<sub>h</sub></em> - множество решений, <em>F<sub>h</sub></em> - множество правых частей.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>Теорема 2.</strong></em> Пусть разностная 
+схема (3.2) аппроксимирует дифференциальное уравнение (3.1) с <a href="../2/lek2_2_2.html#1">порядком аппроксимации</a> <IMG src="3_1_6.gif" style="vertical-align: middle"> 
+и является устойчивой. Тогда решение разностной задачи (3.2) <em>u</em><sup>(<em>h</em>)</sup> 
+сходится к решению исходной дифференциальной задачи (3.1) [<em>u</em>]<sub><em>h</em></sub> и имеет место неравенство:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<font size="2">где <em>М</em> - константа.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, <em>сходимость решения разностной схемы к решению исходного уравнения</em> имеет место только при выполнении двух требований:
+<br>1. разностная схема должна <a href="../2/lek2_2_1.html">аппроксимировать</a> исходное уравнение;
+<br>2. разностная схема должна быть <a href="lek3_1.html#top">устойчива</a>.
+<a name="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений первого порядка. Неявный метод Эйлера.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявный метод Эйлера.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek12_1.html">(12.1)</a> неявную разностную схему:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_2_1.gif" border="0"></td>
+<td align=right width=100>(12.4)</td></tr></table>
+Метод решения обыкновенных дифференциальных уравнений первого порядка с использованием неявной 
+разностной схемы (12.4) называется <strong>неявным методом Эйлера</strong>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Также как и явная разностная схема <a href="lek12_1.html#12_2">(12.2)</a>, неявная разностная схема (12.4) 
+имеет первый <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> по времени. Однако рекуррентное соотношение для её решения в общем виде не может быть 
+получено (отметим, что оно вообще может быть получено не всегда).
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для анализа <a href="../3/lek3_1.html">устойчивости</a> неявного метода Эйлера рассмотрим неявную разностную схему, 
+<a href="../2/lek2_2_1.html">аппроксимирующую</a> уравнение <a href="lek12_1.html#12_3">(12.3)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Проведём исследование устойчивости данной схемы с помощью <a href="../3/lek3_2.html">спектрального метода</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_2_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Упрощаем полученное выражение, деля левую и правую его части на <IMG src="12_1_8.gif" style="vertical-align: middle">, 
+и выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что собственные числа <a href="../3/lek3_3.html#2">оператора перехода</a> удовлетворяют необходимому условию 
+устойчивости разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a> при любом значении <IMG src="12_2_5.gif" style="vertical-align: middle;">; следовательно, неявная разностная схема, 
+аппроксимирующая уравнение <a href="lek12_1.html#12_3">(12.3)</a>, является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, неявный метод Эйлера является абсолютно устойчивым; 
+однако он, также как и <a href="lek12_1.html#12_2">явный метод Эйлера</a>, относится к методам с первым порядком точности.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

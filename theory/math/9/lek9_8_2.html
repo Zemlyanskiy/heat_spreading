@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Схема предиктор-корректор. Характеристика подсхем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">8. Схема предиктор-корректор.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.2. Характеристика подсхем.</FONT></EM></B></FONT> 
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Каждая из подсхем, составляющих предиктор <a href="lek9_8_1.html#9_17">(9.17)-(9.19)</a>, является <a href="../3/lek3_5.html#bottom">абсолютно 
+устойчивой</a> и решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<li></li>для первой подсхемы предиктора <a href="lek9_8_1.html#9_17">(9.17)</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_2_1.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>для второй подсхемы предиктора <a href="lek9_8_1.html#9_18">(9.18)</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_2_2.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>для третьей подсхемы предиктора <a href="lek9_8_1.html#9_19">(9.19)</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_2_3.gif" border="0"></td>
+<td></td></tr></table>
+<div align="justify">
+Легко видеть, что для всех трёх подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Правая часть корректора <a href="lek9_8_1.html#bottom">(9.20)</a> аппроксимируется относительно точки <IMG src="9_8_2_4.gif" style="vertical-align: middle">. 
+Это означает, что разностный оператор в левой части является <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>, которая, 
+<a href="../2/lek2_2_2.html#bottom">как известно</a>, имеет второй <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>. Следовательно, роль корректора <a href="lek9_8_1.html#bottom">(9.20)</a> в схеме 
+предиктор-корректор <a href="lek9_8_1.html#9_17">(9.17)-(9.20)</a> заключается в повышении порядка аппроксимации схемы по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_2_5.gif" border="0"></td>
+<td></td></tr></table>
+что делает её более точной по сравнению со схемой расщепления <a href="lek9_6.html#9_7">(9.7)-(9.9)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_21" id="#9_21"></a>Для решения корректора <a href="lek9_8_1.html#bottom">(9.20)</a> используется рекуррентное соотношение:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_8_2_6.gif" border="0"></td>
+<td>(9.21)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Итак, роль предиктора <a href="lek9_8_1.html#9_17">(9.17)-(9.19)</a> в схеме предиктор-корректор <a href="lek9_8_1.html#9_17">(9.17)-(9.20)</a> заключается в обеспечении абсолютной устойчивости всей схемы; 
+роль корректора <a href="lek9_8_1.html#bottom">(9.20)</a> - в повышении порядка аппроксимации схемы по времени.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

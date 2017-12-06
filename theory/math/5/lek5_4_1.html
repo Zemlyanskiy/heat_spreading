@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Явная разностная схема с аппроксимацией производной по координате левой конечной разностью. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Явная разностная схема с аппроксимацией производной по координате левой конечной разностью</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1. Исследование устойчивости.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> разностной схемы <a href="lek5_2.html#5_3">(5.3)</a> с помощью 
+<a href="../3/lek3_2.html">спектрального метода</a>. Для этого отбрасываем член <IMG src="5_3_1_15.gif" style="vertical-align: middle">, наличие которого, <a href="../3/lek3_4.html">как известно</a>, не оказывает 
+влияния на устойчивость разностной схемы, и представляем решение в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Упрощаем данное выражение, деля левую и правую его части 
+на  <IMG src="5_3_1_2.gif" style="vertical-align: middle">, 
+и выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Комплексный вид полученного выражения свидетельствует о том, что для устойчивости разностной схемы 
+<a href="lek5_2.html#5_3">(5.3)</a> согласно условию <a href="lek5_3_1.html#5_6">(5.6)</a> требуется, 
+чтобы собственные числа <a href="../3/lek3_3.html#2">оператора перехода</a> были расположены внутри или на границе <a href="lek5_3_1.html#5_6">круга радиусом 1</a>, 
+центр которого находится в начале координат комплексной плоскости.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Рассмотрим случай <em>v</em> < 0. Введём следующее обозначение:
+<table align=right><tr><td><IMG alt="" src="5_4_1_6.gif" border="0"></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Полученное выражение свидетельствует о том, что собственные числа оператора перехода 
+расположены на комплексной плоскости на окружности с центром в точке <IMG src="5_4_1_4.gif" style="vertical-align: middle"> и радиусом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данная окружность находится вне круга, соответствующего условию <a href="lek5_3_1.html#5_6">(5.6)</a> при любом значении <em>r</em> 
+(<em>см. рисунок</em>). Таким образом, при отрицательном значении параметра <em>v</em> явная 
+разностная схема <a href="lek5_2.html#5_3">(5.3)</a> будет неустойчива.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Рассмотрим случай <em>v</em> > 0. Введём следующее обозначение:
+<table align=right><tr><td><IMG alt="" src="5_4_1_10.gif" border="0"></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Полученное выражение свидетельствует о том, что собственные числа оператора перехода расположены 
+на комплексной плоскости на окружности с центром в точке <IMG src="5_4_1_8.gif" style="vertical-align: middle"> и радиусом <em>q</em>. 
+Сравнивая расположение этой окружности на комплексной плоскости с условием <a href="lek5_3_1.html#5_6">(5.6)</a>, получаем 
+три различных варианта (<em>см. рисунок</em>). Видно, что окружность, соответствующая 
+собственным числам оператора перехода, при <em>q</em> < 1 находится внутри круга, 
+соответствующего условию <a href="lek5_3_1.html#5_6">(5.6)</a>; при <em>q</em> > 1 - вне этого круга; а при <em>q</em> = 1 совпадает с его границей. 
+Таким образом, при положительном значении параметра <em>v</em> явная разностная схема <a href="lek5_2.html#5_3">(5.3)</a> 
+будет устойчива при выполнении следующего условия:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Обобщая полученные результаты, сделаем вывод, что явная разностная схема с аппроксимацией 
+производной по координате левой конечной разностью <a href="lek5_2.html#5_3">(5.3)</a> является <em>условно устойчивой</em>; 
+условие устойчивости имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_4_1_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Схема предиктор-корректор. Методика записи уравнений схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">9. Схема предиктор-корректор.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9.1. Методика записи уравнений схемы.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим ещё одну интерпретацию неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a>, 
+позволяющую (как и в случае <a href="lek7_7.html">схемы переменных направлений</a>) добиться повышения <a href="../2/lek2_2_2.html#1">порядка аппроксимации</a> 
+по времени, - <strong>схему предиктор-корректор</strong>. 
+<table align=right><tr><td><IMG alt="" src="7_9_1_1.gif" border="0"></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Данная схема требует особого способа расщепления интервала <IMG src="7_6_2.gif" style="vertical-align: middle"> 
+(<em>см. рисунок</em>): интервал <IMG src="7_6_2.gif" style="vertical-align: middle"> между точками 
+<IMG src="7_9_1_2.gif" style="vertical-align: middle"> и <IMG src="7_9_1_3.gif" style="vertical-align: middle"> на <a href="lek7_2.html#1">разностной сетке</a> 
+расщепляется пополам (полученная промежуточная точка обозначена, как <IMG src="7_9_1_4.gif" style="vertical-align: middle">); 
+интервал <IMG src="7_9_1_5.gif" style="vertical-align: middle"> между точками <IMG src="7_9_1_2.gif" style="vertical-align: middle"> 
+и <IMG src="7_9_1_4.gif" style="vertical-align: middle"> снова расщепляется пополам (полученная промежуточная точка обозначена, 
+как <IMG src="7_9_1_6.gif" style="vertical-align: middle">). 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_15" id="#7_15"></a>На первом полушаге интервала <IMG src="7_9_1_5.gif" style="vertical-align: middle"> записывается неявная разностная схема, 
+в которой учитывается только производная второго порядка по координате <em>x</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><br><IMG alt="" src="7_9_1_7.gif" border="0"></td>
+<td align=right>(7.15)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_16" id="#7_16"></a>На втором полушаге интервала <IMG src="7_9_1_5.gif" style="vertical-align: middle"> 
+записывается неявная разностная схема, в которой учитывается только производная второго порядка по 
+координате <em>y</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_9_1_8.gif" border="0"></td>
+<td align=right>(7.16)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Результатом последовательного решения подсхем (7.15), (7.16), называемых 
+в совокупности <strong>предиктором</strong>, являются значения функции <em>u</em> на шаге по времени (<em>n</em> + 1/2). 
+Для завершения расчётов на всём интервале <IMG src="7_6_2.gif" style="vertical-align: middle"> используется поправочное разностное соотношение, 
+называемое <strong>корректором</strong>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_9_1_9.gif" border="0"></td>
+<td align=right>(7.17)</td></tr></table>
+Таким образом, схема предиктор-корректор в случае <a href="../1/lek1_2.html#bottom">двумерных</a> задач состоит из трёх подсхем.
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

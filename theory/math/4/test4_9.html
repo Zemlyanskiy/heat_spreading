@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Задания для самоконтроля.</title>
+<script language="JavaScript">
+   function dataBase(test) {
+     if (   test.t1.value==6 && test.t2.value==12 && test.t3.value==12  && test.t4.value==6 ) {test.otv.value='Поздравляем ! Вы ответили правильно!';}
+	 else  {test.otv.value='Ответ неправильный!';  }
+   }
+</script>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px">
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">Задания для самоконтроля</FONT></FONT>&nbsp;&nbsp;&nbsp;
+<a href="test4_8.html"><IMG alt="Предыдущий тест" src="../back.gif" border=0 style="vertical-align: middle"></a>&nbsp;&nbsp;
+<a href="test4_10.html"><IMG alt="Следующий тест" src="../forward.gif" border=0 style="vertical-align: middle"></a>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<form action="" method="post" name="test">
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9. Определите общее количество циклов по переменной <em>j</em>, требуемых для расчёта 
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="test4_9_1.gif" border="0"></td>
+<td></td></tr></table>
+при использовании следующих разностных схем:
+<br>
+<table align=center width="95%" cellpadding=2 cellspacing=2>
+<tr>
+<td width=300>I. Явной разностной схемы</td>
+<td><input name="t1" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300>II. Неявной разностной схемы</td>
+<td><input name="t2" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300>III. Разностной схемы Кранка-Николсона</td>
+<td><input name="t3" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300>IV. Разностной схемы Саульева</td>
+<td><input name="t4" type="text" size=2></td>
+</tr>
+</table>
+<hr size=-1 color="#1a1a6f" width="99%">
+<table align="center">
+<tr>
+ <td><strong><input name="check" onclick="dataBase(this.form)" type="button" value="Ответить"  class=but></strong></td>
+ <td><strong><input type="reset" value="Очистить"  class=but></strong></td>
+</tr>
+</table>
+<center><input size="50"  name=otv style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12pt; BORDER-LEFT: medium none; FONT-weight: bold; COLOR: #156B1D; BORDER-BOTTOM: medium none; TEXT-ALIGN: center"></center>
+</form>
+<hr size=-1 color="#1a1a6f" width="99%">
+</div>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

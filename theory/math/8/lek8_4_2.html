@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Решение дифференциальных уравнений параболического типа, содержащих первые производные по координатам. Частные случаи.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Решение двумерных дифференциальных уравнений параболического типа, содержащих первые производные по координатам.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2. Частные случаи.</FONT></FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1">параболического типа</a>, в котором отсутствует производная второго порядка по одной из координат:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_4_2_1.gif" border="0"></td><td>(8.19)</td></tr></table>
+Схема расщепления для уравнения (8.19) имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_4_2_2.gif" border="0"></td><td>(8.20)</td></tr></table>
+Первая подсхема в схеме (8.20) является аналогом <a href="../5/lek5_8.html#2">неявной разностной схемы для одномерного дифференциального 
+уравнения в частных производных первого порядка</a>; она абсолютно устойчива и решается с помощью 
+рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_4_2_3.gif" border="0"></td><td></td></tr></table>
+Вторая подсхема в схеме (8.20) является аналогом <a href="../6/lek6_6.html#2">неявной разностной схемы для одномерного 
+дифференциального уравнения параболического типа</a>; она также абсолютно устойчива, но решается 
+с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Данное обстоятельство должно быть учтено при составлении алгоритма 
+решения схемы расщепления (8.20), <a href="../2/lek2_2_1.html">аппроксимирующей</a> уравнение (8.19).
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения (8.19) <a href="../7/lek7_7.html">схему переменных направлений</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_4_2_4.gif" border="0"></td><td></td></tr></table>
+Обратим внимание на то обстоятельство, что отсутствие в уравнении (8.19) второй производной по 
+координате <em>x</em> не оказывает влияния на методику аппроксимации второй производной по координате <em>y</em>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Как и в случае схемы расщепления (8.20), обе подсхемы абсолютно устойчивы; 
+первая подсхема решается с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_4_2_5.gif" border="0"></td><td></td></tr></table>
+вторая подсхема - с помощью метода прогонки.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Предмет курса. Задания для самоконтроля.</title>
+<script language="JavaScript">
+   function dataBase(test) {
+     if (   test.t1.value==2 && test.x1.value==2 && test.y1.value==2
+	     && test.t2.value==2 && test.x2.value==2 && test.y2.value==1
+		 && test.t3.value==1 && test.x3.value==1 && test.y3.value==1
+		 && test.t4.value==2 && test.x4.value==1 && test.y4.value==2
+		 && test.t5.value==1 && test.x5.value==2 && test.y5.value==2 ) {test.otv.value='Поздравляем ! Вы ответили правильно!';}
+	 else  {test.otv.value='Ответ неправильный!';  }
+   }
+</script>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px">
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Предмет курса</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">Задания для самоконтроля</FONT></FONT>&nbsp;&nbsp;&nbsp;
+<a href="test1_3.html"><IMG alt="Предыдущий тест" src="../back.gif" border=0 style="vertical-align: middle"></a>&nbsp;&nbsp;
+<a href="test1_5.html"><IMG alt="Следующий тест" src="../forward.gif" border=0 style="vertical-align: middle"></a>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<form action="" method="post" name="test">
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Определите, какое количество начальных и граничных условий требуется для 
+следующих уравнений (в первое окошко введите количество требуемых начальных условий, во второе - 
+количество граничных условий по координате <em>х</em>, в третье - по координате <em>y</em>):
+<br>
+<table align=center width="95%" cellpadding=2 cellspacing=2>
+<tr><td></td><td>по <em>t</em></td><td>по <em>x</em></td><td>по <em>y</em></td></tr>
+<tr>
+<td width=300><IMG alt="" src="test4_1_1.gif" border="0"></td>
+<td><input name="t1" type="text" size=2></td>
+<td><input name="x1" type="text" size=2></td>
+<td><input name="y1" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300><IMG alt="" src="test4_1_2.gif" border="0"></td>
+<td><input name="t2" type="text" size=2></td>
+<td><input name="x2" type="text" size=2></td>
+<td><input name="y2" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300><IMG alt="" src="test4_1_3.gif" border="0"></td>
+<td><input name="t3" type="text" size=2></td>
+<td><input name="x3" type="text" size=2></td>
+<td><input name="y3" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300><IMG alt="" src="test4_1_4.gif" border="0"></td>
+<td><input name="t4" type="text" size=2></td>
+<td><input name="x4" type="text" size=2></td>
+<td><input name="y4" type="text" size=2></td>
+</tr>
+<tr>
+<td width=300><IMG alt="" src="test4_1_5.gif" border="0"></td>
+<td><input name="t5" type="text" size=2></td>
+<td><input name="x5" type="text" size=2></td>
+<td><input name="y5" type="text" size=2></td>
+</tr>
+</table>
+<hr size=-1 color="#1a1a6f" width="99%">
+<table align="center">
+<tr>
+ <td><strong><input name="check" onclick="dataBase(this.form)" type="button" value="Ответить"  class=but></strong></td>
+ <td><strong><input type="reset" value="Очистить"  class=but></strong></td>
+</tr>
+</table>
+<center><input size="50"  name=otv style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12pt; BORDER-LEFT: medium none; FONT-weight: bold; COLOR: #156B1D; BORDER-BOTTOM: medium none; TEXT-ALIGN: center"></center>
+</form>
+<hr size=-1 color="#1a1a6f" width="99%">
+</div>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

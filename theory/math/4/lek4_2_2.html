@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Неявная разностная схема. Вывод основных соотношений метода прогонки.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявная разностная схема</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2. Вывод основных соотношений метода прогонки</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_8" id="#4_8">Преобразуем неявную</a> разностную схему <a href="lek4_2_1.html#4_6">(4.6)</a>, 
+группируя в левой части члены, содержащие значение функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени, 
+а в правой части - все остальные члены:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_1.gif" border="0"></td>
+<td align=right width=100>(4.8)</td></tr></table>
+<a name="#4_9" id="#4_9">Введём следующие</a> обозначения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_2.gif" border="0"></td>
+<td align=right width=100>(4.9)</td></tr></table>
+<a name="#4_10" id="#4_10">С учётом обозначений</a> (4.9) равенство (4.8) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_3.gif" border="0"></td>
+<td align=right width=100>(4.10)</td></tr></table>
+Данное преобразование часто называют 
+<em>преобразованием неявной разностной схемы к виду, удобному для использования 
+<a href="lek4_2_5.html">метода прогонки</a></em>.
+<br><br>
+<table align=right><tr><IMG alt="" src="4_2_2_4.gif" border="0"><td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), 
+характеризующий неявную разностную схему <a href="lek4_2_1.html#4_6">(4.6)</a>, свидетельствует о том, что данная 
+разностная схема содержит три неизвестные величины - значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени. 
+Это обстоятельство затрудняет вывод <a href="lek4_1_2.html#1">рекуррентного соотношения</a>, позволяющего 
+последовательно рассчитать значения искомой функции <em>u</em> в каждом из <a href="../2/lek2_3_1.html#1">узлов разностной сетки</a> 
+(подобно тому, как это было сделано <a href="lek4_1_2.html">в случае явной разностной схемы</a>). 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_11" id="#4_11">Следовательно, для реализации</a> неявной разностной 
+схемы <a href="lek4_2_1.html#4_6">(4.6) </a>требуется ввести некоторое дополнительное 
+условие, связывающее значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге по 
+времени. Представим это дополнительное условие в виде линейной зависимости
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_5.gif" border="0"></td>
+<td align=right width=100>(4.11)</td></tr></table>
+справедливой для любого значения <em>j</em> = 1, ..., <em>N</em> - 1.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Соотношение (4.11) называют <strong>рекуррентным 
+прогоночным соотношением</strong>, а коэффициенты <IMG src="4_2_2_6.gif" style="vertical-align: bottom"> - <strong>прогоночными коэффициентами</strong>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику определения прогоночных 
+коэффициентов. Для этого перепишем соотношение (4.11) в виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#4_12" id="#4_12">Подставим данное</a> выражение в (4.10) и выразим из полученного равенства <IMG src="4_2_2_8.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_10.gif" border="0"></td>
+<td align=right width=100>(4.12)</td></tr></table>
+<a name="#4_13" id="#4_13">Сравнивая выражения</a> (4.11) и (4.12), получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_2_11.gif" border="0"></td>
+<td align=right width=100>(4.13)</td></tr></table>
+Выражения (4.13) позволяют рассчитать значения прогоночных коэффициентов на 
+<em>j</em>-ом шаге по координате <em>х</em>, если известны их значения на 
+(<em>j</em> - 1)-ом шаге по координате <em>х</em> (а также коэффициенты в 
+выражении (4.10), определение которых не должно вызывать затруднений). Следовательно, 
+для того, чтобы определить значения прогоночных коэффициентов на любом шаге по 
+координате <em>х</em>, необходимо знать их значения <a href="lek4_2_3.html">на 1-м шаге</a>, т.е. <IMG src="4_2_2_12.gif" style="vertical-align: bottom">. 
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Решение трёхмерных дифференциальных уравнений параболического типа, содержащих первые производные по координатам. Общие правила.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">10. Решение трёхмерных дифференциальных уравнений параболического типа, содержащих первые производные по координатам.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10.1. Общие правила.</FONT></FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем <a href="../1/lek1_2.html#bottom">трёхмерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a>, 
+содержащее производные первого порядка по координатам <em>x</em>, <em>y</em> и <em>z</em>, в следующем общем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_1.gif" border="0"></td>
+<td>(9.22)</td></tr></table>
+Методы численного решения подобных уравнений аналогичны методам, которые используются для решения 
+<a href="lek9_9.html">трёхмерных дифференциальных уравнений параболического типа, не содержащих первых производных по координатам</a>. 
+Однако эта аналогия справедлива только при <a href="../5/lek5_8.html#1">правильном выборе конечных разностей</a> для <a href="../2/lek2_2_1.html">аппроксимации</a> первых 
+производных по координатам. 
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В качестве примера рассмотрим случай
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_2.gif" border="0"></td>
+<td></td></tr></table>
+Запишем для уравнения (9.22) схему расщепления, соблюдая <a href="../5/lek5_8.html#1">правило выбора конечных разностей</a> 
+для аппроксимации производных <IMG src="9_10_1_3.gif" style="vertical-align: middle"> и <IMG src="9_10_1_4.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_5.gif" border="0"><br>
+<IMG alt="" src="9_10_1_6.gif" border="0"><br>
+<IMG alt="" src="9_10_1_7.gif" border="0"></td>
+<td>(9.24)</td></tr></table>
+Разностная схема (9.24) имеет первый <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> по каждой переменной:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_8.gif" border="0"></td>
+<td></td></tr></table>
+Каждая из подсхем, являясь аналогом неявной разностной схемы для одномерной задачи (<a href="../6/lek6_3_1.html"><em>см. раздел 6.3</em></a>), 
+абсолютно устойчива и решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, 
+имеют вид:
+<li></li>для первой подсхемы	
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_9.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>для второй подсхемы	
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_10.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>для третьей подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_1_11.gif" border="0"></td>
+<td></td></tr></table>
+<div align="justify">
+Легко видеть, что для всех трёх подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется. 
+Алгоритм решения разностной схемы (9.24) такой же, как и при отсутствии первых производных по 
+координатам <em>x</em>, <em>y</em> и <em>z</em> в исходном дифференциальном уравнении (<a href="lek9_6_4.html"><em>см. раздел 9.6.4</em></a>).
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

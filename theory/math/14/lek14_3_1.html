@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Решение интегро-дифференциальных уравнений. Примеры численного решения интегро-дифференциальных уравнений. Решение уравнений математической модели процесса массовой кристаллизации.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение интегро-дифференциальных уравнений.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Примеры численного решения интегро-дифференциальных уравнений.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Решение уравнений математической модели процесса массовой кристаллизации.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику численного решения интегро-дифференциальных 
+уравнений из <a href="../1/lek1_8.html">математической модели процесса массовой кристаллизации</a>. 
+Уравнение, описывающее баланс по концентрации кристаллизующегося компонента имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_1.gif" border="0"></td>
+<td align=right width=100>(14.5)</td></tr></table>
+<font size="2">где <em>с</em> - концентрация кристаллизующегося компонента; <IMG src="14_3_1_2.gif" style="vertical-align: middle"> - плотность кристалла;
+<IMG src="14_3_1_3.gif" style="vertical-align: middle"> - скорость роста кристалла; <IMG src="14_3_1_4.gif" style="vertical-align: middle"> - число кристаллов в единице объёма смеси с размером 
+от <em>r</em> до <em>r</em> + <em>dr</em>; <em>R</em> - наибольший размер кристалла.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Уравнение (14.5) содержит одну производную, описывающую изменение 
+концентрации кристаллизующегося компонента <em>с</em> во времени. Причём, функция <em>с</em> является функцией только 
+одной независимой переменной (времени). В правой части уравнения (14.5) находится интеграл, 
+содержащий <a href="lek14_1.html#1">функцию распределения включений по размерам</a> <em>f</em>, значения которой зависят как от времени, 
+так и от размера включений. То есть, функция <em>f</em> является функцией двух независимых переменных - <em>t</em> и <em>r</em>. 
+Также в подынтегральное выражение входит функция скорости роста кристалла <IMG src="../etta.gif" style="vertical-align: bottom">, 
+зависящая от размера кристалла и от величины пересыщения раствора (т.е., разности текущей и равновесной 
+концентраций раствора), а, следовательно, являющаяся функцией двух независимых переменных - <em>t</em> и <em>r</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, для записи разностной схемы, <a href="../2/lek2_2_1.html">аппроксимирующей</a> уравнение (14.5), 
+требуется ввести двумерную <a href="../2/lek2_3_1.html#1">разностную сетку</a> (по осям которой отложены независимые переменные - 
+время <em>t</em> и размер кристаллов <em>r</em>), а также следующие обозначения:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>n</em> = 0, 1, 2, ..., <em>M</em> - порядковый номер точки деления по оси <em>t</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>k</em> = 1, 2, 3, ..., <em>Nr</em> - порядковый номер точки деления по оси <em>r</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="14_3_1_6.gif" style="vertical-align: middle"> - величина интервала между точками по оси <em>t</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="14_3_1_7.gif" style="vertical-align: middle"> - величина интервала между точками по оси <em>r</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="14_3_1_8.gif" style="vertical-align: middle"> - значение функции <em>f</em>, соответствующее точкам <IMG src="14_3_1_81.gif" style="vertical-align: middle">.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для аппроксимации производной по времени будем использовать, как и обычно, <a href="../2/lek2_2_1.html#1">правую конечную разность</a>:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Для аппроксимации интеграла будем использовать выражение <a href="lek14_2.html#14_4">(14.4)</a>. Причём, поскольку искомой функцией 
+в уравнении (14.5) является функция <em>с</em>, то при аппроксимации функций <em>f</em> и <IMG src="../etta.gif" style="vertical-align: bottom"> требуется использование 
+<a href="../13/lek13_1_2.html">принципа замороженных коэффициентов</a> (иначе разностная схема не будет разрешима). Учитывая всё сказанное, 
+запишем разностную схему для аппроксимации уравнения (14.5):
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_10.gif" border="0"></td>
+<td align=right width=100>(14.6)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностная схема (14.6) является явной и решается с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Аналогично записывается разностная схема для уравнения, описывающего тепловой баланс:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_12.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_13.gif" border="0"></td>
+<td align=right width=100>(14.7)</td></tr></table>
+<font size="2">где <IMG src="14_3_1_14.gif" style="vertical-align: middle"> - теплоёмкость, плотность и температура смеси в кристаллизаторе;  
+<IMG src="14_3_1_15.gif" style="vertical-align: middle"> - тепловой эффект процесса; <em>К</em> - коэффициент теплопередачи; <em>F</em> - поверхность кристаллизатора; 
+<em>Т<sub>х</sub></em> - температура хладагента.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностная схема (14.7) решается с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_3_1_16.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

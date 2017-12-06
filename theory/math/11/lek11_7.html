@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений эллиптического типа. Обобщение изученных методов.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений эллиптического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">7. Обобщение изученных методов.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify"><a name="#top" id="#top"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём обобщение методов численного решения 
+дифференциальных уравнений <a href="../1/lek1_3.html#1">эллиптического типа</a>:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_1.gif" border="0"></td>
+<td align=right width=100>(11.10)</td></tr></table>
+Для численного решения уравнений типа (11.10) используется метод установления, заключающийся во введении в 
+уравнение фиктивной производной по времени (т.е. преобразовании стационарной задачи в нестационарную):
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В силу <a href="lek11_1.html#bottom">независимости от времени граничных условий</a> (соответствующих исходной стационарной задаче) 
+с течением времени <IMG src="11_7_3.gif" style="vertical-align: middle"> производная по времени будет стремиться к нулю, а решение нестационарной задачи - 
+к решению исходной стационарной задачи:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Процесс пошагового приближения решения нестационарной задачи к решению исходной стационарной задачи 
+называют <em>итерационным процессом</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для осуществления итерационного процесса (т.е. для решения нестационарной 
+задачи) используются следующие разностные схемы:<br>
+<br>1. явная разностная схема (метод простой итерации; рассматривается для случая  <em>k</em> = 0)
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="11_7_6.gif" style="vertical-align: middle">
+<li></li><a href="../7/lek7_4_1.html">условно устойчива</a> <IMG src="11_7_7.gif" style="vertical-align: middle">
+<li></li>решается с помощью итерационного соотношения
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>требует <IMG src="11_7_9.gif" style="vertical-align: middle"> <a href="lek11_2.html#bottom">итераций</a>;
+<br><br>2. схема расщепления
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_10.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет порядок аппроксимации <IMG src="11_7_11.gif" style="vertical-align: middle">
+<li></li><a href="../3/lek3_5.html#bottom">абсолютно устойчива</a>,
+<li></li>каждая подсхема решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>,
+<li></li>требует <IMG src="11_7_12.gif" style="vertical-align: middle"> итераций;
+<br><br>3. схема переменных направлений
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет порядок аппроксимации <IMG src="11_7_14.gif" style="vertical-align: middle">
+<li></li>абсолютно устойчива,
+<li></li>каждая подсхема решается с помощью метода прогонки,
+<li></li>требует <IMG src="11_7_15.gif" style="vertical-align: middle"> итераций;
+<br><br>4. схема предиктор-корректор
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_16.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет порядок аппроксимации <IMG src="11_7_17.gif" style="vertical-align: middle">
+<li></li>абсолютно устойчива,
+<li></li><div align="justify">каждая из подсхем предиктора решается с помощью метода прогонки, 
+корректор - с помощью итерационного соотношения:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_18.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>требует <IMG src="11_7_15.gif" style="vertical-align: middle"> итераций.
+<div align="justify">
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;При использовании любой из перечисленных разностных схем в качестве нулевой итерации 
+(<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения в связи с введением фиктивной производной по времени) 
+задают свободный член:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_20.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций продолжается до тех пор, пока итерационный процесс не сойдётся, 
+т.е. пока не будет выполняться условие:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_7_21.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Следует отметить, что метод установления требует соблюдения следующих 
+<strong>правил при введении фиктивной производной по времени</strong>:
+<br>1) исходное стационарное уравнение предварительно должно быть приведено к виду <a href="lek11_7.html#top">(11.10)</a>, 
+т.е. производные второго порядка должны находится в правой части уравнения и иметь положительный знак; 
+<br>2) фиктивная производная по времени должна быть введена в левую часть уравнения и иметь 
+положительный знак.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

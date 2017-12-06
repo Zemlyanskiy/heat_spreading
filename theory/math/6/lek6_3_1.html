@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка. Неявная разностная схема. Характеристика.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Неявная разностная схема.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Характеристика.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#6_5" id="#6_5"></a>Неявная разностная схема для уравнения <a href="lek6_1.html#6_1">(6.1)</a> имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_1.gif" border="0"></td>
+<td align=right width=100>(6.5)</td></tr></table>
+Учитывая <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> разностных операторов, составляющих данную разностную схему, 
+легко видеть, что она, <a href="lek6_2_2.html">как и явная разностная схема (6.2)</a>, аппроксимирует дифференциальное уравнение <a href="lek6_1.html#6_1">(6.1)</a> с первым порядком и по времени, 
+и по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> неявной разностной схемы (6.5) с 
+помощью <a href="../3/lek3_2.html">спектрального метода</a>. Для этого отбрасываем член <IMG src="6_3_1_3.gif" style="vertical-align: middle">, наличие которого, <a href="../3/lek3_4.html">как известно</a>, не 
+оказывает влияния на устойчивость разностной схемы, и представляем решение в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="6_3_1_5.gif" style="vertical-align: middle">: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Группируя члены, содержащие <IMG src="../lyambda.gif" style="vertical-align: middle">, в левой части уравнения, выразим величину, обратную <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#6_6" id="#6_6"></a>При этом необходимое условие устойчивости разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a> также преобразуем к виду:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_9.gif" border="0"></td>
+<td align=right width=100>(6.6)</td></tr></table>
+Комплексный вид полученного выражения свидетельствует о том, что для устойчивости разностной схемы 
+(6.5) согласно условию (6.6) требуется, чтобы величины, обратные собственным числам <a href="../3/lek3_3.html#2">оператора перехода</a>, 
+были расположены вне или на границе <a href="../5/lek5_5_1.html#5_7">круга радиусом 1</a>, центр которого находится в начале координат 
+комплексной плоскости.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём следующие обозначения:
+<table align=right><tr><td><IMG alt="" src="6_3_1_10.gif" border="0"></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_3_1_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Следовательно, величины, обратные собственным числам оператора перехода, расположены на комплексной 
+плоскости на окружности с центром в точке <IMG src="6_3_1_12.gif" style="vertical-align: middle"> и радиусом <em>r</em> (<em>см. рисунок</em>). Данная окружность 
+находится вне круга, соответствующего условию устойчивости, при любом значении <em>r</em>. Это означает, что 
+неявная разностная схема (6.5) <a href="../3/lek3_5.html#bottom">абсолютно устойчива</a>.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Схема расщепления.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Схема расщепления.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для разрешения неявной разностной схемы <a href="lek9_3.html#9_4">(9.4)</a>, аппроксимирующей 
+дифференциальное уравнение <a href="lek9_2.html">(9.1)</a>, используется <strong>метод дробных шагов</strong>, уже <a href="../7/lek7_6.html">рассматривавшийся нами</a> при 
+изучении <a href="../7/lek7_10.html">методов решения двумерных дифференциальных уравнений параболического типа</a>. Преобразуем 
+с помощью метода дробных шагов неявную разностную схему <a href="lek9_3.html#9_4">(9.4)</a> в схему расщепления.
+<table cellspacing=0 cellpadding=0 align=right><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_1.gif" border="0"></td><td></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В случае <a href="../1/lek1_2.html#bottom">трёхмерных</a> задач интервал <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> 
+между точками <IMG src="9_6_2.gif" style="vertical-align: middle"> и <IMG src="9_6_3.gif" style="vertical-align: middle"> на <a href="lek9_2.html#1">разностной сетке</a> расщепляется на три равные части; 
+полученные промежуточные точки обозначим, как <IMG src="9_6_4.gif" style="vertical-align: middle"> и <IMG src="9_6_5.gif" style="vertical-align: middle"> (<em>см. рисунок</em>).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_7" id="#9_7">На первой трети</a> интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> записывается 
+<strong>первая подсхема</strong>, являющаяся неявной разностной схемой, в которой учитывается только производная второго порядка 
+по координате <em>x</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_6.gif" border="0"></td>
+<td align=right>(9.7)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_8" id="#9_8">На второй трети</a> интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> 
+записывается <strong>вторая подсхема</strong>, являющаяся неявной разностной схемой, в которой учитывается 
+только производная второго порядка по координате <em>y</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_7.gif" border="0"></td>
+<td align=right>(9.8)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#9_9" id="#9_9">На последней трети</a> интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> записывается <strong>третья подсхема</strong>, 
+являющаяся неявной разностной схемой, в которой учитывается только производная второго порядка по координате <em>z</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_8.gif" border="0"></td>
+<td align=right>(9.9)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, схема расщепления для трёхмерного дифференциальные уравнения <a href="lek9_2.html">(9.1)</a> состоит из трёх подсхем 
+(9.7)-(9.9). Складывая подсхемы (9.7)-(9.9), получаем соотношение, отличающееся от неявной 
+разностной схемы <a href="lek9_3.html#9_4">(9.4)</a> только тем, что вторые производные по координатам <em>x</em> и <em>y</em> аппроксимируются 
+в нём не на (<em>n</em> + 1)-ом шаге по времени, а в точках (<em>n</em> + 1/3) и (<em>n</em> + 2/3), соответственно:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_9.gif" border="0"></td>
+<td></td></tr></table>
+Данное соотношение показывает, что схема расщепления (9.7)-(9.9) имеет такой же <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>, 
+как и неявная разностная схема <a href="lek9_3.html#9_4">(9.4)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_10.gif" border="0"></td>
+<td></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Отметим, что свободный член уравнения <a href="lek9_2.html">(9.1)</a> может быть учтён не в первой подсхеме 
+схемы расщепления (9.7)-(9.9), а во второй или в третьей; однако в этом случае он будет иметь вид: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_6_11.gif" border="0"></td>
+<td></td></tr></table>
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

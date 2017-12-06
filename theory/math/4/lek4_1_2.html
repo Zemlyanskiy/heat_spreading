@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Явная разностная схема. Метод решения явной разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Явная разностная схема</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2. Метод решения явной разностной схемы</FONT></EM></B>
+<p align="justify">
+<a name="#4_4" id="#4_4"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выразим из разностной схемы <a href="lek4_1_1.html#4_1">(4.2)</a> величину <IMG src="4_1_2_1.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_2.gif" border="0"></td>
+<td align=right width=100>(4.4)</td></tr></table>
+Значения <IMG src="4_1_2_3.gif" style="vertical-align: middle"> для любого <em>j</em> могут быть определены с помощью <a href="../2/lek2_2_1.html">аппроксимации</a> начального 
+условия <a href="lek4_1_1.html#4_3">(4.3)</a>. Если задать <em>n</em> = 0, то, пользуясь выражением (4.4), можно определить 
+значения <IMG src="4_1_2_4.gif" style="vertical-align: middle">. Значения <IMG src="4_1_2_5.gif" style="vertical-align: middle"> определяются с помощью аппроксимации граничных условий <a href="lek4_1_1.html#4_3">(4.3)</a>. 
+Далее, задаём <em>n</em> = 1 и из выражения (4.4) определяем <IMG src="4_1_2_6.gif" style="vertical-align: middle">, а значения <IMG src="4_1_2_7.gif" style="vertical-align: middle"> - опять же с помощью 
+аппроксимации граничных условий <a href="lek4_1_1.html#4_3">(4.3)</a> и т. д. Таким образом, соотношение (4.4) позволяет 
+<table align=right><tr><td><IMG src="4_1_2_8.gif" style="vertical-align: middle"></td></tr></table>
+рассчитать все значения искомой функции <em>u</em> в <a href="../2/lek2_3_1.html#1">узлах разностной сетки</a>, кроме значений, 
+задаваемых с помощью <a href="../1/lek1_4.html">начального и граничных условий</a>. Описанную методику решения 
+явной разностной схемы наглядно характеризует её <a href="../2/lek2_3_2.html#bottom">разностный шаблон</a> (<em>см. рисунок</em>), 
+на котором <em>n</em>-й шаг по времени следует считать известным, а (<em>n</em> + 1)-й шаг по времени - 
+искомым.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Соотношения типа</a> (4.4), позволяющие 
+рассчитывать значения искомой функции <em>u</em> в узлах разностной сетки через 
+известные значения функции <em>u</em> в других (как правило, соседних) узлах разностной сетки, 
+называют <strong>рекуррентными соотношениями</strong>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Обратим внимание, что если вместо 
+граничных условий 1-го рода <a href="lek4_1_1.html#4_1">(4.1)</a> будут заданы <a href="../1/lek1_5.html#2">граничные условия 2-го или 3-го рода</a>, 
+то расчёт значений <IMG src="4_1_2_9.gif" style="vertical-align: middle"> несколько усложняется. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_4a" id="#4_4a"></a>Рассмотрим граничные условия 2-го рода:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_10.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Запишем <a href="../2/lek2_3_4.html#3">их аппроксимацию</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Выразим значения <IMG src="4_1_2_9.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_12.gif" border="0"></td>
+<td align=right width=100>(4.4а)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_4b" id="#4_4b"></a>Рассмотрим граничные условия 3-го рода:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Запишем <a href="../2/lek2_3_4.html#4">их аппроксимацию</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_14.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Выразим значения <IMG src="4_1_2_9.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_2_15.gif" border="0"></td>
+<td align=right width=100>(4.4б)</td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

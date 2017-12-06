@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Принцип замороженных коэффициентов. Уравнения с непостоянными коэффициентами при производных. Правило записи неявных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Принцип замороженных коэффициентов.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Уравнения с непостоянными коэффициентами при производных.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2. Правило записи неявных разностных схем.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Чтобы записать неявную разностную схему для уравнения <a href="lek13_1_1.html">(13.1)</a>, 
+необходимо определиться на каком шаге по времени следует стабилизировать значение функции <IMG src="13_1_2_1.gif" style="vertical-align: middle">. 
+Как правило, для этого выбирают <em>n</em>-й шаг по времени. Во всех методах численного решения <em>n</em>-й шаг по 
+времени считается известным для всех искомых функций, и, следовательно, как бы ни была задана функция <IMG src="13_1_2_1.gif" style="vertical-align: middle">, 
+при определении значений функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени уже будут известны численные значения <IMG src="13_1_2_1.gif" style="vertical-align: middle"> 
+в каждой точке <IMG src="13_1_2_2.gif" style="vertical-align: middle"> <a href="../2/lek2_3_1.html#1">разностной сетки</a>. Таким образом, неявная разностная схема для уравнения <a href="lek13_1_1.html">(13.1)</a> 
+записывается в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_3.gif" border="0"></td>
+<td align=right width=100>(13.5)</td></tr></table>
+<a name="#1" id="#1"></a>Данный подход, заключающийся в стабилизации коэффициентов, являющихся функцией времени, на последнем рассчитанном шаге, 
+называют <strong>принципом замороженных коэффициентов</strong>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностная схема (13.5) является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> и решается 
+с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Легко видеть, что зависимость коэффициента <IMG src="../sigma.gif" style="vertical-align: middle"> от переменных <em>t</em> и <em>x</em> 
+не оказывает влияния на <a href="../4/lek4_2_5.html#4_16">сходимость прогонки</a>. 
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим теперь <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1_1">параболического типа</a>, в котором коэффициент <IMG src="../sigma.gif" style="vertical-align: middle"> 
+зависит от переменных <em>t</em>, <em>x</em> и <em></em>y:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_5.gif" border="0"></td>
+<td align=right width=100>(13.6)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Схема расщепления для уравнения (13.6) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Отметим, что согласно принципу замороженных коэффициентов функция <IMG src="13_1_2_7.gif" style="vertical-align: middle"> 
+<a href="../2/lek2_2_1.html">аппроксимируется</a> в первой подсхеме на <em>n</em>-ом шаге по времени, а во второй - на шаге по времени (<em>n</em> + 1/2).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Схема переменных направлений для уравнения (13.6) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В данном случае функция <IMG src="13_1_2_7.gif" style="vertical-align: middle"> аппроксимируется в обеих подсхемах 
+на шаге по времени (<em>n</em> + 1/2) для того, чтобы сохранить <a href="../7/lek7_7.html#bottom">второй порядок аппроксимации схемы</a> по времени.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Схема предиктор-корректор для уравнения (13.6) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Согласно принципу замороженных коэффициентов функция <IMG src="13_1_2_7.gif" style="vertical-align: middle"> аппроксимируется в первой подсхеме на <em>n</em>-ом 
+шаге по времени, во второй - на шаге по времени (<em>n</em> + 1/4); вся правая часть третьей подсхемы (корректора) 
+аппроксимируется на шаге по времени (<em>n</em> + 1/2) для достижения <a href="../7/lek7_9_2.html#1">второго порядка аппроксимации схемы по времени</a>.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

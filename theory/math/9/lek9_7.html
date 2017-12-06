@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Схема со стабилизирующей поправкой.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">7. Схема со стабилизирующей поправкой.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Преобразуем с помощью <a href="lek9_6.html">метода дробных шагов</a> неявную разностную схему <a href="lek9_3.html#9_4">(9.4)</a>
+ в схему со стабилизирующей поправкой, имеющую вид с учётом обозначений <a href="lek9_3.html#9_2">(9.2)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_1.gif" border="0"></td>
+<td>(9.16)</td></tr></table>
+Для записи схемы (9.16) необходимо выделить два пространственных направления (в данном случае <em>y</em> и <em>z</em>) 
+и учесть поправку по каждому из них (во второй и третьей подсхемах, соответственно). Схема со 
+стабилизирующей поправкой (9.16) рекомендуется для использования в случае, если существует особенность 
+поведения (например, осцилляции) искомой функции <em>u</em> в одном или двух пространственных направлениях. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Первая подсхема в схеме со стабилизирующей поправкой (9.16) аппроксимируется 
+на первой трети интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> и является неявной по координате <em>x</em>, явной по координате <em>y</em> и явной по координате <em>z</em>. 
+Вторая подсхема аппроксимируется на второй трети интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em>, является неявной по координате <em>y</em> и учитывает 
+поправку по этой координате. Третья подсхема аппроксимируется на последней трети интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em>, является неявной 
+по координате <em>z</em> и учитывает поправку по этой координате. Каждая из подсхем (как и в случае схемы расщепления 
+<a href="lek9_6.html#9_7">(9.7)-(9.9)</a>) является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> и решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Складывая подсхемы, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_2.gif" border="0"></td>
+<td></td></tr></table>
+Данное соотношение показывает, что схема со стабилизирующей поправкой (9.16) имеет, как и неявная 
+разностная схема <a href="lek9_3.html#9_4">(9.4)</a>, первый <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> по времени и второй - 
+по каждой из координат:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_3.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Алгоритм решения схемы со стабилизирующей поправкой (9.16) аналогичен <a href="lek9_6_4.html">алгоритму решения</a> 
+схемы расщепления <a href="lek9_6.html#9_7">(9.7)-(9.9)</a>. 
+Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<br><li>для первой подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_4.gif" border="0"></td>
+<td></td></tr></table>
+<br><li>для второй подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_5.gif" border="0"></td>
+<td></td></tr></table>
+<br><li>для третьей подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_7_6.gif" border="0"></td>
+<td></td></tr></table>
+Легко видеть, что для всех трёх подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

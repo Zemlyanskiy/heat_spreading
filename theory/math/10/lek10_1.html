@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Анализ возможности использования метода прогонки.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Анализ возможности использования метода прогонки.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем обыкновенное дифференциальное уравнение второго порядка в следующем общем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_1.gif" border="0"></td>
+<td align=right width=100>(10.1)</td></tr></table>
+Уравнение (10.1) следует дополнить <a href="../1/lek1_4.html">граничными условиями</a> (для определённости будем рассматривать 
+граничные условия <a href="../1/lek1_5.html#1">1-го рода</a>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_2.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения (10.1) разностную схему, <a href="../2/lek2_2_1.html">аппроксимируя</a> производную второго порядка разностным 
+оператором <a href="../2/lek2_2_3.html#2_12">(2.12)</a>, а производную первого порядка - <a href="../2/lek2_2_1.html#1">левой конечной разностью </a>(в соответствии с 
+<a href="../5/lek5_8.html#1">правилом выбора конечных разностей</a> для аппроксимации первых производных по координатам):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_3.gif" border="0"></td>
+<td align=right width=100>(10.2)</td></tr></table>
+Отметим, что в случае <em>v</em> < 0 для аппроксимации производной первого порядка следует использовать 
+<a href="../2/lek2_2_1.html#1">правую конечную разность</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приведём разностную схему (10.2) к виду <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, удобному для использования <a href="../4/lek4_2_5.html">метода прогонки</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_4.gif" border="0"></td>
+<td></td></tr></table>
+Следовательно, коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_5.gif" border="0"></td>
+<td></td></tr></table>
+Проверяя для разностной схемы (10.2) достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_6.gif" border="0"></td>
+<td></td></tr></table>
+приходим к выводу, что оно выполняется только при условии <em>k</em> > 0. Алгоритм решения 
+(в виде блок-схемы) разностной схемы (10.2) для этого случая представлен на рисунке.<a name="#1" id="#1"></a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_1_7.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;При <em>k</em> = 0 достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> 
+не выполняется и, следовательно, для решения разностной схемы (10.2) в этом случае метод прогонки 
+использовать нельзя.
+<a name="#bottom" id="#bottom"></a>
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Метод установления.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Метод установления.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Представим стационарную задачу, описываемую уравнением <a href="lek10_1.html">(10.1)</a> 
+для случая <em>k</em> = 0 (т.е., <a href="lek10_1.html#bottom">когда метод прогонки неприменим</a>), 
+в нестационарном виде. Для этого в уравнение <a href="lek10_1.html">(10.1)</a> необходимо добавить фиктивную производную по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_1.gif" border="0"></td>
+<td align=right width=100>(10.3)</td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_2.gif" border="0"></td>
+<td align=right width=100>(10.4)</td></tr></table>
+При этом искомая функция станет уже функцией двух переменных:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_3.gif" border="0"></td>
+<td></td></tr></table>
+Полученное уравнение (10.4) относится к <a href="../1/lek1_2.html#bottom">одномерным</a> дифференциальным уравнениям параболического типа, 
+<a href="../6/lek6_6.html">методы численного решения которых</a> мы уже рассматривали. Таким образом, возникает вопрос: можно ли для 
+решения уравнения (10.3) воспользоваться решением уравнения (10.4)? Чтобы получить ответ на этот вопрос, 
+следует проанализировать результат численного решения уравнения (10.4).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Известно, что численное решение нестационарной задачи (10.4) 
+требует задания <a href="../1/lek1_4.html">начального условия</a>. Если оно будет отличаться от истинного решения стационарной задачи (10.3):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_4.gif" border="0"></td>
+<td></td></tr></table>
+то производная по времени не будет равна нулю и в ходе численного решения уравнения (10.4) возникнет 
+некоторая динамика, т.е. изменение значений <IMG src="10_2_5.gif" style="vertical-align: middle"> при <IMG src="10_2_6.gif" style="vertical-align: middle">. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Однако поскольку в качестве <a href="../1/lek1_4.html">граничных условий</a> для численного решения нестационарной задачи (10.4) 
+используются граничные условия исходной стационарной задачи
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_7.gif" border="0"></td>
+<td></td></tr></table>
+т.е. граничные условия, не зависящие от времени, то с течением времени  (<IMG src="10_2_6.gif" style="vertical-align: middle">)
+производная по времени будет стремиться к нулю, а решение <IMG src="10_2_5.gif" style="vertical-align: middle"> нестационарной задачи (10.4) - к решению стационарной задачи (10.3):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_2_8.gif" border="0"></td>
+<td align=right width=100>(10.5)</td></tr></table>
+Таким образом, использование граничных условий, не зависящих от времени, даёт положительный ответ на поставленный вопрос.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Данный метод решения стационарной задачи путём преобразования её в 
+нестационарную получил название <strong>метода установления</strong>. Процесс пошагового приближения решения 
+нестационарной задачи к решению исходной стационарной задачи называют <strong>итерационным процессом</strong>, 
+переход от <em>n</em>-го шага к (<em>n</em> + 1)-му - <strong>итерацией</strong>, значение <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> - <strong>шагом итерации</strong>, 
+а индекс <em>п</em> - <strong>номером итерации</strong>.
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

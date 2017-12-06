@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация дифференциальных уравнений. Аппроксимация начальных и граничных условий</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Аппроксимация дифференциальных уравнений</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. Аппроксимация начальных и граничных условий </FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для решения дифференциальных уравнений численными методами требуются <a href="../1/lek1_4.html">начальные и граничные условия</a>. 
+Рассмотрим, как эти условия следует представлять в разностном виде.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Для подавляющего большинства задач <a href="../1/lek1_4.html">начальное условие</a> имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_1.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+Левая часть данного выражения соответствует нижнему ряду точек на <a href="lek2_3_1.html#1">разностной сетке</a>, 
+поэтому с учётом введённой ранее <a href="lek2_3_1.html#bottom">нумерации точек</a> начальное условие в разностном виде 
+записывается следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_2.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+причём значение <em>x<sub>j</sub></em> вычисляется согласно правилу:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_3.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+Отметим, что если <em>a</em> = 0, то 
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_4.gif" border="0"></td>
+<td align=right width=100>(2.19)</td></tr>
+</table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2" id="#2"></a>2. Граничные условия <a href="../1/lek1_5.html#1">1-го рода</a> имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_5.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+Левая часть левого граничного условия соответствует крайнему слева ряду точек на <a href="lek2_3_1.html#1">разностной 
+сетке</a>; левая часть правого граничного условия - крайнему справа ряду точек. Поэтому с учётом 
+введённой ранее <a href="lek2_3_1.html#bottom">нумерации точек</a> граничные условия 1-го рода в разностном виде записываются 
+следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_6.gif" border="0"></td>
+<td align=right width=100>(2.20)</td></tr>
+</table>
+причём значение <em>t<sup>n</sup></em> вычисляется согласно правилу:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_7.gif" border="0"></td>
+<td align=right width=100>(2.21)</td></tr>
+</table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#3" id="#3">3. Граничные условия </a><a href="../1/lek1_5.html#2">2-го рода</a> имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_8.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+Левая часть левого граничного условия в некоторой точке <em>t<sup>n</sup></em> 
+<a href="lek2_2_1.html">аппроксимируется</a> крайней слева конечной разностью на <a href="lek2_3_1.html#1">разностной сетке</a>; левая часть правого 
+граничного условия - крайней справа конечной разностью. Поэтому с учётом введённой ранее 
+<a href="lek2_3_1.html#bottom">нумерации точек</a> граничные условия 2-го рода в разностном виде записываются следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_9.gif" border="0"></td>
+<td align=right width=100>(2.22)</td></tr>
+</table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4" id="#4">4. Граничные условия</a> <a href="../1/lek1_5.html#3">3-го рода</a> в общем виде записываются следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_10.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+Левая часть левого граничного условия в некоторой точке <em>t<sup>n</sup></em> 
+<a href="lek2_2_1.html">аппроксимируется</a> крайней слева конечной разностью на <a href="lek2_3_1.html#1">разностной сетке</a>, а выражение в правой 
+части соответствует крайней слева точке; левая часть правого граничного условия 
+аппроксимируется крайней справа конечной разностью, а выражение в правой части соответствует 
+крайней справа точке. Поэтому граничные условия 3-го рода в разностном виде записываются 
+следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_4_11.gif" border="0"></td>
+<td align=right width=100>(2.23)</td></tr>
+</table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

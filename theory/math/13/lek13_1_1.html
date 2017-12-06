@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Принцип замороженных коэффициентов. Уравнения с непостоянными коэффициентами при производных. Исследование устойчивости явных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Принцип замороженных коэффициентов.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Уравнения с непостоянными коэффициентами при производных.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1. Исследование устойчивости явных разностных схем.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, 
+в котором коэффициент при производной второго порядка по координате не является константой, 
+а зависит от переменных <em>t</em> и <em>x</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_1.gif" border="0"></td>
+<td align=right width=100>(13.1)</td></tr></table>
+Поскольку в математических моделях физико-химических процессов любой коэффициент 
+является физической величиной, то для любых значений переменных <em>t</em> и <em>x</em> должно выполняться условие:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения (13.1) явную разностную схему, 
+стабилизируя значение функции <IMG src="13_1_1_3.gif" style="vertical-align: middle"> 
+в точке <IMG src="13_1_1_4.gif" style="vertical-align: middle"> на <a href="../2/lek2_3_1.html#1">разностной сетке</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_5.gif" border="0"></td>
+<td align=right width=100>(13.2)</td></tr></table>
+<a href="../3/lek3_4.html">В разделе 3.4</a> было доказано, что такая разностная схема условно устойчива. Условием <a href="../3/lek3_1.html">устойчивости</a> 
+для случая, когда <IMG src="../sigma.gif" style="vertical-align: middle"> является константой, служит соотношение <a href="../3/lek3_4.html#bottom">(3.12)</a>. Выясним, какой вид будет иметь 
+условие устойчивости для разностной схемы (13.2). Для этого выберем на разностной сетке произвольную 
+точку <IMG src="13_1_1_6.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Запишем для уравнения (13.1) явную разностную схему с постоянным коэффициентом <IMG src="13_1_1_8.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_9.gif" border="0"></td>
+<td align=right width=100>(13.3)</td></tr></table>
+Соотношение <a href="../3/lek3_4.html#bottom">(3.12)</a>, являющееся условием устойчивости, для разностной схемы (13.3) имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_10.gif" border="0"></td>
+<td align=right width=100>(13.4)</td></tr></table>
+Однако точка <IMG src="13_1_1_6.gif" style="vertical-align: middle"> - произвольно выбранная точка на разностной сетке, и, следовательно, 
+значение <IMG src="13_1_1_8.gif" style="vertical-align: middle"> - произвольно выбранное значение, 
+которое может принимать функция <IMG src="13_1_1_3.gif" style="vertical-align: middle"> при заданных интервалах изменения 
+переменных <em>t</em> и <em>x</em>. Но для устойчивости разностной схемы (13.3) необходимо, чтобы условие (13.4) 
+выполнялось для любой точки <IMG src="13_1_1_6.gif" style="vertical-align: middle"> на разностной сетке. Поэтому для записи условия (13.4) следует выбрать 
+максимальное значение, которое может принимать функция <IMG src="13_1_1_3.gif" style="vertical-align: middle"> 
+при заданных интервалах изменения переменных <IMG src="13_1_1_11.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_12.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данное условие и является условием устойчивости явной разностной схемы (13.2).
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Используя аналогичные рассуждения, можно получить условие 
+устойчивости явной разностной схемы, <a href="../2/lek2_2_1.html">аппроксимирующей</a> одномерное дифференциальное уравнение 
+в частных производных первого порядка, в котором коэффициент при производной по координате 
+не является константой:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_1_1_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

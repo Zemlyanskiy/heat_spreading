@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Решение интегро-дифференциальных уравнений. Методы численного вычисления интегралов.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение интегро-дифференциальных уравнений.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Методы численного вычисления интегралов.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+<table width="100%" cellspacing=0 cellpadding=0>
+	<tr>
+		<td valign=top>
+			<div align="justify">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим непрерывную функцию одной переменной <em>u</em> = <em>u</em>(<em>x</em>), 
+			для которой задан интервал её изменения <em>x</em> <IMG src="14_2_2.gif" style="vertical-align: middle"> 
+			[<em>a</em>; <em>b</em>]. Разобьём интервал [<em>a</em>; <em>b</em>] 
+			на <em>N</em> равных частей (<em>см. рисунок</em>). Величину интервала деления обозначим за <em>h</em>.
+			<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;На основе свойств определённого интеграла имеем:
+		</td>
+		<td width=50>&nbsp;</td>
+		<td valign=top><IMG alt="" src="14_2_1.gif" border="0"></td>
+	</tr>
+</table>
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_2_3.gif" border="0"></td>
+<td align=right width=100>(14.3)</td></tr></table>
+При бесконечном увеличении числа интервалов деления получаем
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#14_4" id="#14_4"></a>Заменяя <IMG src="14_2_5.gif" style="vertical-align: middle"> 
+на <IMG src="14_2_6.gif" style="vertical-align: middle"> в выражении (14.3), 
+получаем приближённую формулу для расчёта определённого интеграла:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_2_7.gif" border="0"></td>
+<td align=right width=100>(14.4)</td></tr></table>
+Формула (14.4) называется <strong>формулой прямоугольников</strong>, поскольку точное выражение площади кривой <em>u</em>(<em>x</em>) 
+она заменяет на сумму площадей вписанных в неё прямоугольников.
+<table align=right cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_2_8.gif" border="0"></td>
+</tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Если заменить точное выражение площади кривой <em>u</em>(<em>x</em>) 
+на сумму площадей трапеций, построенных на основе точек деления (<em>см. рисунок</em>), 
+то получим следующую приближённую формулу для расчёта определённого интеграла, 
+называемую <strong>формулой трапеций</strong>:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="14_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Существуют и более сложные формулы для численного расчёта определённого интеграла, 
+однако в настоящем курсе мы на них останавливаться не будем.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Схема расщепления.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Схема расщепления.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим метод разрешения неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a>, 
+называемый <strong>методом дробных шагов</strong>. Данный метод позволяет представить неявную разностную схему <a href="lek7_3.html#7_3">(7.3)</a> 
+в виде двух подсхем, каждая из которых может быть решена с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>.
+<table align=right><tr><td><IMG alt="" src="7_6_1.gif" border="0"></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разобьём пополам интервал <IMG src="7_6_2.gif" style="vertical-align: middle"> между точками 
+<IMG src="7_6_3.gif" style="vertical-align: middle"> и <IMG src="7_6_4.gif" style="vertical-align: middle"> на <a href="lek7_2.html#1">разностной сетке</a> и обозначим полученную 
+промежуточную точку, как  <IMG src="7_6_5.gif" style="vertical-align: middle">(<em>см. рисунок</em>). 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_7" id="#7_7"></a>Запишем на первом полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle"> 
+неявную разностную схему, которая будет учитывать только производную второго порядка по координате <em>x</em> 
+(назовём её <strong>первой подсхемой</strong>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_6.gif" border="0"></td>
+<td align=right>(7.7)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#7_8" id="#7_8"></a>Запишем на втором полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle"> 
+неявную разностную схему, которая будет учитывать только производную второго порядка 
+по координате <em>y</em> (назовём её <strong>второй подсхемой</strong>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_7.gif" border="0"></td>
+<td align=right>(7.8)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Складывая подсхемы (7.7) и (7.8), получаем соотношение, 
+отличающееся от неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a> только тем, что вторая производная по координате <em>x</em> 
+аппроксимируется в нём не на (<em>n</em> + 1)-ом шаге по времени, а на шаге (<em>n</em> + 1/2):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_8.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, дифференциальное уравнение <a href="lek7_2.html">(7.1)</a> может быть <a href="../2/lek2_2_1.html">аппроксимировано</a> 
+с помощью последовательного разрешения двух подсхем (7.7), (7.8), называемых в совокупности 
+<strong>схемой расщепления</strong>. Соотношение, являющееся суммой подсхем (7.7), (7.8), показывает, что 
+схема расщепления имеет такой же <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>, как и неявная разностная схема <a href="lek7_3.html#7_3">(7.3)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_9.gif" border="0"></td>
+<td></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Отметим, что свободный член уравнения <a href="lek7_2.html">(7.1)</a> может быть учтён 
+не в первой подсхеме схемы расщепления (7.7), (7.8), а во второй; однако в этом случае он будет иметь вид: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_6_10.gif" border="0"></td>
+<td></td></tr></table>
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

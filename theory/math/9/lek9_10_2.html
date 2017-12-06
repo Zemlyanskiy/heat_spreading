@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Решение трёхмерных дифференциальных уравнений параболического типа, содержащих первые производные по координатам. Частные случаи.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">10. Решение трёхмерных дифференциальных уравнений параболического типа, содержащих первые производные по координатам.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10.2. Частные случаи.</FONT></FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">трёхмерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a>, 
+содержащее не все производные первого и второго порядка, например:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_2_1.gif" border="0"></td>
+<td>(9.25)</td></tr></table>
+Схема расщепления для уравнения (9.25) имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_2_2.gif" border="0"></td>
+<td>(9.26)</td></tr></table>
+В связи с отсутствием в уравнении (9.25) первой производной по <em>х</em> <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> схемы (9.26) 
+по этой координате будет выше, чем по <em>y</em> и <em>z</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_2_3.gif" border="0"></td>
+<td></td></tr></table>
+Первая и вторая подсхемы в схеме (9.26) являются аналогами <a href="../6/lek6_6.html#2">неявной разностной схемы для одномерного 
+дифференциального уравнения параболического типа</a>; они абсолютно устойчивы и решаются с помощью <a href="../4/lek4_2_5.html">метода 
+прогонки</a>. Третья подсхема в схеме (9.26) является аналогом  <a href="../5/lek5_8.html#2">неявной разностной схемы для одномерного 
+дифференциального уравнения в частных производных первого порядка</a>; она также абсолютно устойчива, 
+но решается с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_10_2_4.gif" border="0"></td>
+<td></td></tr></table>
+Также следует отметить, что по координате <em>z</em> требуется только одно (а именно, левое) <a href="../1/lek1_4.html">граничное условие</a>. 
+Всё это необходимо учесть при составлении алгоритма решения схемы расщепления (9.26), <a href="../2/lek2_2_1.html">аппроксимирующей</a> 
+уравнение (9.25).
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

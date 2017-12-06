@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Погрешность решения разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 0px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Погрешность решения разностной схемы</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В настоящем учебном пособии изучается два метода, 
+позволяющих исследовать <a href="lek3_1.html">устойчивость разностных схем</a>. Первый из них называется 
+<strong>гармоническим</strong> или <strong>спектральным</strong> методом анализа <a href="../2/lek2_3_2.html#1">разностных схем</a>. Второй - <strong>метод тестовых 
+задач</strong> - будет описан <a href="../under.html">в конце курса</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2" id="#2">Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> </a>дифференциальное уравнение 
+<a href="../1/lek1_3.html#1_1">параболического типа</a>, свободный член которого не включает искомую функцию <em>u</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_1.gif" border="0"></td>
+<td align=right width=100>(3.3)</td></tr></table>
+Запишем для него <a href="../2/lek2_3_2.html#1">явную разностную схему</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_2.gif" border="0"></td>
+<td align=right width=100>(3.4)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#3" id="#3">Погрешность решения</a> разностной схемы (3.4) 
+в точке <IMG src="3_2_3.gif" style="vertical-align: middle"> можно представить с помощью соотношения: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Здесь <IMG src="3_2_5.gif" style="vertical-align: middle">  - решение разностной схемы (3.4) 
+в точке  <IMG src="3_2_3.gif" style="vertical-align: middle">; 
+<IMG src="3_2_6.gif" style="vertical-align: middle"> - истинное решение исходного дифференциального уравнения (3.3) 
+в точке  <IMG src="3_2_3.gif" style="vertical-align: middle">. Выражая из данного соотношения <IMG src="3_2_5.gif" style="vertical-align: middle"> 
+и подставляя в разностную схему (3.4), получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В разделе "<a href="../2/lek2_3_3.html">Порядок аппроксимации разностной схемы</a>" 
+было доказано, что разностная схема (3.4) имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Следовательно, имеет место следующее равенство:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+С учётом данного выражения получаем разностную схему для погрешности решения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_2_10.gif" border="0"></td>
+<td align=right width=100>(3.5)</td></tr></table>
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

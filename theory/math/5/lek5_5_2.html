@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Неявная разностная схема с аппроксимацией производной по координате правой конечной разностью. Метод решения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Неявная разностная схема с аппроксимацией производной по координате правой конечной разностью</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2. Метод решения.</FONT></EM></B>
+<p align="justify">
+<table align=right><tr><td>&nbsp;</td><td><IMG alt="" src="5_5_2_1.gif" border="0"></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим метод решения разностной схемы <a href="lek5_2.html#5_4">(5.4)</a>. 
+<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), характеризующий данную разностную схему, 
+свидетельствует о том, что она содержит две неизвестные величины - значения функции <em>u</em> на 
+(<em>n</em> + 1)-ом шаге по времени <IMG src="5_5_2_2.gif" style="vertical-align: middle">. То есть, для определения величины <IMG src="5_5_2_3.gif" style="vertical-align: middle"> необходимо знать 
+значение функции <em>u</em> в соседней справа точке на <a href="../2/lek2_3_1.html#1">разностной сетке</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выражая <IMG src="5_5_2_3.gif" style="vertical-align: middle"> из разностной схемы <a href="lek5_2.html#5_4">(5.4)</a>, получаем рекуррентное соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_2_5.gif" border="0"></td>
+<td align=right width=100>(5.9)</td></tr></table>
+позволяющее последовательно рассчитать все значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге 
+по времени <IMG src="5_5_2_6.gif" style="vertical-align: middle">, если известна величина <IMG src="5_5_2_7.gif" style="vertical-align: middle">, 
+которую можно определить из <em>правого граничного условия</em>: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, неявная разностная схема <a href="lek5_2.html#5_4">(5.4)</a> по сложности 
+метода решения не уступает соответствующей явной разностной схеме <a href="lek5_2.html#5_2">(5.2)</a>, а в отношении <a href="../3/lek3_1.html">устойчивости</a> 
+имеет очевидное преимущество. Основываясь на этом, мы рекомендуем для численного решения 
+дифференциального уравнения в частных производных 1-го порядка <a href="lek5_1.html#5_1">(5.1)</a> при отрицательном значении 
+параметра <em>v</em> именно неявную разностную схему с аппроксимацией производной по координате правой 
+конечной разностью <a href="lek5_2.html#5_4">(5.4)</a>. Ниже приводится алгоритм её решения (в виде блок-схемы).
+<table align=center cellspacing=0 cellpadding=0><tr>
+<td><br><IMG alt="" src="5_5_2_8.gif" border="0"></td>
+</tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

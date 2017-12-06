@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация простейших дифференциальных операторов. Разностная аппроксимация производной первого порядка.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Аппроксимация простейших дифференциальных операторов</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1. Разностная аппроксимация производной первого порядка</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В основе методов численного решения дифференциальных уравнений, 
+изучаемых в настоящем учебном пособии, лежит преобразование дифференциальной задачи в разностную 
+задачу, называемое <strong><a style="color: #000088; cursor: hand;" title="В переводе с английского &laquo;approximation&raquo; означает &laquo;приближение&raquo, &laquo;приближённое значение&raquo.">аппроксимацией*</a></strong>. Однако прежде, чем перейти к проблемам <a href="lek2_3_2.html">аппроксимации 
+дифференциальных уравнений</a>, рассмотрим аппроксимацию простейших дифференциальных операторов, 
+т.е. производных первого и второго порядков.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим функцию одной переменной <em>u</em> = <em>u</em>(<em>x</em>), 
+для которой задан интервал её изменения <em>x</em> <IMG src="../prinadlegn.gif" style="vertical-align: middle"> [<em>a</em>; <em>b</em>]. Разобьём интервал [<em>a</em>; <em>b</em>] на <em>n</em> равных частей (<em>см. рисунок</em>).
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Введём следующие обозначения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><em>u</em>(<em>x</em><sub><em>j</em></sub>) = <em>u<sub>j</sub></em> - значение функции <em>u</em>(<em>x</em>) в точке <em>x<sub>j</sub></em> ;
+<br><IMG src="2_2_1_2.gif" style="vertical-align: bottom">  - величина интервала между точками.
+</td>
+<td align=right width=100></td></tr></table>
+<a name="#2" id="#2">Введём понятие</a> <strong>нормы функции</strong> <em>u</em>(<em>x<sub>j</sub></em>) с помощью соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Рассмотрим производную</a> функции <em>u</em> в точке <em>x<sub>j</sub></em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Аппроксимация этой производной может быть введена с помощью следующих разностных операторов:
+<br><br><li style="font-family:Times New Roman;">с помощью <strong>правой конечной разности</strong>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_5.gif" border="0"></td>
+<td align=right width=100>(2.5)</td></tr></table>
+<li style="font-family:Times New Roman;">с помощью <strong>левой конечной разности</strong>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_6.gif" border="0"></td>
+<td align=right width=100>(2.6)</td></tr></table>
+<li style="font-family:Times New Roman;">с помощью <strong>центральной конечной разности</strong>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_7.gif" border="0"></td>
+<td align=right width=100>(2.7)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Кроме того, разностную аппроксимацию производной первого порядка можно задать в виде линейной комбинации выражений (2.5) и (2.6):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_1_8.gif" border="0"></td>
+<td align=right width=100>(2.8)</td></tr></table>
+<font size="2">где 0  <IMG src="2_2_1_9.gif" style="vertical-align: middle">  1.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Видно, что при <IMG src="../sigma.gif" style="vertical-align: middle"> = 0 выражение (2.8) становится левой конечной разностью, 
+при <IMG src="../sigma.gif" style="vertical-align: middle"> = 1 - правой конечной разностью, 
+при <IMG src="../sigma.gif" style="vertical-align: middle"> = 1/2 - центральной конечной разностью.
+</p>
+</Td></Tr></Table>
+</body>
+</html>
