@@ -1,8 +1,15 @@
 # -*- coding: utf8 -*-
 
-import re
+import numpy as np
 import matplotlib.pyplot as plt
-file=open("input1.txt").readlines()
+from matplotlib.widgets import Button
+import re
+import sys
+
+PATH=sys.argv[1]
+
+#--------------------------------------READING FILE----------------------------------------
+file=open(PATH).readlines()
 matrix=[]
 for line in file:
     if re.match(r"t=",line):
@@ -27,14 +34,48 @@ for line in file:
 step = (XMax-XMin)/Lx
 i=XMin
 xArr=[]
-while i<XMax:
-    xArr.append(i)
-    i+=step
-result=matrix[0]
-del matrix[0]
-line=plt.plot(xArr,result)
-print("end step\n")
-for result in matrix:
-    line[0].set_ydata(result)
-    print("end step\n")
+globals()['iterator']=1
+#---------------------------------START DRAWING PLOT------------------------------------------
+freqs = np.arange(2, 20, 3)
+
+fig, ax = plt.subplots()
+plt.subplots_adjust(bottom=0.2)
+t = np.arange(0.0, 1.0, 0.001)
+s = np.sin(2*np.pi*freqs[0]*t)
+
+xcoords=np.arange(XMin,XMax,(XMax-XMin)/Lx)
+l, = plt.plot(xcoords,matrix[0], lw=2)
+plt.xlabel('OX')
+plt.ylabel('OY')
+ax.set_title('0')
+class Index(object):
+    ind = 0
+
+    def next(self, event):
+        if self.ind < len(matrix)-1:
+            self.ind += 1
+            i = self.ind % len(matrix)
+            ydata = matrix[i]
+            l.set_ydata(ydata)
+            ax.set_title(self.ind)
+            plt.draw()
+
+    def prev(self, event):
+        if self.ind>0:
+            self.ind -= 1
+            i = self.ind % len(matrix)
+            ydata = matrix[i]
+            l.set_ydata(ydata)
+            ax.set_title(self.ind)
+            plt.draw()
+
+callback = Index()
+axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
+axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
+bnext = Button(axnext, 'Next')
+bnext.on_clicked(callback.next)
+bprev = Button(axprev, 'Previous')
+bprev.on_clicked(callback.prev)
+
+plt.show()
 exit(0)
