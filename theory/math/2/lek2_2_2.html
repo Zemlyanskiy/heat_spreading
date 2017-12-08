@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация простейших дифференциальных операторов. Понятие порядка аппроксимации.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Аппроксимация простейших дифференциальных операторов</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2. Понятие порядка аппроксимации</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2_9" id="#2_9">Выясним, с какой точностью </a><a href="lek2_2_1.html#1">конечные разности (2.5), (2.6), (2.7)</a> 
+аппроксимируют значение производной функции <em>u</em> в точке <em>x<sub>j</sub></em>. Для этого разложим значения функции  <IMG src="2_2_2_1.gif" style="vertical-align: middle"> 
+в ряд Тейлора относительно точки <em>x<sub>j</sub></em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_2.gif" border="0"></td>
+<td align=right width=100>(2.9)</td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_3.gif" border="0"></td>
+<td align=right width=100>(2.10)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#3" id="#3">Подставляя выражение (2.9) </a>в правую конечную разность <a href="lek2_2_1.html#1">(2.5)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_4.gif" border="0"></td>
+<td align=right width=100>(2.11)</td></tr></table>
+Первое слагаемое в правой части выражения (2.11) является производной функции <em>u</em> в точке <em>x<sub>j</sub></em>, 
+а все остальные составляют так называемую <strong>ошибку аппроксимации</strong>, показывающую насколько значение 
+производной функции <em>u</em> в точке <em>x<sub>j</sub></em>, определяемое с помощью разностного 
+оператора, <a href="lek2_2_1.html">аппроксимирующего</a> эту производную, отличается от её истинного значения. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Учитывая, что производные любых порядков функции <em>u</em> 
+ограничены в точках интервала [<em>a</em>; <em>b</em>], а величина <em>h</em> после выполнения 
+операции <a href="lek2_1_1.html">обезразмеривания переменных</a> не будет превышать 1, наиболее существенный вклад в ошибку 
+аппроксимации вносит слагаемое, в котором порядок <em>h</em> наименьший. На основании этого говорят, 
+что рассматриваемая конечная разность имеет <strong>порядок аппроксимации</strong> по <em>h</em>, соответствующий 
+этой наименьшей степени <em>h</em> в выражении для ошибки аппроксимации.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Таким образом</a>, понятие "<strong>порядок аппроксимации</strong>" характеризует 
+точность, с которой разностный оператор аппроксимирует производную функции <em>u</em> в точке<em> x<sub>j</sub></em>: 
+чем выше порядок аппроксимации, тем точнее <a href="lek2_2_1.html">аппроксимация</a> и, соответственно, меньше её ошибка.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В случае правой конечной разности наибольший вклад в ошибку аппроксимации вносит второе слагаемое в правой части 
+выражения (2.11) и, следовательно, <em>правая конечная разность имеет первый порядок аппроксимации</em>, что записывается в виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подставляя выражение (2.10) в левую конечную разность <a href="lek2_2_1.html#1">(2.6)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, <em>левая конечная разность также имеет первый порядок аппроксимации</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подставляя выражения (2.9), (2.10) в центральную конечную разность <a href="lek2_2_1.html#1">(2.7)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_2_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, <em>центральная конечная разность имеет второй порядок аппроксимации</em> и, следовательно, 
+значение производной функции <em>u</em> в точке <em>x<sub>j</sub></em>, полученное при использовании центральной конечной разности, 
+будет ближе к истинному значению, чем при использовании правой или левой конечных разностей.
+</p>
+<a name="#bottom" id="#bottom"></a>
+</Td></Tr></Table>
+</body>
+</html>

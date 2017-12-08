@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Принцип замороженных коэффициентов. Уравнения с нелинейным свободным членом.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Принцип замороженных коэффициентов.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Уравнения с нелинейным свободным членом.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, 
+свободный член которого является функцией квадрата искомой функции <em>u</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_1.gif" border="0"></td>
+<td align=right width=100>(13.7)</td></tr></table>
+Подобные уравнения входят в математические модели реакторов, в которых протекают химические реакции 
+второго порядка.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Чтобы записать неявную разностную схему для уравнения (13.7), свободный член представляют в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В данной записи выражение в скобках будет играть роль коэффициента, зависящего от переменных <em>t</em> и <em>x</em>. 
+Тогда согласно <a href="lek13_1_2.html#1">принципу замороженных коэффициентов</a> выражение (<em>ku</em>) должно 
+быть <a href="../2/lek2_2_1.html">аппроксимировано</a> на <em>n</em>-ом шаге по времени. 
+С учётом этого неявная разностная схема для уравнения (13.7) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_3.gif" border="0"></td>
+<td align=right width=100>(13.8)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностная схема (13.8) является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> 
+и решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. 
+Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_41.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Если искомая функция <em>u</em> является физической величиной, то она не может быть отрицательна. 
+В этом случае зависимость коэффициента<em> b</em> от значений функции <em>u</em> не оказывает влияния на <a href="../4/lek4_2_5.html#4_16">сходимость прогонки</a>. 
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим одномерное дифференциальное уравнение параболического типа, 
+свободный член которого является произвольной степенной функцией искомой функции <em>u</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_4.gif" border="0"></td>
+<td align=right width=100>(13.9)</td></tr></table>
+По аналогии с предыдущим случаем представим свободный член в виде произведения коэффициента, 
+зависящего от переменных <em>t</em> и <em>x</em>, и функции <em>u</em> в первой степени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Тогда с учётом принципа замороженных коэффициентов неявная разностная схема для уравнения (13.9) 
+будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="13_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данная разностная схема абсолютно устойчива, 
+решается с помощью метода прогонки; условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

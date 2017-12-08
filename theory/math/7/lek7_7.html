@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Схема переменных направлений.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">7. Схема переменных направлений.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим способ интерпретации неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a>, 
+позволяющий добиться повышения <a href="../2/lek2_2_2.html#1">порядка аппроксимации</a> по времени, - <strong>схему переменных направлений</strong>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_1.gif" border="0"></td>
+<td>(7.13)</td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_2.gif" border="0"></td>
+<td></td></tr></table>
+Первая подсхема в схеме переменных направлений (7.13) <a href="../2/lek2_2_1.html">аппроксимируется</a> на первом полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle"> 
+и является неявной по координате <em>x</em> и явной по координате <em>y</em>. Вторая подсхема 
+аппроксимируется на втором полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle"> и является неявной по координате <em>y</em> и 
+явной по координате <em>x</em>. Каждая из подсхем (как и в случае схемы расщепления <a href="lek7_6.html#7_7">(7.7), (7.8)</a>) 
+является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> и решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Обратим внимание на две особенности, которые необходимо учитывать 
+при записи схемы переменных направлений (7.13): 1) коэффициенты перед разностными операторами, 
+аппроксимирующими производные <IMG src="7_7_3.gif" style="vertical-align: middle"> и <IMG src="7_7_4.gif" style="vertical-align: middle">, должны быть поделены пополам; 
+2) свободный член записывается во второй подсхеме и аппроксимируется на шаге (<em>n</em> + 1/2).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Складывая обе подсхемы и принимая во внимание обозначения <a href="lek7_4_2.html#bottom">(7.6)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_5.gif" border="0"></td>
+<td></td></tr></table>
+Видно, что правая часть данного соотношения аппроксимируется относительно точки <IMG src="7_7_6.gif" style="vertical-align: middle">. Это означает, 
+что разностный оператор в левой части является <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>, которая, <a href="../2/lek2_2_2.html#bottom">как известно</a>, 
+имеет второй порядок аппроксимации. Таким образом, схема переменных направлений (7.13), имея порядок 
+аппроксимации
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_7.gif" border="0"></td>
+<td></td></tr></table>
+является более точной по сравнению со схемой расщепления <a href="lek7_6.html#7_7">(7.7), (7.8)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Алгоритм решения схемы переменных направлений (7.13) аналогичен 
+<a href="lek7_6_3.html">алгоритму решения</a> схемы расщепления <a href="lek7_6.html#7_7">(7.7), (7.8)</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, 
+имеют вид:
+<br><li></li>для первой подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_8.gif" border="0"></td>
+<td></td></tr></table>
+<br><li></li>для второй подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_7_9.gif" border="0"></td>
+<td></td></tr></table>
+Легко видеть, что для обеих подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

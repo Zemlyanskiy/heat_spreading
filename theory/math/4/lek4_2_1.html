@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Неявная разностная схема. Характеристика неявной разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявная разностная схема</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1. Характеристика неявной разностной схемы</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_5" id="#4_5">Рассмотрим</a> <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a> с <a href="../1/lek1_4.html">начальным и граничными условиями</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_1_1.gif" border="0"></td>
+<td align=right width=100>(4.5)</td></tr></table>
+<a name="#4_6" id="#4_6">Запишем для уравнения</a> (4.5) <a href="../2/lek2_3_2.html#2_15">неявную разностную схему</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_1_2.gif" border="0"></td>
+<td align=right width=100>(4.6)</td></tr></table>
+Запишем <a href="../2/lek2_3_4.html">аппроксимацию начального и граничных условий</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_1_3.gif" border="0"></td>
+<td align=right width=100>(4.7)</td></tr></table>
+Аппроксимация граничных условий (4.7) записана на (<em>n</em> + 1)-ом шаге по времени для удобства последующего изложения 
+<a href="lek4_2_5.html">метода</a> и <a href="lek4_2_6.html">алгоритма</a> решения неявной разностной схемы (4.6).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В разделе "<a href="../2/lek2_3_3.html">Порядок аппроксимации разностной схемы</a>" 
+было отмечено, что разностная схема (4.6) имеет такой же <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>, как и 
+соответствующая ей явная разностная схема <a href="lek4_1_1.html#4_2">(4.2)</a>, а именно:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_2_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В разделе "<a href="../3/lek3_5.html">Доказательство абсолютной устойчивости неявной разностной схемы</a>" было 
+доказано, что неявная разностная схема (4.6) абсолютно устойчива, т.е. вне зависимости от 
+выбора интервала деления на <a href="../2/lek2_3_1.html#1">разностной сетке</a> (или, иначе говоря, выбора расчётного шага по 
+независимым переменным) <a href="../3/lek3_2.html#3">погрешность решения</a> неявной разностной схемы в процессе 
+вычислений возрастать не будет. Отметим, что это, безусловно, является достоинством неявной 
+разностной схемы (4.6) по сравнению с явной разностной схемой <a href="lek4_1_1.html#4_2">(4.2)</a>, которая устойчива 
+только при выполнения условия <a href="../3/lek3_4.html#3_12">(3.12)</a>. В то же время явная разностная схема имеет 
+достаточно простой <a href="lek4_1_2.html">метод решения</a>, а метод решения неявной разностной схемы (4.6), 
+называемый <strong>методом прогонки</strong>, более сложен. Прежде чем перейти <a href="lek4_2_5.html">к изложению метода 
+прогонки</a>, необходимо <a href="lek4_2_2.html">вывести ряд соотношений</a>, используемых этим методом.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

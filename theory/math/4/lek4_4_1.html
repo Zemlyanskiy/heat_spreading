@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Саульева. Вывод разностной схемы Саульева.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Разностная схема Саульева</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1. Вывод разностной схемы Саульева</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1_1">параболического типа</a> с <a href="../1/lek1_4.html">начальным и граничными условиями</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_1.gif" border="0"></td>
+<td align=right width=100>(4.19)</td></tr></table>
+<a name="#4_20" id="#4_20"></a>Представим разностный оператор для аппроксимации второй производной функции <em>u</em> по координате <em>х</em> <a href="../2/lek2_2_3.html#2_12">(2.12)</a> в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_2.gif" border="0"></td>
+<td align=right width=100>(4.20)</td></tr></table>
+<a href="../2/lek2_2_1.html">Аппроксимируя</a> первую дробь числителя в выражении (4.20) на <em>n</em>-ом шаге по 
+времени, а вторую дробь и свободный член в уравнении (4.19) - на (<em>n</em> + 1)-ом шаге 
+по времени, получим соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#4_21" id="#4_21"></a>или, упрощая,
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_4.gif" border="0"></td>
+<td align=right width=100>(4.21)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Соотношение (4.21) не аппроксимирует исходное дифференциальное уравнение (4.19). 
+Поэтому рассмотрим следующий шаг по времени на <a href="../2/lek2_3_1.html#1">разностной сетке</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Аппроксимируя на этот раз первую дробь числителя в выражении (4.20) 
+на (<em>n</em> + 2)-ом шаге по времени, а вторую дробь и свободный член в уравнении 
+(4.19) - на (<em>n</em> + 1)-ом шаге по времени, получим соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#4_22" id="#4_22"></a>или, упрощая,
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_1_7.gif" border="0"></td>
+<td align=right width=100>(4.22)</td></tr></table>
+Соотношение (4.22) также не аппроксимирует исходное дифференциальное уравнение (4.19). 
+Однако в совокупности выражения (4.21) и (4.22) составляют <a href="../2/lek2_3_2.html#1">разностную схему</a>, 
+называемую в честь её автора, <strong>разностной схемой Саульева</strong>. Сами выражения (4.21) и (4.22) 
+называют <strong>первой и второй ступенями</strong> разностной схемы Саульева, соответственно.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

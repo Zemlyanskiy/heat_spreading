@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Влияние наличия искомой функции в составе свободного члена на устойчивость разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">7. Влияние наличия искомой функции в составе свободного члена на устойчивость разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="lek5_1.html">Математические модели химических реакторов</a> могут содержать 
+дифференциальные уравнения типа <a href="lek5_1.html#5_1">(5.1)</a>, свободный член которых включает 
+искомую функцию <em>u</em> следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_7_1.gif" border="0"></td>
+<td align=right width=100>(5.12)</td></tr></table>
+Следует знать, как это может повлиять на <a href="../3/lek3_1.html">устойчивость</a> разностных схем <a href="lek5_2.html#5_4">(5.4)</a>, <a href="lek5_2.html#5_5">(5.5)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностная схема <a href="lek5_2.html#5_4">(5.4)</a> абсолютно устойчива при <em>v</em> < 0. 
+Для уравнения (5.12) она преобразуется к виду:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_7_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Величины, обратные собственным числам <a href="../3/lek3_3.html#2">оператора перехода</a>, для данной разностной схемы будут 
+определяться соотношением:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_7_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table align=right><tr><td>&nbsp;</td><td><IMG alt="" src="5_7_4.gif" border="0"></td></tr></table>
+Следовательно, их расположение на комплексной плоскости будет соответствовать окружности с 
+центром в точке <IMG src="5_7_5.gif" style="vertical-align: middle"> и радиусом <em>r</em>. Данная 
+окружность находится вне круга, соответствующего условию устойчивости <a href="lek5_5_1.html#5_7">(5.7)</a> при любом значении <em>r</em> 
+(<em>см. рисунок</em>). Таким образом, при отрицательном значении параметра <em>v</em> наличие 
+функции <em>u</em> в свободном члене уравнения (5.12) не повлияет на абсолютную устойчивость 
+неявной разностной схемы с аппроксимацией производной по координате правой конечной разностью.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Аналогично можно доказать, что при <em>v</em> > 0 разностная 
+схема <a href="lek5_2.html#5_5">(5.5)</a> также сохранит абсолютную устойчивость; отметим, что для 
+уравнения (5.12) она будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_7_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

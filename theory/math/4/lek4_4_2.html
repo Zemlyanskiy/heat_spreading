@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Саульева. Определение порядка аппроксимации разностной схемы Саульева.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Разностная схема Саульева</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2. Определение порядка аппроксимации разностной схемы Саульева</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим сумму соотношений <a href="lek4_4_1.html#4_21">(4.21)</a> и <a href="lek4_4_1.html#4_22">(4.22)</a>, 
+делённую пополам:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_2_1.gif" border="0"></td>
+<td align=right width=100>(4.23)</td></tr></table>
+Разложим значения <IMG src="4_4_2_2.gif" style="vertical-align: middle"> в ряд Тейлора относительно точки   <IMG src="4_4_2_3.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td><td><IMG alt="" src="4_4_2_4.gif" border="0"></td><td align=right width=100></td></tr>
+<tr><td width=100>&nbsp;</td><td><IMG alt="" src="4_4_2_5.gif" border="0"></td><td align=right width=100></td></tr>
+</table>
+Исходя из этих соотношений, среднее арифметическое значений  <IMG src="4_4_2_2.gif" style="vertical-align: middle">, 
+используемое в (4.23), можно <a href="../2/lek2_2_1.html">аппроксимировать</a> значением <IMG src="4_4_2_6.gif" style="vertical-align: middle"> со вторым <a href="../2/lek2_2_2.html#1">порядком аппроксимации</a> 
+по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя данную формулу в (4.23), получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_2_8.gif" border="0"></td>
+<td align=right width=100>(4.24)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разностный оператор, стоящий в левой части выражения 
+(4.24), по отношению к точке <IMG src="4_4_2_3.gif" style="vertical-align: middle">, т.е. к точке, для которой записана правая часть этого же 
+выражения, является <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>, имеющей, <a href="../2/lek2_2_2.html#bottom">как известно</a>, 
+второй <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>. Следовательно, <a href="lek4_4_1.html#4_22">разностная схема Саульева</a> аппроксимирует 
+уравнение <a href="lek4_4_1.html#4_19">(4.19)</a> со вторым порядком и по времени, и по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_2_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Однако второе слагаемое в правой части выражения (4.24) вносит дополнительный вклад в 
+<a href="../2/lek2_2_2.html#3">ошибку аппроксимации</a>. Поэтому реально точность результатов, получаемых при использовании 
+разностной схемы Саульева, будет зависеть от выбора величин шагов по времени и координате <em>х</em>, 
+а точнее от порядка отношения  <IMG src="4_4_2_10.gif" style="vertical-align: middle">. 
+При <IMG src="4_4_2_11.gif" style="vertical-align: middle"> погрешность, вносимая вторым слагаемым в правой части 
+выражения (4.24), будет сопоставима с погрешностью, вносимой аппроксимацией производных. 
+Если же <IMG src="4_4_2_12.gif" style="vertical-align: middle">, то точных результатов мы не получим. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Завершая анализ <a href="../3/lek3_2.html#3">погрешности</a>, создаваемой 
+разностной схемой Саульева, и переходя к рассмотрению <a href="lek4_4_3.html">метода её решения</a>, следует отметить, 
+что данная разностная схема является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> (примем этот факт без 
+доказательства), однако её аппроксимация сама накладывает ограничение на выбор интервала 
+деления на <a href="../2/lek2_3_1.html#1">разностной сетке</a>.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Явная разностная схема. Метод решения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Явная разностная схема.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2. Метод решения.</FONT></EM></B>
+<p align="justify">
+<table align=right><tr><td><IMG alt="" src="7_4_2_1.gif" border="0"></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), характеризующий 
+явную разностную схему <a href="lek7_3.html#7_2">(7.2)</a>, свидетельствует о том, что она содержит одну неизвестную величину - 
+значение функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени. Выражая эту величину из разностной схемы, 
+получаем рекуррентное соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><br><br><IMG alt="" src="7_4_2_2.gif" border="0"></td>
+<td>(7.5)</td></tr></table>
+позволяющее рассчитать все значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени 
+(при известных значениях функции <em>u</em> на <em>n</em>-ом шаге), кроме значений <IMG src="7_4_2_3.gif" style="vertical-align: middle">, 
+определяемых с помощью <a href="../1/lek1_4.html">граничных условий</a>. Если заданы граничные условия <a href="../1/lek1_5.html#1">1-го рода</a>, 
+то эти значения определяются непосредственно из разностной аппроксимации граничных условий:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_4_2_4.gif" border="0"></td>
+<td></td></tr></table>
+Если заданы граничные условия <a href="../1/lek1_5.html#2">2-го или 3-го рода</a>, то значения <IMG src="7_4_2_3.gif" style="vertical-align: middle"> 
+можно определить, выразив их из <a href="../2/lek2_3_4.html#3">разностной аппроксимации</a> граничных условий.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Используя обозначение, принятое для разностного оператора <a href="../2/lek2_2_3.html#2_12">(2.12)</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_4_2_5.gif" border="0"></td>
+<td>(7.6)</td></tr></table>
+запишем рекуррентное соотношение (7.5) в более компактном виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_4_2_6.gif" border="0"></td>
+<td></td></tr></table>
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

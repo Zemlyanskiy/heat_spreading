@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Неявная разностная схема с аппроксимацией производной по координате правой конечной разностью. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Неявная разностная схема с аппроксимацией производной по координате правой конечной разностью</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1. Исследование устойчивости.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> разностной схемы <a href="lek5_2.html#5_4">(5.4)</a> с помощью 
+<a href="../3/lek3_2.html">спектрального метода</a>. Для этого отбрасываем член <IMG src="5_3_1_15.gif" style="vertical-align: middle">, 
+наличие которого, <a href="../3/lek3_4.html">как известно</a>, не оказывает влияния на устойчивость разностной схемы, 
+и представляем решение в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Упрощаем данное выражение, деля левую и правую его части на <IMG src="5_3_1_2.gif" style="vertical-align: middle">, 
+и выражаем величину, обратную <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#5_7" id="#5_7"></a>При этом необходимое условие устойчивости разностных схем <a href="lek5_3_1.html#5_6">(5.6)</a> также преобразуем к виду:
+<table align=right><tr><td>&nbsp;</td><td><IMG alt="" src="5_5_1_4.gif" border="0"></td></tr></table>
+<table cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_3.gif" border="0"></td>
+<td align=right width=100>(5.7)</td></tr></table>
+Неравенство (5.7) в применении к комплексным числам означает, что для устойчивости разностной схемы 
+<a href="lek5_2.html#5_4">(5.4)</a> требуется, чтобы величины, обратные собственным числам <a href="../3/lek3_3.html#2">оператора 
+перехода</a>, были расположены вне или на границе круга радиусом 1, центр которого находится в начале 
+координат комплексной плоскости (<em>см. рисунок</em>).
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Рассмотрим случай <em>v</em> < 0. Введём следующее обозначение:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table align=right><tr><td>&nbsp;</td><td><IMG alt="" src="5_5_1_6.gif" border="0"></td></tr></table>
+Полученное выражение свидетельствует о том, что величины, обратные собственным числам оператора 
+перехода, расположены на комплексной плоскости на окружности с центром в точке <IMG src="5_4_1_4.gif" style="vertical-align: middle"> и радиусом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данная окружность находится вне круга, соответствующего условию <a href="lek5_5_1.html#5_7">(5.7)</a> при любом значении <em>r</em> 
+(<em>см. рисунок</em>). Таким образом, при отрицательном значении параметра <em>v</em> неявная 
+разностная схема <a href="lek5_2.html#5_4">(5.4)</a> будет устойчива.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Рассмотрим случай <em>v</em> > 0. Введём следующее обозначение:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table align=right><tr><td>&nbsp;</td><td><IMG alt="" src="5_5_1_10.gif" border="0"></td></tr></table>
+Полученное выражение свидетельствует о том, что величины, обратные собственным числам оператора перехода, 
+расположены на комплексной плоскости на окружности с центром в точке <IMG src="5_5_1_9.gif" style="vertical-align: middle"> и радиусом <em>q</em>. 
+Сравнивая расположение этой окружности на комплексной плоскости с условием <a href="lek5_5_1.html#5_7">(5.7)</a>, получаем три 
+различных варианта (<em>см. рисунок</em>). Видно, что окружность, соответствующая величинам <IMG src="5_5_1_13.gif" style="vertical-align: middle">, 
+при <em>q</em> < 1 находится внутри круга, соответствующего условию <a href="lek5_5_1.html#5_7">(5.7)</a>; при <em>q</em> > 1 - вне этого круга; 
+а при <em>q</em> = 1 совпадает с его границей. Таким образом, при положительном значении параметра <em>v</em> неявная разностная 
+схема <a href="lek5_2.html#5_4">(5.4)</a> будет устойчива при выполнении следующего условия:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Обобщая полученные результаты, сделаем вывод, что неявная 
+разностная схема с аппроксимацией производной по координате правой конечной разностью <a href="lek5_2.html#5_4">(5.4)</a> 
+будет устойчива при выполнении одного из условий:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_5_1_12.gif" border="0"></td>
+<td align=right width=100>(5.8)</td></tr></table>
+Из соотношения (5.8) видно, что в частном случае при отрицательном значении параметра <em>v</em> 
+рассматриваемая разностная схема является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>.
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

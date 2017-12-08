@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Кранка-Николсона. Вывод разностной схемы Кранка-Николсона.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Разностная схема Кранка-Николсона</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Вывод разностной схемы Кранка-Николсона</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1_1">параболического типа</a> с <a href="../1/lek1_4.html">начальным и граничными условиями</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_1_1.gif" border="0"></td>
+<td align=right width=100>(4.17)</td></tr></table>
+<a name="#4" id="#4"></a>Запишем для уравнения (4.17) <a href="../2/lek2_3_2.html#1">разностную схему</a>, представляя вторую производную функции <em>u</em> 
+по координате <em>х</em> в виде двух слагаемых
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#4_18" id="#4_18"></a>и аппроксимируя первое слагаемое на <em>n</em>-ом шаге по времени, а второе - на (<em>n</em> + 1)-ом шаге по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_1_3.gif" border="0"></td>
+<td align=right width=100>(4.18)</td></tr></table>
+Данная разностная схема называется <strong>разностной схемой Кранка-Николсона</strong> в честь авторов, создавших её.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разложение второй производной функции <em>u</em> 
+по координате <em>х</em> на две равноценные составляющие, одна из которых 
+аппроксимируется на <em>n</em>-ом шаге по времени, а другая - на (<em>n</em> + 1)-ом 
+шаге по времени, указывает на то, что <a href="../2/lek2_2_1.html">аппроксимацию</a> этой производной в целом следует 
+рассматривать на шаге по времени (<em>n</em> + 1/2). В то же время конечная разность, 
+аппроксимирующая производную функции <em>u</em> по времени, по отношению к точке (<em>n</em> + 1/2) 
+является <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>, имеющей, <a href="../2/lek2_2_2.html#bottom">как известно</a>, второй <a href="../2/lek2_2_2.html#1">порядок 
+аппроксимации</a>. Следовательно, разностная схема Кранка-Николсона аппроксимирует уравнение 
+(4.17) со вторым порядком и по времени, и по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, порядок аппроксимации разностной схемы Кранка-Николсона выше, 
+чем порядок аппроксимации <a href="lek4_1_1.html">явной</a> и <a href="lek4_2_1.html">неявной</a> разностных схем; 
+то есть, результаты, получаемые при использовании разностной схемы Кранка-Николсона будут более точными.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

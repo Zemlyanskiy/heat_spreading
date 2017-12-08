@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений первого порядка. Решение уравнений методом Рунге-Кутта.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Решение уравнений методом Рунге-Кутта.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику решения дифференциальных уравнений методом Рунге-Кутта на конкретном примере. 
+Пусть задано дифференциальное уравнение с <a href="../1/lek1_4.html">начальным условием</a>:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_1.gif" border="0"></td>
+<td align=right width=100>(12.12)</td></tr></table>
+Требуется определить значение функции <em>u</em> в точке
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Значение шага по времени возьмём равным 0,1.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Видно, что решением уравнения (12.12) является функция <IMG src="12_6_3.gif" style="vertical-align: middle">, 
+значение которой в искомой точке составляет:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Выполним решение уравнения (12.12), используя метод Рунге-Кутта с различными порядками точности, 
+и сравним полученные результаты с истинным решением (следует отметить, что для данного уравнения <a href="lek12_1.html">явный</a> 
+и <a href="lek12_2.html">неявный</a> методы Эйлера неприменимы, так как соответствующие им разностные схемы для уравнения (12.12) 
+будут <a href="../3/lek3_1.html">неустойчивы</a>).
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику решения уравнения (12.12) <a href="lek12_4.html">методом Рунге-Кутта 
+2-го порядка</a> с использованием <a href="lek12_4.html#1">первого набора параметров</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что ошибка появляется в третьей цифре после запятой.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику решения уравнения (12.12) методом Рунге-Кутта 2-го порядка с использованием <a href="lek12_4.html#1">второго набора параметров</a>:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что ошибка, как и в предыдущем случае, появляется в третьей цифре после запятой.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику решения уравнения (12.12) <a href="lek12_5.html#1">методом Рунге-Кутта 3-го порядка</a>:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что ошибка появляется в пятой цифре после запятой. Это наглядно доказывает, что метод Рунге-Кутта 
+3-го порядка более точен, чем метод Рунге-Кутта 2-го порядка.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику решения уравнения (12.12) <a href="lek12_5.html#2">методом Рунге-Кутта 4-го порядка</a>:
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_6_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Видно, что ошибка появляется в седьмой цифре после запятой. Это наглядно доказывает, что метод Рунге-Кутта 4-го порядка более точен, чем методы Рунге-Кутта 2-го и 3-го порядка.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

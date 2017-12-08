@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Саульева. Метод решения разностной схемы Саульева.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Разностная схема Саульева</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3. Метод решения разностной схемы Саульева</FONT></EM></B>
+<p align="justify">
+<a name="#1" id="#1"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), характеризующий <a href="lek4_4_1.html#4_22">первую ступень разностной схемы Саульева</a>, 
+<table align=right cellspacing=2 cellpadding=2><tr><td><IMG alt="" src="4_4_3_1.gif" border="0"></td></tr></table>
+свидетельствует о том, что выражение <a href="lek4_4_1.html#4_21">(4.21)</a> содержит две неизвестные величины - значения функции 
+<em>u</em> на (<em>n</em> + 1)-ом шаге по времени <IMG src="4_4_3_2.gif" style="vertical-align: middle">. 
+<a name="#4_25" id="#4_25"></a>То есть, для определения величины <IMG src="4_4_3_3.gif" style="vertical-align: middle"> необходимо знать значение функции <em>u</em> в 
+соседней слева точке на <a href="../2/lek2_3_1.html#1">разностной сетке</a>. Определяя <IMG src="4_4_3_4.gif" style="vertical-align: middle">  из левого граничного условия <a href="lek4_4_1.html#4_19">(4.19)</a> и 
+выражая <IMG src="4_4_3_3.gif" style="vertical-align: middle"> из соотношения <a href="lek4_4_1.html#4_21">(4.21)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_3_5.gif" border="0"></td>
+<td align=right width=100>(4.25)</td></tr></table>
+можно последовательно рассчитать значения функции <em>u</em> на (<em>n</em> + 1)-ом 
+шаге по времени <IMG src="4_4_3_3.gif" style="vertical-align: middle">, <em>j</em> = 2, ..., <em>N</em>-1. Если вместо граничных условий 1-го рода <a href="lek4_4_1.html#4_19">(4.19)</a> будут заданы 
+<a href="../1/lek1_5.html#2">граничные условия 2-го или 3-го рода</a>, то для определения величины <IMG src="4_4_3_4.gif" style="vertical-align: middle"> необходимо решить систему двух 
+уравнений: <a href="../2/lek2_3_4.html#3">разностной аппроксимации левого граничного условия</a> на (<em>n</em> + 1)-ом шаге по времени 
+и рекуррентного соотношения (4.25) при <em>j</em> = 2. Значение <IMG src="4_4_3_6.gif" style="vertical-align: middle"> определяется из правого граничного 
+условия.
+<br><br><a name="#4_26" id="#4_26"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), характеризующий <a href="lek4_4_1.html#4_22">вторую ступень разностной схемы Саульева</a>, 
+<table align=right cellspacing=2 cellpadding=2><tr><td><IMG alt="" src="4_4_3_7.gif" border="0"></td></tr></table>
+свидетельствует о том, что выражение <a href="lek4_4_1.html#4_22">(4.22)</a> содержит две неизвестные величины - значения 
+функции <em>u</em> на (<em>n</em> + 2)-ом шаге по времени <IMG src="4_4_3_8.gif" style="vertical-align: middle">. То есть, для определения величины <IMG src="4_4_3_9.gif" style="vertical-align: middle"> необходимо 
+знать значение функции <em>u</em> в соседней справа точке на <a href="../2/lek2_3_1.html#1">разностной сетке</a>. Определяя <IMG src="4_4_3_10.gif" style="vertical-align: middle"> из правого 
+граничного условия <a href="lek4_4_1.html#4_19">(4.19)</a> и выражая <IMG src="4_4_3_9.gif" style="vertical-align: middle"> из соотношения <a href="lek4_4_1.html#4_22">(4.22)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_4_3_11.gif" border="0"></td>
+<td align=right width=100>(4.26)</td></tr></table>
+можно последовательно рассчитать значения функции <em>u</em> на (<em>n</em> + 2)-ом шаге по времени <IMG src="4_4_3_9.gif" style="vertical-align: middle">. 
+В случае, если заданы <a href="../1/lek1_5.html#2">граничные условия 2-го или 3-го рода</a>, для определения величины <IMG src="4_4_3_10.gif" style="vertical-align: middle"> 
+необходимо решить систему двух уравнений: <a href="../2/lek2_3_4.html#3">разностной аппроксимации правого граничного 
+условия</a> на (<em>n</em> + 2)-ом шаге по времени и рекуррентного соотношения (4.26) при <em>j</em> = <em>N</em> - 1. 
+Значение <IMG src="4_4_3_12.gif" style="vertical-align: middle"> определяется из левого граничного условия.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, метод решения <a href="lek4_4_1.html#4_22">разностной схемы 
+Саульева</a> существенно проще метода решения <a href="lek4_2_1.html">неявной разностной схемы</a> и <a href="lek4_3_1.html">разностной схемы 
+Кранка-Николсона</a> (т.е. <a href="lek4_2_5.html">метода прогонки</a>). Однако следует обратить внимание, что поскольку 
+выражения <a href="lek4_4_1.html#4_21">(4.21)</a> и <a href="lek4_4_1.html#4_22">(4.22)</a> по отдельности не аппроксимируют исходное дифференциальное 
+уравнение <a href="lek4_4_1.html#4_19">(4.19)</a>, оценка <a href="../3/lek3_2.html#3">погрешности</a> значений функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени не 
+представляется возможной. Близость к истинным значениям может быть гарантирована только 
+для значений функции <em>u</em> на (<em>n</em> + 2)-ом шаге по времени, поэтому заданный временной интервал 
+должен быть изначально разделён на <em>чётное</em> число частей (шагов). 
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Явная разностная схема. Характеристика явной разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Явная разностная схема</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1. Характеристика явной разностной схемы.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#4_1" id="#4_1">Рассмотрим </a><a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a> 
+с <a href="../1/lek1_4.html">начальным и граничными условиями</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_1_1.gif" border="0"></td>
+<td align=right width=100>(4.1)</td></tr></table>
+<a name="#4_2" id="#4_2">Запишем для уравнения </a>(4.1) <a href="../2/lek2_3_2.html#1">явную разностную схему</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_1_2.gif" border="0"></td>
+<td align=right width=100>(4.2)</td></tr></table>
+<a name="#4_3" id="#4_3">Запишем </a><a href="../2/lek2_3_4.html">аппроксимацию начального и граничных условий</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_1_3.gif" border="0"></td>
+<td align=right width=100>(4.3)</td></tr></table>
+Аппроксимация граничных условий (4.3) записана на (<em>n</em> + 1)-ом шаге 
+по времени для удобства последующего изложения <a href="lek4_1_2.html">метода</a> и <a href="lek4_1_3.html">алгоритма</a> решения явной 
+разностной схемы (4.2).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В разделе "<a href="../2/lek2_3_3.html">Порядок аппроксимации разностной схемы</a>" 
+было доказано, что разностная схема (4.2) имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_1_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В разделе "<a href="../3/lek3_4.html">Доказательство условной устойчивости явной разностной схемы</a>" 
+было получено условие <a href="../3/lek3_1.html">устойчивости</a> данной разностной схемы, накладывающее ограничение 
+на выбор интервала деления при создании <a href="../2/lek2_3_1.html#1">разностной сетки</a> (или, иначе говоря, 
+ограничение на выбор расчётного шага по одной из независимых переменных):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_1_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Отметим, что это, безусловно, является недостатком явной разностной схемы (4.2). 
+В то же время она имеет достаточно простой <a href="lek4_1_2.html">метод решения</a>.
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

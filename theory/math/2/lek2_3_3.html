@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация дифференциальных уравнений. Порядок аппроксимации разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Аппроксимация дифференциальных уравнений</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. Порядок аппроксимации разностной схемы</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Мы ввели понятие <a href="lek2_3_2.html#1">разностной схемы</a> путём составления её из 
+отдельных разностных операторов. Напомним, что каждый разностный оператор имеет определённый 
+<a href="lek2_2_2.html#1">порядок аппроксимации</a>, характеризующий точность <a href="lek2_2_1.html">аппроксимации</a>. Следовательно, разностная 
+схема также будет иметь порядок аппроксимации, причём по каждой независимой переменной 
+отдельно.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Определим порядок аппроксимации явной разностной 
+схемы <a href="lek2_3_2.html#1">(2.14)</a>. Для этого запишем разложение значений <IMG src="2_3_3_1.gif" style="vertical-align: middle"> 
+в ряд Тейлора относительно точки  <IMG src="2_3_3_2.gif" style="vertical-align: middle">
+на<a href="lek2_3_1.html#1"> разностной сетке</a>: 
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_3_3.gif" border="0"></td>
+<td align=right width=100>(2.16)</td></tr>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_3_4.gif" border="0"></td>
+<td align=right width=100>(2.17)</td></tr>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_3_5.gif" border="0"></td>
+<td align=right width=100>(2.18)</td></tr>
+</table>
+Подставляя зависимости (2.16)-(2.18) в разностную схему <a href="lek2_3_2.html#1">(2.14)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_3_6.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, явная разностная схема <a href="lek2_3_2.html#1">(2.14)</a> аппроксимирует 
+исходное дифференциальное уравнение <a href="lek2_3_1.html#2_13">(2.13)</a> с первым порядком по времени и со вторым 
+порядком по координате, что записывается в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0>
+<tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_3_7.gif" border="0"></td>
+<td align=right width=100></td></tr>
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Легко видеть, что и неявная разностная схема <a href="lek2_3_2.html#2_15">(2.15)</a> 
+имеет тот же порядок аппроксимации.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

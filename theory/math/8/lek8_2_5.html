@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений в частных производных первого порядка. Неявные разностные схемы. Метод решения с использованием схемы переменных направлений.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Неявные разностные схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.5. Метод решения с использованием схемы переменных направлений.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Преобразуем с помощью <a href="../7/lek7_6.html">метода дробных шагов</a> неявную разностную схему <a href="lek8_2_1.html">(8.8)</a> 
+в <a href="../7/lek7_7.html">схему переменных направлений</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_5_1.gif" border="0"></td><td>(8.14)</td></tr></table>
+Первая подсхема в схеме переменных направлений (8.14) аппроксимируется на первом полушаге интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em>
+и является неявной по координате <em>x</em> и явной по координате <em>y</em>. Вторая подсхема аппроксимируется на 
+втором полушаге интервала <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> и является неявной по координате <em>y</em> и явной по координате <em>x</em>. Складывая 
+обе подсхемы, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_5_2.gif" border="0"></td><td></td></tr></table>
+Видно, что данное соотношение аппроксимируется относительно точки <IMG src="8_2_5_3.gif" style="vertical-align: middle">. 
+Следовательно, разностный оператор, аппроксимирующий производную функции <em>u</em> по времени, является 
+<a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>, которая, <a href="../2/lek2_2_2.html#bottom">как известно</a>, имеет второй <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>. Таким образом, 
+схема переменных направлений (8.14), имея порядок аппроксимации
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_5_4.gif" border="0"></td><td></td></tr></table>
+является более точной по сравнению со схемой расщепления <a href="lek8_2_3.html#8_12">(8.12)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Каждая из подсхем схемы переменных направлений (8.14) является <a href="../3/lek3_5.html#bottom">абсолютно 
+устойчивой</a> и решается с помощью соответствующего рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="8_2_5_5.gif" border="0"></td><td>(8.15)</td></tr></table>
+Алгоритм решения схемы переменных направлений (8.14) аналогичен <a href="lek8_2_4.html">алгоритму решения</a> схемы расщепления <a href="lek8_2_3.html#8_12">(8.12)</a>.
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Необходимое условие устойчивости разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 0px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Необходимое условие устойчивости разностных схем</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выразим из соотношения <a href="lek3_2.html#bottom">(3.5)</a> величину <a href="lek3_2.html#3">погрешности</a> на 
+(<em>n</em> + 1)-ом шаге по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Последний член в правой части полученного выражения имеет порядок малости, 
+явно меньший  <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em>, что позволяет им пренебречь. Таким образом, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2" id="#2"></a>Представим данное выражение в операторном виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Здесь <em>z<sup>n</sup></em> - вектор погрешностей, <em>Е</em> - единичный оператор:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Оператор <em>В</em>, определяемый с помощью выражения
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+называют <strong><a name="#4" id="#4">оператором перехода</a></strong> от <em>n</em>-го шага по времени к (<em>n</em> + 1)-му шагу по времени.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для того чтобы разностная схема <a href="lek3_2.html#2">(3.4)</a>, 
+<a href="../2/lek2_2_1.html">аппроксимирующая</a> дифференциальное уравнение <a href="lek3_2.html#2">(3.3)</a>, была <a href="lek3_1.html">устойчива</a>, 
+необходимо (согласно определению устойчивости разностных схем), 
+чтобы <a href="../2/lek2_2_1.html#2">норма</a> погрешности на (<em>n</em> + 1)-ом шаге по времени не превосходила <a href="../2/lek2_2_1.html#2">нормы</a> 
+погрешности на <em>n</em>-ом шаге по времени, то есть:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_6.gif" border="0"></td>
+<td align=right width=100>(3.6)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Погрешность решения </a><a href="../2/lek2_3_2.html#1">разностной схемы</a> в точке <IMG src="3_2_3.gif" style="vertical-align: middle"> 
+можно представить в виде комплексного выражения (гармоники):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_7.gif" border="0"></td>
+<td align=right width=100>(3.7)</td></tr></table>
+<font size="2">где <IMG src="3_3_8.gif" style="vertical-align: middle">  - собственное число оператора перехода <em>В</em>; <em>i</em> - мнимая единица.</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>Теорема. </strong></em>Для того, 
+чтобы разностная схема была устойчива (т.е. для выполнения условия (3.6)), необходимо, 
+чтобы все собственные числа оператора перехода <em>В</em> удовлетворяли условию:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_3_9.gif" border="0"></td>
+<td align=right width=100>(3.8)</td></tr></table>
+Данное условие является <strong>необходимым условием устойчивости</strong> разностных схем.
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

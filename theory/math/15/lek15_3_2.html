@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Решение сложных систем уравнений. Определение устойчивости разностных схем с помощью тестовых задач. Пример на построение тестовой задачи.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение сложных систем уравнений.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Определение устойчивости разностных схем с помощью тестовых задач.</FONT></FONT></FONT>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. Пример на построение тестовой задачи.</FONT></EM></B></FONT>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, 
+для решения которого требуется подобрать <a href="../3/lek3_1.html">устойчивую</a> разностную схему:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_1.gif" border="0"></td>
+<td align=right width=100>(15.13)</td></tr></table>
+Зададим тестовую функцию в виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_2.gif" border="0"></td>
+<td align=right width=100>(15.14)</td></tr></table>
+Определим выражения для производных от тестовой функции (15.14), которые входят в исходное уравнение (15.13):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_3.gif" border="0"></td>
+<td align=right width=100>(15.15)</td></tr></table>
+Представим дифференциальное уравнение, истинным решением которого должна быть тестовая функция (15.14), в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя выражения (15.15) в данное уравнение, определим вид неизвестной функции <IMG src="15_3_2_5.gif" style="vertical-align: middle">, входящей в состав свободного члена:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, мы построили дифференциальное уравнение, которое отличается 
+от исходного уравнения (15.13) только видом свободного члена и для которого, в то же время, тестовая 
+функция (15.14) является истинным решением:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_7.gif" border="0"></td>
+<td align=right width=100>(15.6)</td></tr></table>
+Однако для того чтобы его решить с использованием численных методов, требуется задать <a href="../1/lek1_4.html">начальное и граничное условия</a>. Зададим эти условия с помощью истинного решения уравнения (15.16), то есть с помощью 
+тестовой функции (15.14):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_2_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Теперь мы можем записать для уравнения (15.16) какую-либо разностную схему, решить уравнение (15.16) 
+с её помощью, сравнить полученные численные значения со значениями тестовой функции (15.14) в тех же 
+точках <a href="../2/lek2_3_1.html#1">разностной сетки</a> и на основании выражения <a href="lek15_3_1.html#15_12">(15.12)</a> сделать вывод об устойчивости использовавшейся 
+разностной схемы. Поскольку уравнения (15.13) и (15.16) отличаются только видом свободного члена, 
+в состав которого в обоих случаях не входит искомая функция, то одинаковые разностные схемы для этих 
+уравнений будут обладать одинаковым типом устойчивости.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

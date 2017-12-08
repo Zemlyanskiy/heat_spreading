@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Метод установления с использованием неявной разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Метод установления с использованием неявной разностной схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek10_2.html">(10.4)</a> неявную разностную схему 
+(соблюдая <a href="../5/lek5_8.html#1">правило выбора конечной разности</a> для аппроксимации первой производной по координате):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_1.gif" border="0"></td>
+<td align=right width=100>(10.9)</td></tr></table>
+<a href="../6/lek6_3_1.html">В разделе 6.3.1</a> было доказано, что данная разностная схема является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>. Поэтому 
+значение <a href="lek10_2.html#bottom">шага итерации</a> в данном случае может быть выбрано произвольно в отличие от <a href="lek10_3_1.html#2">метода простой итерации</a>, 
+в котором значение шага итерации задаётся с помощью соотношения <a href="lek10_3_1.html#10_7">(10.7)</a>. Выбор более грубого шага итерации 
+(по сравнению с методом простой итерации) позволяет существенно ускорить сходимость <a href="lek10_2.html#bottom">итерационного процесса</a> 
+и уменьшить количество <a href="lek10_2.html#bottom">итераций</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../6/lek6_3_2.html">В разделе 6.3.2</a> было показано, что разностные схемы типа (10.9) решаются с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. 
+Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, для разностной схемы (10.9) имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Легко видеть, что для разностной схемы (10.9) достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a href="../4/lek4_2_6.html">Алгоритм решения</a>, а также методики определения <a href="../4/lek4_2_2.html#4_11">прогоночных коэффициентов</a> и <a href="../4/lek4_2_4.html">решения на правой границе</a> 
+аналогичны описанным ранее. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Также как и в случае <a href="lek10_3_1.html#2">метода простой итерации</a>, 
+в качестве нулевой итерации (<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения в связи 
+с <a href="lek10_2.html">введением фиктивной производной по времени</a>) обычно задают свободный член:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций продолжается до тех пор, пока итерационный процесс не сойдётся, 
+т.е. пока не будет выполняться условие <a href="lek10_2.html#bottom">(10.5)</a>, в разностном представлении соответствующее неравенству:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_4_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Итерационным выражением является прогоночное соотношение <a href="../4/lek4_2_2.html#4_11">(4.11)</a>, 
+имеющее такой же вид, как и в общем случае. 
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

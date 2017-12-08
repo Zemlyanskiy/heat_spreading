@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Метод установления с использованием разностной схемы Кранка-Николсона.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Метод установления с использованием разностной схемы Кранка-Николсона.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek10_2.html">(10.4)</a> разностную схему Кранка-Николсона 
+(соблюдая <a href="../5/lek5_8.html#1">правило выбора конечной разности</a> для аппроксимации первой производной по координате):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_1.gif" border="0"></td>
+<td align=right width=100>(10.10)</td></tr></table>
+Как и неявная разностная схема <a href="lek10_4.html">(10.9)</a>, разностная схема Кранка-Николсона (10.10) является 
+<a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>, что обеспечивает возможность произвольного выбора значения <a href="lek10_2.html#bottom">шага итерации</a>. 
+Однако разностная схема Кранка-Николсона (10.10) имеет более высокий (второй) <a href="../2/lek2_2_2.html#1">порядок 
+аппроксимации</a> по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данная особенность разностной схемы Кранка-Николсона (10.10) позволяет использовать 
+при её решении более грубый шаг итерации, чем при решении неявной разностной схемы <a href="lek10_4.html">(10.9)</a>, 
+для получения результатов с такой же точностью; а это в свою очередь способствует ускорению 
+сходимости <a href="lek10_2.html#bottom">итерационного процесса</a> и уменьшению количества <a href="lek10_2.html#bottom">итераций</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../6/lek6_4.html">В разделе 6.4</a> было показано, что разностные схемы типа (10.10) решаются 
+с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, для разностной схемы (10.10) 
+имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Легко видеть, что достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a href="../4/lek4_2_6.html">Алгоритм решения</a>, а также методики определения <a href="../4/lek4_2_2.html#4_11">прогоночных коэффициентов</a> и <a href="../4/lek4_2_4.html">решения на правой границе</a> 
+аналогичны описанным ранее. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Также как и в случае <a href="lek10_3_1.html#2">метода простой итерации</a>, в качестве нулевой итерации 
+(<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения в связи с <a href="lek10_2.html">введением фиктивной производной по времени</a>) 
+обычно задают свободный член:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций продолжается до тех пор, пока итерационный процесс не сойдётся, 
+т.е. пока не будет выполняться условие <a href="lek10_2.html#bottom">(10.5)</a>, в разностном представлении соответствующее неравенству:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_5_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Итерационным выражением является прогоночное соотношение <a href="../4/lek4_2_2.html#4_11">(4.11)</a>, имеющее такой же вид, как и в общем случае. 
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

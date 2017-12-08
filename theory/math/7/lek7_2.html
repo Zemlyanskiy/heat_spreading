@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Разностная сетка для двумерных задач.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Разностная сетка для двумерных задач.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, 
+не содержащее первых производных по координатам <em>x</em> и <em>y</em>, в следующем общем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_2_1.gif" border="0"></td>
+<td>(7.1)</td>
+</tr></table>
+Уравнение (7.1) должно быть дополнено <a href="../1/lek1_4.html">начальным и двумя граничными условиями</a> по каждой 
+из пространственных координат (для определённости будем рассматривать граничные условия <a href="../1/lek1_5.html#1">1-го рода</a>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_2_2.gif" border="0"></td>
+<td></td>
+</tr></table>
+<table align=right><td></td><td><IMG alt="" src="7_2_3.gif" border="0"></td></table>
+<br><a name="#1" id="#1"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Пусть для независимых переменных заданы следующие интервалы 
+их изменения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_2_4.gif" border="0"></td>
+<td></td>
+</tr></table>
+Разбивая каждый из этих интервалов на некоторое количество равных частей (по аналогии с тем, как это 
+<a href="../2/lek2_3_1.html#1">было сделано в случае двух независимых переменных</a>), получим <strong>разностную сетку</strong>, которая в данном случае 
+будет трёхмерной (<em>см. рисунок</em>). Введём следующие обозначения:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>n</em> - порядковый номер точки деления по оси <em>t</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>j</em> - порядковый номер точки деления по оси <em>x</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>k</em> - порядковый номер точки деления по оси <em>y</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="7_2_5.gif" style="vertical-align: middle"> - величина интервала между точками по оси <em>t</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="7_2_6.gif" style="vertical-align: middle"> - величина интервала между точками по оси <em>x</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="7_2_7.gif" style="vertical-align: middle"> - величина интервала между точками по оси <em>y</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="7_2_8.gif" style="vertical-align: middle"> - значение функции <em>u</em>, соответствующее точкам <IMG src="7_2_10.gif" style="vertical-align: middle">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="7_2_9.gif" style="vertical-align: middle"> - значение функции <em>f</em>, соответствующее точкам <IMG src="7_2_11.gif" style="vertical-align: middle">.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём нумерацию точек разностной сетки по каждой из осей следующим образом:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по оси <em>t</em>: <em>n</em> = 0, 1, 2, ..., <em>M</em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по оси <em>x</em>: <em>j</em> = 1, 2, 3, ..., <em>N<sub>x</sub></em>;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по оси <em>y</em>: <em>k</em> = 1, 2, 3, ..., <em>N<sub>y</sub></em>.
+<br>Тогда значения переменных <em>t</em>, <em>x</em> и <em>y</em> в точках разностной сетки будут определяться согласно следующему правилу:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_2_12.gif" border="0"></td>
+<td></td>
+</tr></table>
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

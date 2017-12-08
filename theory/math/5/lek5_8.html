@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Сравнительная характеристика изученных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">8. Сравнительная характеристика изученных разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём сравнительную характеристику рекомендуемых 
+для использования разностных схем, аппроксимирующих <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное 
+уравнение <a href="../1/lek1_2.html">в частных производных 1-го порядка</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Неявная разностная схема с аппроксимацией производной по координате правой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="5_8_3.gif" style="vertical-align: middle"> 
+<li></li><a href="lek5_5_1.html#bottom">Абсолютно устойчива</a> при <em>v</em> < 0.
+<li></li><a href="lek5_5_2.html">Решается с помощью рекуррентного соотношения</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Для решения требуется задание правого <a href="../1/lek1_4.html">граничного условия</a> по координате <em>x</em>, т.е.
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br><a name="#2" id="#2"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Неявная разностная схема с аппроксимацией производной по координате левой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="5_8_3.gif" style="vertical-align: middle">
+<li></li><a href="lek5_6_1.html#bottom">Абсолютно устойчива</a> при <em>v</em> > 0.
+<li></li><a href="lek5_6_2.html">Решается с помощью рекуррентного соотношения</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Для решения требуется задание левого граничного условия по координате <em>x</em>, т.е.
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_8_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, определяющим фактором при выборе разностной 
+схемы для <a href="../2/lek2_2_1.html">аппроксимации</a> одномерного дифференциального уравнения в частных производных 1-го порядка 
+является знак параметра <em>v</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1"></a>Сформулируем <strong>правило выбора конечной разности</strong> 
+для аппроксимации производной первого порядка по координате в зависимости от знака стоящего перед 
+ней параметра <em>v</em>: для того, чтобы разностная схема была <a href="../3/lek3_1.html">устойчива</a> (условно устойчива в 
+случае явной разностной схемы и абсолютно устойчива в случае неявной разностной схемы) при 
+положительном <em>v</em> для аппроксимации первой производной по координате следует использовать 
+<a href="../2/lek2_2_1.html#1">левую конечную разность</a>, при отрицательном <em>v</em> - <a href="../2/lek2_2_1.html#1">правую конечную разность</a>. Кроме этого, 
+для решения разностной схемы при положительном <em>v</em> потребуется левое граничное условие, при 
+отрицательном <em>v</em> - правое граничное условие. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Отметим, что данное правило применимо только в случае, если 
+производная первого порядка по координате находится в левой части дифференциального уравнения 
+(т.е., если дифференциальное уравнение представлено в виде <a href="lek5_1.html#5_1">(5.1)</a>, 
+для которого проводились все исследования). Если же первая производная по координате находится в 
+правой части дифференциального уравнения, то её необходимо перенести в левую и только затем 
+применять правило выбора конечной разности.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Решение сложных систем уравнений. Определение устойчивости разностных схем с помощью тестовых задач. Определение устойчивости разностных схем, аппроксимирующих уравнения математической модели процесса массовой кристаллизации из растворов.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение сложных систем уравнений.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Определение устойчивости разностных схем с помощью тестовых задач.</FONT></FONT></FONT>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. Определение устойчивости разностных схем, аппроксимирующих уравнения математической модели процесса массовой кристаллизации из растворов.</FONT></EM></B></FONT>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику определения <a href="../3/lek3_1.html">устойчивости</a> разностных схем, <a href="../2/lek2_2_1.html">аппроксимирующих</a> 
+уравнения <a href="lek15_2_1.html#15_2">математической модели процесса массовой кристаллизации из растворов</a>, с помощью тестовой задачи. 
+Для простоты рассмотрим только два уравнения модели: уравнение изменения концентрации раствора <a href="lek15_2_1.html#15_3">(15.2)</a> и 
+уравнение баланса числа частиц <a href="lek15_2_1.html#15_4">(15.4)</a>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Зададим тестовые функции для концентрации раствора, скорости роста 
+кристаллов и функции распределения кристаллов по размерам в экспоненциальной форме:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_1.gif" border="0"></td>
+<td align=right width=100>(15.17)</td></tr></table>
+Представим уравнения, истинными решениями которых должны быть тестовые функции (15.17), в следующем виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя тестовые функции (15.17) в данные уравнения, определим вид неизвестных функций <IMG src="15_3_3_9.gif" style="vertical-align: middle">
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, уравнения, истинными решениями которых являются тестовые функции (15.17), имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_4.gif" border="0"></td>
+<td align=right width=100>(15.18)</td></tr></table>
+При этом уравнения (15.18) отличаются от уравнений <a href="lek15_2_1.html#15_3">(15.2)</a> и <a href="lek15_2_1.html#15_4">(15.4)</a> только видом свободных членов, 
+в состав которых не входят искомые функции. Зададим <a href="../1/lek1_4.html">начальные и граничные условия</a> для уравнений (15.18) 
+с помощью тестовых функций (15.17):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнений (15.18) разностные схемы, используя при этом <a href="../13/lek13_1_2.html">принцип замороженных коэффициентов,</a> 
+выражение <a href="../14/lek14_2.html#14_4">(14.4)</a> для аппроксимации интеграла и <a href="../5/lek5_8.html#1">правило выбора конечной разности</a> для аппроксимации 
+производной по <em>r</em>: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_6.gif" border="0"></td>
+<td align=right width=100>(15.19)</td></tr></table>
+Решив уравнения (15.18) с помощью разностных схем (15.19), мы сможем провести сравнение полученных численных значений со значениями тестовых функций (15.17):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Если расхождения будут незначительны, то разностные схемы (15.19) можно считать устойчивыми и, 
+следовательно, разностные схемы <a href="lek15_2_2.html#15_9">(15.9)</a> и <a href="lek15_2_2.html#15_10">(15.10)</a>, аппроксимирующие уравнения 
+<a href="lek15_2_1.html#15_3">(15.2)</a> и <a href="lek15_2_1.html#15_4">(15.4)</a>, соответственно, также будут устойчивыми. Отметим, что 
+выражение для изменения функции  <IMG src="15_3_3_8.gif" style="vertical-align: middle">
+в систему (15.18) не входит, поэтому при решении тестовых разностных схем (15.19) для <IMG src="15_3_3_10.gif" style="vertical-align: middle">
+можно использовать непосредственно тестовую функцию (15.17).
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="15_3_3_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

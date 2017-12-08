@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация дифференциальных уравнений. Понятие разностной сетки.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Аппроксимация дифференциальных уравнений</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Понятие разностной сетки</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2_13" id="#2_13">Рассмотрим</a> <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_1_1.gif" border="0"></td>
+<td align=right width=100>(2.13)</td></tr></table>
+Здесь <em>u</em> - функция двух независимых переменных: 
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+для которых задан интервал их изменения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_1_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table align=right  cellspacing=2 cellpadding=2>
+	<tr><td><IMG alt="" src="2_3_1_4.gif" border="0"></td></tr>
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Введём двумерную</a> систему координат, отложив по оси абсцисс независимую переменную <em>х</em>, 
+а по оси ординат - независимую переменную <em>t</em>, и отметим на осях заданные интервалы 
+изменения переменных <em>х</em> и <em>t</em>. Разобьём интервал [<em>a</em>; <em>b</em>] на некоторое количество 
+равных частей и проведём из каждой точки деления прямую, перпендикулярную оси <em>х</em>. 
+Выполним те же действия для интервала изменения другой независимой переменной. Тогда 
+построенные прямые составят так называемую <strong>разностную сетку</strong> (<em>см. рисунок</em>). 
+Точки пересечения проведённых прямых будем называть <strong>узлами разностной сетки</strong>, причём каждый 
+из них будет соответствовать некоторым значениям независимых переменных <em>х</em> и <em>t</em> 
+из заданных интервалов.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём следующие обозначения:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><em>j</em> - порядковый номер точки деления по оси <em>х</em>;
+<br><em>n</em> - порядковый номер точки деления по оси <em>t</em>;
+<br><IMG src="2_3_1_5.gif" style="vertical-align: bottom">  - величина интервала между точками по оси <em>х</em>;
+<br><IMG src="2_3_1_6.gif" style="vertical-align: bottom">  - величина интервала между точками по оси <em>t</em>;
+<br><IMG src="2_3_1_7.gif" style="vertical-align: middle">  - значение функции <em>u</em>, соответствующее точкам <em>t<sup>n</sup></em>, <em>x<sub>j</sub></em> .
+</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём нумерацию точек разностной сетки по каждой из осей следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td>по оси <em>х</em> -	&nbsp;&nbsp;&nbsp;&nbsp;<em>j</em> = 1, 2, 3, ..., <em>N</em>;
+<br>по оси <em>t</em> -	&nbsp;&nbsp;&nbsp;&nbsp;<em>n</em> = 0, 1, 2, ..., <em>M</em>.
+</td>
+<td align=right width=100></td></tr></table>
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

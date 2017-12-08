@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Сравнительная характеристика изученных разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">10. Сравнительная характеристика изученных разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём сравнительную характеристику <a href="../2/lek2_3_2.html#1">разностных схем</a>, 
+аппроксимирующих <a href="../1/lek1_2.html#bottom">двумерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, не содержащее первых 
+производных по координатам <em>x</em> и <em>y</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_1.gif" border="0"></td>
+<td></td></tr></table>
+При записи разностных схем использованы обозначения <a href="lek7_4_2.html#bottom">(7.6)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Явная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_2.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="7_10_3.gif" style="vertical-align: middle">
+<li></li><a href="lek7_4_1.html">Условно устойчива</a> <IMG src="7_10_4.gif" style="vertical-align: middle">
+<li></li>Решается с помощью рекуррентного соотношения <a href="lek7_4_2.html">(7.5)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. <a href="lek7_6.html">Схема расщепления</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_5.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="7_10_3.gif" style="vertical-align: middle">
+<li></li><a href="../3/lek3_5.html#bottom">Абсолютно устойчива</a>.
+<li></li>Каждая подсхема решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. <a href="lek7_7.html">Схема переменных направлений</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_6.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="7_10_7.gif" style="vertical-align: middle">
+<li></li>Абсолютно устойчива.
+<li></li>Каждая подсхема решается с помощью метода прогонки.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. <a href="lek7_8.html">Схема со стабилизирующей поправкой</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_8.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="7_10_3.gif" style="vertical-align: middle">
+<li></li>Абсолютно устойчива.
+<li></li>Каждая подсхема решается с помощью метода прогонки.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. <a href="lek7_9_1.html">Схема предиктор-корректор</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_10_9.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="7_10_7.gif" style="vertical-align: middle">
+<li></li>Абсолютно устойчива.
+<li></li>Каждая из подсхем предиктора решается с помощью метода прогонки; корректор 
+(третья подсхема) - с помощью рекуррентного соотношения <a href="lek7_9_2.html#7_18">(7.18)</a>.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

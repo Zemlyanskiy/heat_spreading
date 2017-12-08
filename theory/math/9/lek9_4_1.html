@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Решение трёхмерных дифференциальных уравнений параболического типа. Явная разностная схема. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение трёхмерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Явная разностная схема.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1. Исследование устойчивости.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> явной разностной схемы <a href="lek9_3.html#9_3">(9.3)</a>, 
+аппроксимирующей дифференциальное уравнение <a href="lek9_2.html">(9.1)</a>, с помощью <a href="../3/lek3_2.html">спектрального метода</a>. 
+Для этого отбрасываем член <IMG src="9_4_1_1.gif" style="vertical-align: middle">, наличие которого, <a href="../3/lek3_4.html">как известно</a>, 
+не оказывает влияния на устойчивость разностной схемы, и представляем решение в виде гармоники:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_2.gif" border="0"><br>
+<IMG alt="" src="9_4_1_3.gif" border="0">
+</td><td></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="9_4_1_4.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_5.gif" border="0"></td>
+<td></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем формулу
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_6.gif" border="0"></td>
+<td></td></tr></table>
+из которой выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_7.gif" border="0"></td>
+<td></td></tr></table>
+С учётом необходимого условия устойчивости разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a> имеем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_8.gif" border="0"></td>
+<td></td></tr></table>
+В полученном двойном неравенстве правое условие выполняется автоматически. 
+Поэтому рассмотрим более подробно левое условие:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_9.gif" border="0"></td>
+<td></td></tr></table>
+Чтобы гарантировать устойчивость разностной схемы <a href="lek9_3.html#9_3">(9.3)</a> независимо от значений <IMG src="../alfa.gif" style="vertical-align: middle">,
+<IMG src="../beta.gif" style="vertical-align: middle">  и <IMG src="../gamma.gif" style="vertical-align: middle">, следует перейти к более строгому условию, задавая для <IMG src="9_4_1_10.gif" style="vertical-align: middle"> максимально возможное значение, равное 1:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_11.gif" border="0"></td>
+<td>(9.5)</td></tr></table>
+Выражение (9.5) является условием устойчивости явной разностной схемы <a href="lek9_3.html#9_3">(9.3)</a>, 
+аппроксимирующей дифференциальное уравнение <a href="lek9_2.html">(9.1)</a>. В случае отсутствия в уравнении <a href="lek9_2.html">(9.1)</a> 
+свободного члена (т.е. при <em>k</em> = 0), а также если интервалы между точками по осям <em>x</em>, <em>y</em> и <em>z</em> на 
+<a href="lek9_2.html#1">разностной сетке</a> задать равными
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_12.gif" border="0"></td>
+<td></td></tr></table>
+выражение (9.5) примет более простой вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_13.gif" border="0"></td>
+<td></td></tr></table>
+Сравнивая данное выражение с соотношениями <a href="../3/lek3_4.html#bottom">(3.12)</a> и <a href="../7/lek7_4_1.html#7_4a">(7.4a)</a> (условиями устойчивости явной разностной схемы 
+для случаев <a href="../4/lek4_1_1.html">одномерной</a> и <a href="../7/lek7_2.html">двумерной</a> задач, соответственно), можно получить условие устойчивости явной 
+разностной схемы, аппроксимирующей <em>N</em>-мерное дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="9_4_1_14.gif" border="0"></td>
+<td></td></tr></table>
+
+
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

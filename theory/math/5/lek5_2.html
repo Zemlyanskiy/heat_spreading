@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений в частных производных первого порядка. Разностные схемы, аппроксимирующие дифференциальные уравнения в частных производных 1-го порядка.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений в частных производных первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Разностные схемы, аппроксимирующие дифференциальные уравнения в частных производных 1-го порядка</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для дифференциального уравнения <a href="lek5_1.html#5_1">(5.1)</a> введём 
+<a href="../2/lek2_3_1.html#1">разностную сетку</a> и рассмотрим <a href="../2/lek2_2_1.html">аппроксимацию</a> производных в точке   <IMG src="5_2_1.gif" style="vertical-align: middle">. 
+Для аппроксимации производной функции <em>u</em> по времени обычно используется <a href="../2/lek2_2_1.html#1">правая 
+конечная разность</a> (со стабилизацией значения независимой переменной <em>х</em> в точке с 
+порядковым номером <em>j</em>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для аппроксимации производной функции <em>u</em> 
+по координате <em>х</em> может быть использована как правая конечная разность, 
+так и <a href="../2/lek2_2_1.html#1">левая конечная разность</a>; причём стабилизация значения независимой переменной <em>t</em> 
+может быть как на <em>n</em>-ом шаге по времени (т.е. в точке <em>t</em><em><sup>n</sup></em>), 
+так и на (<em>n</em> + 1)-ом шаге по времени (т.е. в точке <em>t</em><sup><em>n</em>+1</sup>). 
+Данный выбор позволяет записать для уравнения <a href="lek5_1.html#5_1">(5.1)</a> четыре <a href="../2/lek2_3_2.html#1">разностные схемы</a>:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#5_2" id="#5_2"></a>1. явная разностная схема с аппроксимацией производной по координате правой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_3.gif" border="0"></td>
+<td align=right width=100>(5.2)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#5_3" id="#5_3"></a>2. явная разностная схема с аппроксимацией производной по координате левой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_4.gif" border="0"></td>
+<td align=right width=100>(5.3)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#5_4" id="#5_4"></a>3. неявная разностная схема с аппроксимацией производной по координате правой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_5.gif" border="0"></td>
+<td align=right width=100>(5.4)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#5_5" id="#5_5"></a>4. неявная разностная схема с аппроксимацией производной по координате левой конечной разностью
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_6.gif" border="0"></td>
+<td align=right width=100>(5.5)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Учитывая <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> разностных 
+операторов, из которых составлены разностные схемы (5.2)-(5.5), легко видеть, что 
+каждая из них имеет первый порядок аппроксимации и по времени, и по координате:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="5_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Чтобы выяснить, какие из разностных схем (5.2)-(5.5) 
+лучше всего подходят для численного решения уравнения <a href="lek5_1.html#5_1">(5.1)</a>, необходимо провести 
+исследование их <a href="../3/lek3_1.html">устойчивости</a> и сравнить методы их решения.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

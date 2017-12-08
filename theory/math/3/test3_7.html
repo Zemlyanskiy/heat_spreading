@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Задания для самоконтроля.</title>
+<script language="JavaScript">
+   function dataBase(test) {
+     if (test.r[1].checked ) {test.otv.value='Поздравляем ! Вы ответили правильно!';  }
+	     else { if (test.r[4].checked ) {test.otv.value='Вы, видимо, забыли учесть свободный член. Ответ неправильный!';  }
+		 else  {test.otv.value='Ответ неправильный!';  }
+	 }
+   }
+</script>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px">
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">Задания для самоконтроля</FONT></FONT>&nbsp;&nbsp;&nbsp;
+<a href="test3_6.html"><IMG alt="Предыдущий тест" src="../back.gif" border=0 style="vertical-align: middle"></a>&nbsp;&nbsp;
+<a href="test3_1.html"><IMG alt="Следующий тест" src="../forward.gif" border=0 style="vertical-align: middle"></a>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<form action="" method="post" name="test">
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. Определите, при каком условии на шаг <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> 
+разностная схема, аппроксимирующая дифференциальное уравнение из задания <a href="test3_6.html">№ 6</a>, будет устойчива, 
+если <em>h</em> = 10<sup>-2</sup>:
+<br><br>
+<table align=center width="600" cellpadding=2 cellspacing=2>
+<tr>
+<td width=7 valign=top><input name="r" type="radio" value="11"></td>
+<td width=150><IMG alt="" src="test3_7_1.gif" border="0"></td>
+<td width=7 valign=top><input name="r" type="radio" value="14"></td>
+<td><IMG alt="" src="test3_7_4.gif" border="0"></td>
+</tr>
+<tr>
+<td valign=top><input name="r" type="radio" value="12"></td>
+<td><IMG alt="" src="test3_7_2.gif" border="0"></td>
+<td valign=top><input name="r" type="radio" value="15"></td>
+<td><IMG alt="" src="test3_7_5.gif" border="0"></td>
+</tr>
+<tr>
+<td valign=top><input name="r" type="radio" value="13"></td>
+<td><IMG alt="" src="test3_7_3.gif" border="0"></td>
+<td valign=top><input name="r" type="radio" value="16"></td>
+<td><IMG alt="" src="test3_7_6.gif" border="0"></td>
+</tr>
+</table>
+<hr size=-1 color="#1a1a6f" width="99%">
+<table align="center">
+<tr>
+ <td><strong><input name="check" onclick="dataBase(this.form)" type="button" value="Ответить"  class=but></strong></td>
+ <td><strong><input type="reset" value="Очистить"  class=but></strong></td>
+</tr>
+</table>
+<center><input size="70"  name=otv style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 10pt; BORDER-LEFT: medium none; FONT-weight: bold; COLOR: #156B1D; BORDER-BOTTOM: medium none; TEXT-ALIGN: center"></center>
+</form>
+<hr size=-1 color="#1a1a6f" width="99%">
+</div>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

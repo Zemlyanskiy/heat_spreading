@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка. Явная разностная схема. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Явная разностная схема.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1. Исследование устойчивости.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#6_2" id="#6_2"></a>Явная разностная схема для уравнения <a href="lek6_1.html#6_1">(6.1)</a> имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_1.gif" border="0"></td>
+<td align=right width=100>(6.2)</td></tr></table>
+Исследуем её <a href="../3/lek3_1.html">устойчивость</a> с помощью <a href="../3/lek3_2.html">спектрального метода</a>. Для этого 
+отбрасываем член <IMG src="6_2_1_2.gif" style="vertical-align: middle">, 
+наличие которого, <a href="../3/lek3_4.html">как известно</a>, не оказывает влияния на устойчивость разностной схемы, 
+и представляем решение в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="6_2_1_4.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем формулу
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+из которой выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Комплексный вид полученного выражения свидетельствует о том, что для устойчивости разностной схемы 
+(6.2) согласно необходимому условию устойчивости разностных схем <a href="../3/lek3_3.html#1">(3.8)</a> требуется, чтобы собственные 
+числа <a href="../3/lek3_3.html#2">оператора перехода</a> были расположены внутри или на границе<a href="../5/lek5_3_1.html#5_6"> круга радиусом 1</a>, 
+центр которого находится в начале координат комплексной плоскости.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём следующие обозначения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table align=right><tr><td><IMG alt="" src="6_2_1_9.gif" border="0"></td></tr></table>
+Следовательно, собственные числа оператора перехода расположены на комплексной плоскости на 
+окружности с центром в точке <IMG src="6_2_1_10.gif" style="vertical-align: middle"> и радиусом <em>r</em> (<em>см. рисунок</em>). Данная окружность 
+не выходит за границы круга, соответствующего условию устойчивости <a href="../3/lek3_3.html#1">(3.8)</a>, только при выполнении 
+неравенства:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Так как <IMG src="6_2_1_12.gif" style="vertical-align: middle">, правое условие выполняется автоматически. 
+Рассмотрим более подробно левое условие:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Данное выражение содержит переменную величину - аргумент комплексного числа <IMG src="../alfa.gif" style="vertical-align: middle">. Чтобы гарантировать устойчивость явной разностной схемы 
+(6.2) независимо от значения <IMG src="../alfa.gif" style="vertical-align: middle">, 
+следует перейти к более строгому условию, задавая для <IMG src="6_2_1_14.gif" style="vertical-align: middle"> максимально возможное значение, равное 1:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_2_1_15.gif" border="0"></td>
+<td align=right width=100>(6.3)</td></tr></table>
+Выражение (6.3) является условием устойчивости явной разностной схемы (6.2), <a href="../2/lek2_2_1.html">аппроксимирующей</a> 
+дифференциальное уравнение <a href="lek6_1.html#6_1">(6.1)</a>.
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

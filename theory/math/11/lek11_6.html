@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений эллиптического типа. Метод установления с использованием схемы предиктор-корректор.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений эллиптического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Метод установления с использованием схемы предиктор-корректор.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek11_2.html#11_2">(11.2)</a> схему предиктор-корректор:
+<li></li>предиктор
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td align=left><IMG alt="" src="11_6_1.gif" border="0"></td>
+<td align=right width=100>(11.9)</td></tr></table>
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td><td><IMG alt="" src="11_6_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>корректор
+<table width="98%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_3.gif" border="0"></td>
+<td align=right width=50></td></tr></table>
+<div align="justify">
+Как и схема переменных направлений <a href="lek11_5.html">(11.8)</a>, схема предиктор-корректор (11.9) является 
+<a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> (абсолютную устойчивость схемы обеспечивает предиктор) и имеет 
+<a href="../7/lek7_9_2.html#1">второй порядок аппроксимации по времени</a> (благодаря наличию корректора). Таким образом, 
+в данном случае допускается такая же величина <a href="lek11_2.html#bottom">шага итерации</a>, как и при использовании схемы 
+переменных направлений <a href="lek11_5.html">(11.8)</a>, для получения результатов с такой же точностью. Количество 
+<a href="lek11_2.html#bottom">итераций</a> как и в случае схемы переменных направлений <a href="lek11_5.html">(11.8)</a> определяется соотношением:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Каждая из подсхем, входящих в состав предиктора, решается с помощью 
+<a href="../4/lek4_2_5.html">метода прогонки</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<li></li>для первой подсхемы	предиктора
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>для второй подсхемы предиктора
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<div align="justify">
+Легко видеть, что для обеих подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется. 
+<a href="../7/lek7_9_3.html">Алгоритм решения</a> схемы предиктор-корректор (11.9), а также методики определения <a href="../4/lek4_2_2.html#4_11">прогоночных коэффициентов</a> 
+и <a href="../4/lek4_2_4.html">решения на правой границе</a> аналогичны описанным ранее. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Также как и в случае <a href="lek11_3_1.html">метода простой итерации</a>, в качестве нулевой итерации 
+(<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения в связи с <a href="lek11_2.html#11_2">введением фиктивной производной по времени</a>) 
+обычно задают свободный член:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций следует продолжать до тех пор, пока <a href="lek11_2.html#bottom">итерационный процесс</a> не сойдётся, т.е. пока не будет 
+выполняться условие <a href="lek11_2.html#11_3">(11.3)</a>, в разностном представлении соответствующее неравенству:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Итерационным выражением для подсхем, входящих в состав предиктора, является прогоночное соотношение <a href="../4/lek4_2_2.html#4_11">(4.11)</a>, 
+имеющее вид:
+<li></li>для первой подсхемы предиктора <IMG src="11_6_9.gif" style="vertical-align: middle">			 
+<li></li>для второй подсхемы предиктора	<IMG src="11_6_10.gif" style="vertical-align: middle">		 
+<br>Итерационное выражение для корректора имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_6_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

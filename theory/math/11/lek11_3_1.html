@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений эллиптического типа. Метод установления с использованием явной разностной схемы. Методика решения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений эллиптического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Метод установления с использованием явной разностной схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Методика решения.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Метод установления с использованием явной разностной схемы называют <strong>методом 
+простой итерации</strong>. Рассмотрим применение данного метода для решения дифференциальных уравнений <a href="../1/lek1_3.html#1">эллиптического 
+типа</a> для случая, когда свободный член уравнения не содержит искомую функцию <em>u</em> (т.е. для случая <em>k</em> = 0). 
+Явная разностная схема для уравнения <a href="lek11_2.html#11_2">(11.2)</a> при <em>k</em> = 0 будет иметь вид:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_1.gif" border="0"></td>
+<td align=right width=100>(11.4)</td></tr></table>
+<a name="#11_5" id="#11_5"></a>
+<a href="../7/lek7_4_1.html">В разделе 7.4.1</a> было доказано, что данная разностная схема условно устойчива. 
+Условием <a href="../3/lek3_1.html">устойчивости</a> при <IMG src="11_3_1_2.gif" style="vertical-align: middle"> является 
+соотношение <a href="../7/lek7_4_1.html#7_4a">(7.4a)</a>. Следовательно, максимальное значение <a href="lek11_2.html#bottom">шага итерации</a>, 
+при котором разностная схема (11.4) будет устойчива, 
+определяется следующим выражением:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_4.gif" border="0"></td>
+<td align=right width=100>(11.5)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выражая из разностной схемы (11.4) величину <IMG src="11_3_1_5.gif" style="vertical-align: middle">, 
+получаем рекуррентное соотношение
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+которое с учётом равенства (11.5) преобразуется к виду:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_8.gif" border="0"></td>
+<td align=right>(11.6)</td></tr></table>
+Выражение (11.6) является <strong>формулой простой итерации</strong> для дифференциальных уравнений эллиптического типа; 
+равенство (11.5) определяет величину шага итерации.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В качестве нулевой итерации (<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения 
+в связи с <a href="lek11_2.html#11_2">введением фиктивной производной по времени</a>) обычно задают свободный член исходного 
+дифференциального уравнения <a href="lek11_1.html#bottom">(11.1)</a>:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт <a href="lek11_2.html#bottom">итераций</a> следует продолжать до тех пор, пока <a href="lek11_2.html#bottom">итерационный процесс</a> не сойдётся, 
+т.е. пока не будет выполняться условие <a href="lek11_2.html#11_3">(11.3)</a>, в разностном представлении соответствующее неравенству:
+<table width="100%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_3_1_10.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<font size="2">где <IMG src="11_3_1_11.gif" style="vertical-align: middle"> - некоторая наперёд заданная 
+положительная величина, характеризующая точность вычислений.</font>
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

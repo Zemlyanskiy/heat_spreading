@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Характеристика неявной разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">5. Характеристика неявной разностной схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a>, 
+аппроксимирующей дифференциальное уравнение <a href="lek7_2.html">(7.1)</a>, с помощью <a href="../3/lek3_2.html">спектрального метода</a>. 
+Для этого отбрасываем член <IMG src="7_5_1.gif" style="vertical-align: middle">, наличие которого, <a href="../3/lek3_4.html">как известно</a>, не оказывает влияния на устойчивость 
+разностной схемы, и представляем решение в виде гармоники:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_5_2.gif" border="0"></td>
+<td></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="7_5_3.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_5_4.gif" border="0"></td>
+<td></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем формулу
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_5_5.gif" border="0"></td>
+<td></td></tr></table>
+из которой выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_5_6.gif" border="0"></td>
+<td></td></tr></table>
+Видно, что собственные числа <a href="../3/lek3_3.html#2">оператора перехода</a> удовлетворяют необходимому условию устойчивости 
+разностных схем <a href="../3/lek3_3.html#bottom">(3.8)</a> при любых значениях <IMG src="7_5_7.gif" style="vertical-align: middle">; 
+следовательно, неявная разностная схема <a href="lek7_3.html#7_3">(7.3)</a> является 
+<a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>.
+<table align=right><tr><td><IMG alt="" src="7_5_8.gif" border="0"></td></tr></table>
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон </a>(<em>см. рисунок</em>), характеризующий неявную разностную схему <a href="lek7_3.html#7_3">(7.3)</a>, 
+свидетельствует о том, что она содержит пять неизвестных величин - значений функции <em>u</em> на 
+(<em>n</em> + 1)-ом шаге по времени. Это означает, что разностная схема <a href="lek7_3.html#7_3">(7.3)</a> без <a href="lek7_6.html">дополнительных 
+преобразований</a> неразрешима.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

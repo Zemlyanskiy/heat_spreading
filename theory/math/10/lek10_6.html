@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Обобщение изученных методов.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Обобщение изученных методов.</FONT></FONT></FONT>
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify"><a name="#top" id="#top"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём обобщение методов численного решения обыкновенных дифференциальных уравнений второго порядка:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_1.gif" border="0"></td>
+<td align=right width=100>(10.11)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I. <em>k</em> > 0. Записывается разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+для решения которой используется <a href="lek10_1.html#1">метод прогонки</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II. <em>k</em> = 0. Используется метод установления, 
+заключающийся во введении в исходное уравнение (10.11) фиктивной производной по времени 
+(т.е. преобразовании стационарной задачи в нестационарную):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В силу независимости от времени <a href="../1/lek1_4.html">граничных условий</a> (соответствующих исходной стационарной задаче) 
+с течением времени <IMG src="10_6_4.gif" style="vertical-align: middle"> производная по времени будет стремиться к нулю, 
+а решение нестационарной задачи - к решению исходной стационарной задачи:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Процесс пошагового приближения решения нестационарной задачи к решению исходной стационарной задачи 
+называют <em>итерационным процессом</em>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для осуществления итерационного процесса (т.е. для решения нестационарной задачи) 
+используются следующие разностные схемы:
+<br><br>1. явная разностная схема (метод простой итерации)
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="10_6_7.gif" style="vertical-align: middle">
+<li></li><a href="../6/lek6_2_1.html">условно устойчива</a> <IMG src="10_6_8.gif" style="vertical-align: middle">
+<li></li>решается с помощью итерационного соотношения
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>требует <IMG src="10_6_10.gif" style="vertical-align: middle"> <a href="lek10_2.html#bottom">итераций</a>;
+<br><br>2. неявная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_11.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет порядок аппроксимации <IMG src="10_6_7.gif" style="vertical-align: middle">
+<li></li><a href="../6/lek6_3_1.html">абсолютно устойчива</a>,
+<li></li>решается с помощью <a href="../4/lek4_2_5.html">метода прогонки</a>,
+<li></li>требует <IMG src="10_6_12.gif" style="vertical-align: middle"> итераций;
+<br><br>3. разностная схема Кранка-Николсона
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>имеет порядок аппроксимации <IMG src="10_6_14.gif" style="vertical-align: middle">
+<li></li>абсолютно устойчива,
+<li></li>решается с помощью метода прогонки,
+<li></li>требует <IMG src="10_6_15.gif" style="vertical-align: middle"> итераций.
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;При использовании любой из перечисленных разностных схем 
+в качестве нулевой итерации (<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения в связи с введением 
+фиктивной производной по времени) задают свободный член:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_16.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт итераций продолжается до тех пор, пока итерационный процесс не сойдётся, 
+т.е. пока не будет выполняться условие:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_6_17.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Следует отметить, что метод установления требует соблюдения 
+следующих <strong>правил при введении фиктивной производной по времени</strong>:
+<br>1) исходное стационарное уравнение предварительно должно быть приведено к виду <a href="lek10_6.html#top">(10.11)</a>, 
+т.е. производная второго порядка должна находится в правой части уравнения и иметь положительный знак, 
+а производная первого порядка - в левой части уравнения;
+<br>2) фиктивная производная по времени должна быть введена в левую часть уравнения и иметь 
+положительный знак.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Напомним, что в случае <em>v</em> < 0 для <a href="../2/lek2_2_1.html">аппроксимации</a> 
+производной по координате первого порядка следует использовать <a href="../2/lek2_2_1.html#1">правую конечную разность</a>.
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

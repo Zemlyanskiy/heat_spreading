@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Доказательство условной устойчивости явной разностной схемы, аппроксимирующей дифференциальное уравнение параболического типа.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 0px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">4. Доказательство условной устойчивости явной разностной схемы, аппроксимирующей дифференциальное уравнение параболического типа</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Сравнивая явную разностную схему <a href="lek3_2.html#2">(3.4)</a>, 
+<a href="../2/lek2_2_1.html">аппроксимирующую</a> дифференциальное уравнение параболического типа <a href="lek3_2.html#2">(3.3)</a>, с разностной схемой 
+для погрешности её решения <a href="lek3_2.html#bottom">(3.5)</a>, легко видеть, что разностная схема для погрешности 
+решения <a href="lek3_2.html#bottom">(3.5)</a> по структуре совпадает с <a href="../2/lek2_3_2.html#1">явной разностной схемой</a> для однородного уравнения 
+<a href="../1/lek1_3.html#1">параболического типа</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Это означает, что <em>наличие свободного члена в правой части дифференциального уравнения 
+не оказывает влияния на <a href="lek3_1.html">устойчивость</a> разностной схемы</em>, аппроксимирующей это уравнение, 
+при условии, что свободный член не включает искомую функцию <em>u</em>. Таким образом, 
+для доказательства устойчивости разностной схемы <a href="lek3_2.html#2">(3.4)</a> отбрасываем свободный член и 
+представляем решение разностной схемы в виде гармоники <a href="lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Подставляя данное выражение в разностную схему, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на <IMG src="3_4_4.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#1" id="#1">Преобразуем комплексные</a> числа из экспоненциальной формы в тригонометрическую:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_6.gif" border="0"></td>
+<td align=right width=100>(3.9)</td></tr></table>
+Используя тригонометрические тождества
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_7.gif" border="0"></td>
+<td align=right width=100>(3.10)</td></tr></table>
+получаем формулу, из которой затем выражаем <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#2" id="#2">С учётом необходимого условия </a>устойчивости разностных схем <a href="lek3_3.html#bottom">(3.8)</a> имеем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+В полученном двойном неравенстве правое условие выполняется автоматически (если <a title="В уравнениях математических моделей физико-химических процессов эта величина представляет собой, как правило, какую-либо физическую величину или соотношение физических величин, а, следовательно, она должна быть положительной" style="color: #000088; cursor: hand;"><IMG src="../sigma.gif" style="vertical-align: middle"> > 0*</a>). 
+Поэтому рассмотрим более подробно левое условие:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_10.gif" border="0"></td>
+<td align=right width=100>(3.11)</td></tr></table>
+Таким образом, при выполнении неравенства (3.11) явная разностная схема <a href="lek3_2.html#2">(3.4)</a> устойчива. 
+Однако выражение (3.11) непригодно для использования, поскольку содержит 
+переменную величину - аргумент комплексного числа <IMG src="../alfa.gif" style="vertical-align: middle">. Поэтому, чтобы 
+гарантировать устойчивость явной разностной схемы <a href="lek3_2.html#2">(3.4)</a> не зависимо от значения <IMG src="../alfa.gif" style="vertical-align: middle">, 
+переходим к более строгому условию, задавая для <IMG src="3_4_11.gif" style="vertical-align: middle"> максимально возможное значение, 
+равное 1:
+<a name="#3_12" id="#3_12"></a><table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_4_12.gif" border="0"></td>
+<td align=right width=100>(3.12)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выражение (3.12) является условием <a href="lek3_1.html">устойчивости</a> 
+явной разностной схемы, <a href="../2/lek2_2_1.html">аппроксимирующей</a> дифференциальное уравнение 
+<a href="../1/lek1_3.html#1">параболического типа</a>, свободный член которого не включает искомую функцию <em>u</em>. 
+Такие <a href="../2/lek2_3_2.html#1">разностные схемы</a>, устойчивость которых зависит от какого-либо условия, 
+ограничивающего выбор интервала деления на <a href="../2/lek2_3_1.html#1">разностной сетке</a>, называют 
+<strong>условно устойчивыми</strong>.
+<a name="#bottom" id="#bottom"></a>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

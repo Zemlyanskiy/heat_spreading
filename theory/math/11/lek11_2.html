@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений эллиптического типа. Метод установления.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений эллиптического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">2. Метод установления.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём для дифференциального уравнения <a href="lek11_1.html#bottom">(11.1)</a> двумерную <a href="../2/lek2_3_1.html#1">разностную сетку</a> 
+и запишем разностную схему, используя для <a href="../2/lek2_2_1.html">аппроксимации</a> каждой из производных второго порядка 
+разностный оператор <a href="../2/lek2_2_3.html#2_12">(2.12)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_2_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Очевидно, что данная разностная схема неразрешима.
+<br><br><a name="#11_2" id="#11_2"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для численного решения дифференциальных 
+уравнений <a href="../1/lek1_3.html#1">эллиптического типа</a> (также как и для <a href="../10/lek10_6.html">решения обыкновенных дифференциальных уравнений 
+второго порядка</a>) используют <strong>метод установления</strong>, заключающийся в преобразовании стационарной задачи 
+в нестационарную. С этой целью в уравнение <a href="lek11_1.html#bottom">(11.1)</a>, описывающее стационарную задачу, 
+следует добавить фиктивную производную по времени:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_2_3.gif" border="0"></td>
+<td align=right width=100>(11.2)</td></tr></table>
+При этом искомая функция станет уже функцией трёх переменных:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Полученное уравнение (11.2) относится к <a href="../1/lek1_2.html#bottom">двумерным</a> дифференциальным 
+уравнениям параболического типа, <a href="../7/lek7_10.html">методы численного решения которых</a> мы уже рассматривали. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#11_3" id="#11_3"></a>Если при численном решении уравнения (11.2), описывающего нестационарную 
+задачу, использовать <a href="../1/lek1_4.html">граничные условия</a>, соответствующие исходной стационарной задаче <a href="lek11_1.html#bottom">(11.1)</a>, т.е. 
+граничные условия, не зависящие от времени, то с течением времени <IMG src="11_2_5.gif" style="vertical-align: middle"> производная по времени будет 
+стремиться к нулю, а решение <IMG src="11_2_6.gif" style="vertical-align: middle"> нестационарной задачи (11.2) - к решению стационарной задачи <a href="lek11_1.html#bottom">(11.1)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="11_2_7.gif" border="0"></td>
+<td align=right width=100>(11.3)</td></tr></table>
+Отметим, что выполнение условия (11.3) обеспечивается независимостью от времени не только 
+граничных условий, но и свободного члена уравнений <a href="lek11_1.html#bottom">(11.1)</a> и (11.2).
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, для численного решения дифференциальных уравнений 
+эллиптического типа можно использовать <a href="../7/lek7_10.html">разностные схемы, аппроксимирующие двумерные 
+дифференциальные уравнения параболического типа</a>. Напомним, что процесс пошагового приближения решения 
+нестационарной задачи к решению исходной стационарной задачи называют <strong>итерационным процессом</strong>, 
+переход от <em>n</em>-го шага к (<em>n</em> + 1)-му - <strong>итерацией</strong>, а значение <IMG src="11_2_8.gif" style="vertical-align: middle"> - <strong>шагом итерации</strong>.
+
+<a name="#bottom" id="#bottom"></a>
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

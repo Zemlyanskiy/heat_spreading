@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Аппроксимация дифференциальных уравнений. Понятие разностной схемы.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Аппроксимация дифференциальных уравнений</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. Понятие разностной схемы</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим производные в уравнении <a href="lek2_3_1.html#2_13">(2.13) </a>в точке 
+<IMG src="2_3_2_1.gif" style="vertical-align: middle"> на <a href="lek2_3_1.html#1">разностной сетке</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для <a href="lek2_2_1.html">аппроксимации</a> производной функции <em>u</em> по времени будем использовать <a href="lek2_2_1.html#1">правую 
+конечную разность</a>, стабилизируя при этом значение независимой переменной <em>х</em> в точке с 
+порядковым номером <em>j</em>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_2_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для аппроксимации второй производной функции <em>u</em> 
+по координате будем использовать разностный оператор <a href="lek2_2_3.html#2_12">(2.12)</a>, стабилизируя при этом значение 
+независимой переменной <em>t</em> в точке с порядковым номером <em>n</em> (или, иначе говоря, на <em>n</em>-ом шаге):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_2_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#1" id="#1">Если подставить</a> записанные конечные разности в исходное дифференциальное уравнение <a href="lek2_3_1.html#2_13">(2.13)</a>, 
+получим соотношение, <a href="lek2_2_1.html">аппроксимирующее</a> это дифференциальное уравнение в точке  <IMG src="2_3_2_1.gif" style="vertical-align: middle">
+на <a href="lek2_3_1.html#1">разностной сетке</a>, и называемое <strong>разностной схемой</strong>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_2_4.gif" border="0"></td>
+<td align=right width=100>(2.14)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В записанной разностной схеме (2.14) аппроксимация 
+второй производной функции <em>u</em> по координате рассматривается на <em>n</em>-ом 
+шаге по времени, то есть относительно точки <em>t<sup>n</sup></em> , для которой 
+рассматривается аппроксимация всего уравнения. Такая разностная схема называется <strong>явной</strong>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2_15" id="#2_15">Однако аппроксимацию</a> второй производной функции <em>u</em> 
+по координате можно рассматривать и на (<em>n</em> + 1)-ом шаге по времени, в точке <em>t<sup>n</em>+1</sup>; 
+такая разностная схема называется <strong>неявной</strong>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_3_2_5.gif" border="0"></td>
+<td align=right width=100>(2.15)</td></tr></table>
+Отметим, что если в состав свободного члена входит сама функция <em>u</em>, то её значение 
+должно соответствовать <em>n</em>-му шагу по времени при составлении явной разностной 
+схемы и (<em>n</em> + 1)-му шагу по времени при составлении неявной разностной схемы. 
+Значение же переменной <em>t</em>, входящей в состав свободного члена, всегда берётся на <em>n</em>-ом шаге.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Схематическое изображение <a href="lek2_3_1.html#1">узлов разностной сетки</a>, 
+связанных уравнением разностной схемы, называют <strong>разностным шаблоном</strong>. Разностный шаблон 
+может служить хорошим ориентиром при выборе метода решения разностной схемы и составлении 
+алгоритма решения. Разностные шаблоны для разностных схем (2.14) и (2.15) имеют вид:
+<table align=center width="95%" border=0 bordercolor=silver cellspacing=0 cellpadding=0>
+<tr>
+	<td width="50%" align=center>для явной разностной схемы</td>
+	<td align=center>для неявной разностной схемы</td>
+</tr>
+<tr>
+	<td align=center><IMG alt="" src="2_3_2_6.gif" border="0"></td>
+	<td align=center><IMG alt="" src="2_3_2_7.gif" border="0"></td>
+</tr>
+</table>
+<a name="#bottom" id="#bottom"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В дальнейшем мы неоднократно будем сопоставлять возможности и методы решения явных и неявных разностных схем для дифференциальных уравнений различного типа.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

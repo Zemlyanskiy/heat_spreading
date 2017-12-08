@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Спектральный метод анализа устойчивости разностных схем. Влияние наличия искомой функции в составе свободного члена на устойчивость разностных схем.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 0px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Спектральный метод анализа устойчивости разностных схем</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Влияние наличия искомой функции в составе свободного члена на устойчивость разностных схем</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1">параболического типа</a>, 
+свободный член которого включает искомую функцию <em>u</em> следующим образом:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_1.gif" border="0"></td>
+<td align=right width=100>(3.13)</td></tr></table>
+Подобные уравнения часто встречаются в <a href="../1/lek1_6.html">математических моделях химических реакторов</a>, в которых 
+протекают прямые реакции. Поэтому важно знать, каким образом наличие подобного свободного члена 
+влияет на <a href="lek3_1.html">устойчивость</a> разностных схем.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения (3.13) <a href="../2/lek2_3_2.html#1">явную разностную схему</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_2.gif" border="0"></td>
+<td align=right width=100>(3.14)</td></tr></table>
+Осуществляя выкладки, аналогичные описанным ранее (<a href="lek3_2.html#2">для случая уравнения</a>, свободный член которого 
+не включает функцию <em>u</em>), можно получить разностную схему для <a href="lek3_2.html#3">погрешности решения</a>, которая будет 
+иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Наличие слагаемого <IMG src="3_6_4.gif" style="vertical-align: middle"> в правой части данного уравнения говорит о том, что свободный член в 
+уравнении (3.13) влияет на погрешность вычислений, поэтому отбрасывать его при анализе устойчивости разностной схемы (3.14) нельзя.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Представляя решение разностной схемы (3.14) в виде гармоники <a href="lek3_3.html#1">(3.7)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, деля левую и правую части данного выражения на <IMG src="3_4_4.gif" style="vertical-align: middle"> и используя зависимости <a href="lek3_4.html#1">(3.9), (3.10)</a>, 
+получаем формулу, из которой затем выражаем  <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+С учётом необходимого условия устойчивости разностных схем <a href="lek3_3.html#bottom">(3.8)</a> имеем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Анализ полученного неравенства, аналогичный <a href="lek3_4.html#2">описанному выше</a> 
+(для случая уравнения, свободный член которого не включает функцию <em>u</em>), позволяет получить 
+условие устойчивости явной разностной схемы (3.14), <a href="../2/lek2_2_1.html">аппроксимирующей</a> уравнение (3.13):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="3_6_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Легко доказать, что на <a href="lek3_5.html#bottom">абсолютную устойчивость</a> неявной разностной схемы, аппроксимирующей уравнение (3.13), 
+наличие рассматриваемого свободного члена не повлияет.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

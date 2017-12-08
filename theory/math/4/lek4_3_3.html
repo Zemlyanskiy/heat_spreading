@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Кранка-Николсона. Метод решения разностной схемы Кранка-Николсона.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Разностная схема Кранка-Николсона</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. Метод решения разностной схемы Кранка-Николсона</FONT></EM></B>
+<p align="justify">
+<table align=right cellspacing=2 cellpadding=2><tr><td valign=top><IMG alt="" src="4_3_3_1.gif" border="0"></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../2/lek2_3_2.html#bottom">Разностный шаблон</a> (<em>см. рисунок</em>), 
+характеризующий разностную схему Кранка-Николсона <a href="lek4_3_1.html#4">(4.18)</a>, свидетельствует о том, 
+что она содержит три неизвестные величины - значения функции <em>u</em> на (<em>n</em> + 1)-ом шаге по времени. 
+Следовательно, для решения данной разностной схемы необходимо использовать <a href="lek4_2_5.html">метод прогонки</a>. 
+Методики определения <a href="lek4_2_2.html#4_11">прогоночных коэффициентов</a> и <a href="lek4_2_4.html">решения на правой границе</a>, 
+а также общий вид <a href="lek4_2_6.html">алгоритма решения</a> в данном случае будут такими же, как и для неявной 
+разностной схемы <a href="lek4_2_1.html#4_6">(4.6)</a>. Однако достаточное условие сходимости прогонки <a href="lek4_2_5.html#4_16">(4.16)</a> требует 
+проверки.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приведём выражение <a href="lek4_3_1.html#4">(4.18)</a> к виду <a href="lek4_2_2.html#4_10">(4.10)</a>, удобному для использования метода прогонки:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_3_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Следовательно, коэффициенты, соответствующие уравнению <a href="lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_3_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Легко видеть, что для разностной схемы <a href="lek4_3_1.html#4">(4.18)</a> достаточное условие сходимости прогонки выполняется:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_3_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+</p>
+</Td></Tr></Table>
+</body>
+</html>

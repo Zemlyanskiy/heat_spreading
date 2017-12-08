@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа. Разностная схема Кранка-Николсона. Устойчивость разностной схемы Кранка-Николсона.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Разностная схема Кранка-Николсона</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. Устойчивость разностной схемы Кранка-Николсона</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Исследуем <a href="../3/lek3_1.html">устойчивость</a> разностной схемы Кранка-Николсона 
+<a href="lek4_3_1.html#4">(4.18)</a> с помощью <a href="../3/lek3_2.html">спектрального метода</a>. Для этого отбрасываем член  <IMG src="4_3_2_2.gif" style="vertical-align: middle">, наличие которого, 
+<a href="../3/lek3_4.html">как известно</a>, не оказывает влияния на устойчивость разностной схемы, и представляем решение 
+в виде гармоники <a href="../3/lek3_3.html#1">(3.7)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_2_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Далее, упрощаем полученное выражение, деля левую и правую его части на  <IMG src="4_3_2_3.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Используя зависимости <a href="../3/lek3_4.html#1">(3.9), (3.10)</a>, получаем формулу
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_2_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+из которой выражаем  <IMG src="../lyambda.gif" style="vertical-align: middle">:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="4_3_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Видно, что в полученном выражении числитель по абсолютному значению меньше знаменателя 
+(при <IMG src="../sigma.gif" style="vertical-align: middle">  > 0<a style="color: #000088; cursor: hand;" title="В уравнениях математических моделей физико-химических процессов данная величина представляет собой, как правило, какую-либо физическую величину или соотношение физических величин, а, следовательно, она должна быть положительной.">*</a> 
+и <em>k</em> <IMG src="4_3_2_7.gif" style="vertical-align: middle"> 0<a style="color: #000088; cursor: hand;" title="Данное условие было оговорено при постановке задачи.">*</a>). Следовательно, необходимое условие устойчивости разностных схем <a href="../3/lek3_3.html#1">(3.8)</a> 
+в данном случае выполняется при любых значениях  <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em> и <em>h</em>; то есть, разностная схема 
+Кранка-Николсона <a href="lek4_3_1.html#4">(4.18)</a> является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Отметим, что при <em>k</em> < 0<a style="color: #000088; cursor: hand;" title="Данный случай соответствует математической модели химического реактора, в котором протекают автокаталитические реакции.">*</a> 
+спектральный метод не будет гарантировать устойчивость разностной схемы <a href="lek4_3_1.html#4">(4.18)</a>, поскольку  <IMG src="4_3_2_8.gif" style="vertical-align: middle">
+может принимать любые значения от 0 до 1 и при <IMG src="4_3_2_8.gif" style="vertical-align: middle"> = 0 числитель будет больше знаменателя при 
+любом положительном  <IMG src="../delta.gif" style="vertical-align: middle"><em>t</em>. Очевидно, данный случай требует особого метода решения.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

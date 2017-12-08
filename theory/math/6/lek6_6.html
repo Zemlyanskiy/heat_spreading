@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка. Неявная разностная схема. Метод решения.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение дифференциальных уравнений параболического типа, содержащих производную по координате первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">6. Сравнительная характеристика изученных разностных схем.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В заключение приведём сравнительную характеристику разностных схем, 
+аппроксимирующих <a href="../1/lek1_2.html#bottom">одномерное</a> дифференциальное уравнение <a href="../1/lek1_3.html#1_1">параболического типа</a>, содержащее производную по 
+координате первого порядка:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_6_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Явная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_6_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> <IMG src="6_6_3.gif" style="vertical-align: middle"> 
+<li></li><a href="lek6_2_1.html">Условно устойчива</a> <IMG src="6_6_4.gif" style="vertical-align: middle"> 
+<li></li>Решается с помощью рекуррентного соотношения <a href="lek6_2_2.html#6_4">(6.4)</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="#2" id="#2"></a>2. Неявная разностная схема
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_6_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="6_6_3.gif" style="vertical-align: middle"> 
+<li></li><a href="lek6_3_1.html">Абсолютно устойчива</a>.
+<li></li>Решается <a href="../4/lek4_2_5.html">методом прогонки</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Разностная схема Кранка-Николсона
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_6_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="6_6_7.gif" style="vertical-align: middle"> 
+<li></li>Абсолютно устойчива.
+<li></li>Решается методом прогонки.
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Напомним, что в случае <em>v</em> < 0 для <a href="../2/lek2_2_1.html">аппроксимации</a> 
+производной по координате первого порядка следует использовать <a href="../2/lek2_2_1.html#1">правую конечную разность</a>.
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Вне зависимости от знака параметра <em>v</em> (или в случае, 
+когда <em>v</em> является знакопеременной величиной) может быть также использована 
+неявная разностная схема с аппроксимацией производной по координате первого порядка 
+<a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="6_6_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<li></li>Имеет порядок аппроксимации <IMG src="6_6_9.gif" style="vertical-align: middle"> 
+<li></li><a href="lek6_5_1.html">Абсолютно устойчива</a>.
+<li></li>Решается методом прогонки, сходящейся при выполнении одного из условий: <a href="lek6_5_2.html#1">(6.9) или (6.10)</a>.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

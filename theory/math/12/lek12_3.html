@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений первого порядка. Метод Рунге-Кутта второго порядка.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений первого порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Метод Рунге-Кутта второго порядка.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+<table align=right cellspacing=0 cellpadding=0><tr>
+<td><IMG alt="" src="12_3_1.gif" border="0"></td>
+</tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим метод решения уравнения <a href="lek12_1.html">(12.1)</a>, имеющий второй порядок точности. 
+Для этого разобьём пополам интервал <IMG src="12_3_2.gif" style="vertical-align: middle"> между точками
+<IMG src="12_3_3.gif" style="vertical-align: middle"> и  <IMG src="12_3_4.gif" style="vertical-align: middle"> (<em>см. рисунок</em>). 
+Полученную промежуточную точку обозначим, как <IMG src="12_3_5.gif" style="vertical-align: middle">. Запишем явную разностную схему, 
+<a href="../2/lek2_2_1.html">аппроксимирующую</a> уравнение <a href="lek12_1.html">(12.1)</a> на первом полушаге интервала  <IMG src="12_3_2.gif" style="vertical-align: middle"> 
+(т.е., на интервале  <IMG src="12_3_6.gif" style="vertical-align: middle">):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Следовательно, решение в точке <IMG src="12_3_5.gif" style="vertical-align: middle"> можно найти с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_8.gif" border="0"></td>
+<td align=right width=100>(12.5)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Зная решение в точке <IMG src="12_3_5.gif" style="vertical-align: middle">, 
+можно записать для уравнения <a href="lek12_1.html">(12.1)</a> разностную схему, в которой производная по времени будет 
+аппроксимирована <a href="../2/lek2_2_1.html#1">центральной конечной разностью</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_9.gif" border="0"></td>
+<td align=right width=100>(12.6)</td></tr></table>
+где <IMG src="12_3_10.gif" style="vertical-align: middle"> Видно, что правая часть разностной схемы (12.6) 
+аппроксимируется относительно точки <IMG src="12_3_5.gif" style="vertical-align: middle">. Следовательно, разностный оператор в левой части является 
+центральной конечной разностью, которая, <a href="../2/lek2_2_2.html#bottom">как известно</a>, имеет второй <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a>. 
+<br><a name="#12_7" id="#12_7"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Введём следующие обозначения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_11.gif" border="0"></td>
+<td align=right width=100>(12.7)</td></tr></table>
+С учётом рекуррентного соотношения (12.5) и обозначений (12.7) разностная схема (12.6) будет иметь вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_12.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Таким образом, решение на (<em>n</em> + 1)-ом шаге по времени можно найти с помощью рекуррентного соотношения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="12_3_13.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Описанный метод решения обыкновенных дифференциальных уравнений первого порядка носит название 
+<strong>метода Рунге-Кутта 2-го порядка</strong>.
+</p>
+</Td></Tr></Table>
+</body>
+</html>

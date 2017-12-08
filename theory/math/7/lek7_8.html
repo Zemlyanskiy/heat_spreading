@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Решение двумерных дифференциальных уравнений параболического типа. Схема со стабилизирующей поправкой.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left" style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение двумерных дифференциальных уравнений параболического типа.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">8. Схема со стабилизирующей поправкой.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ещё одним способом интерпретации неявной разностной схемы <a href="lek7_3.html#7_3">(7.3)</a>, 
+<a href="../2/lek2_2_1.html">аппроксимирующей</a> двумерное дифференциальное уравнение параболического типа <a href="lek7_2.html">(7.1)</a>, является 
+<strong>схема со стабилизирующей поправкой</strong>, рекомендуемая для использования в случае, если существует особенность 
+поведения (например, осцилляции) искомой функции <em>u</em> в одном из пространственных направлений 
+(в данном случае по координате <em>y</em>):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_1.gif" border="0"></td>
+<td></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_2.gif" border="0"></td>
+<td>(7.14)</td></tr></table>
+Первая подсхема в схеме со стабилизирующей поправкой (7.14) аппроксимируется на первом полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle">
+и является неявной по координате <em>x</em> и явной по координате <em>y</em>. Вторая подсхема 
+аппроксимируется на втором полушаге интервала <IMG src="7_6_2.gif" style="vertical-align: middle">, является неявной по координате <em>y</em> и учитывает 
+поправку по этой координате. Каждая из подсхем (как и в случае схемы расщепления <a href="lek7_6.html#7_7">(7.7), (7.8)</a>) 
+является <a href="../3/lek3_5.html#bottom">абсолютно устойчивой</a> и решается с помощью <a href="../4/lek4_2_5.html#bottom">метода прогонки</a>. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Складывая обе подсхемы и принимая во внимание обозначения <a href="lek7_4_2.html#bottom">(7.6)</a>, получаем:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_3.gif" border="0"></td>
+<td></td></tr></table>
+Данное соотношение показывает, что схема со стабилизирующей поправкой (7.14) имеет, как и неявная 
+разностная схема <a href="lek7_3.html#7_3">(7.3)</a>, первый <a href="../2/lek2_2_2.html#1">порядок аппроксимации</a> по времени и второй - по каждой из координат:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_4.gif" border="0"></td>
+<td></td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Алгоритм решения схемы со стабилизирующей поправкой (7.14) 
+аналогичен <a href="lek7_6_3.html">алгоритму решения</a> схемы расщепления 
+<a href="lek7_6.html#7_7">(7.7), (7.8)</a>. Коэффициенты, соответствующие уравнению <a href="../4/lek4_2_2.html#4_10">(4.10)</a>, имеют вид:
+<li></li>для первой подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_5.gif" border="0"></td>
+<td></td></tr></table>
+<li></li>для второй подсхемы
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="7_8_6.gif" border="0"></td>
+<td></td></tr></table>
+Легко видеть, что для обеих подсхем достаточное условие сходимости прогонки <a href="../4/lek4_2_5.html#4_16">(4.16)</a> выполняется.
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

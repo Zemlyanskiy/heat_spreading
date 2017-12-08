@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Решение обыкновенных дифференциальных уравнений второго порядка. Метод установления с использованием явной разностной схемы. Исследование устойчивости.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Решение обыкновенных дифференциальных уравнений второго порядка.</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">3. Метод установления с использованием явной разностной схемы.</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. Методика решения.</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запишем для уравнения <a href="lek10_2.html">(10.4)</a> явную разностную схему 
+(соблюдая <a href="../5/lek5_8.html#1">правило выбора конечной разности</a> для аппроксимации первой производной по координате):
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_1.gif" border="0"></td>
+<td align=right width=100>(10.6)</td></tr></table>
+<a name="#1" id="#1"></a><a href="../6/lek6_2_1.html">В разделе 6.2.1</a> было доказано, что данная разностная схема условно устойчива. Условием <a href="../3/lek3_1.html">устойчивости</a> 
+является соотношение <a href="../6/lek6_2_1.html#bottom">(6.3)</a>, которое для случая <em>k</em> = 0 имеет вид:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_2.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<a name="#10_7" id="#10_7">Следовательно, максимальное</a> значение шага итерации, при котором разностная схема (10.6) будет устойчива, определяется следующим выражением:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_3.gif" border="0"></td>
+<td align=right width=100>(10.7)</td></tr></table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выражая из разностной схемы (10.6) величину <IMG src="10_3_1_4.gif" style="vertical-align: middle">, получаем рекуррентное соотношение
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_5.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+которое с учётом равенства (10.7) преобразуется к виду:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_7.gif" border="0"></td>
+<td align=right width=100>(10.8)</td></tr></table>
+<a name="#2" id="#2"></a>Метод установления с использованием явной разностной схемы называют <strong>методом простой итерации</strong>, 
+а выражение (10.8) - <strong>формулой простой итерации</strong>. Равенство (10.7) определяет шаг итерации 
+для метода простой итерации. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В качестве нулевой итерации (<a href="../1/lek1_4.html">начального условия</a>, необходимого для решения 
+в связи с <a href="lek10_2.html">введением фиктивной производной по времени</a>) обычно задают свободный член исходного 
+дифференциального уравнения <a href="lek10_2.html">(10.3)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_8.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Расчёт <a href="lek10_2.html#bottom">итераций</a> следует продолжать до тех пор, пока <a href="lek10_2.html#bottom">итерационный процесс</a> не сойдётся, 
+т.е. пока не будет выполняться условие <a href="lek10_2.html#bottom">(10.5)</a>, в разностном представлении соответствующее неравенству:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="10_3_1_9.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+<font size="2">где <IMG src="10_3_1_10.gif" style="vertical-align: middle"> - некоторая наперёд заданная положительная величина, характеризующая точность вычислений.</font>
+
+
+</p>
+</Td></Tr></Table>
+</body>
+</html>

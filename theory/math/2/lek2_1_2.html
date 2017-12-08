@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Преобразование дифференциальной задачи в разностную. Метод приведения уравнений к безразмерному виду. Методика определения неизвестных характерных параметров процесса.</title>
+<LINK rel="stylesheet" href="../main.css" type="text/css">
+</head>
+<body>
+<div id="Left"
+  style  ="LEFT: 5px; POSITION: absolute; TOP: 2px"><FONT color=#1a1a6f>
+<FONT face="MS Sans Serif" size=4 color="#156B1D">Преобразование дифференциальной задачи в разностную</FONT><br>
+<FONT face="MS Sans Serif" size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT face="MS Sans Serif" size=3 color="#156B1D">1. Метод приведения уравнений к безразмерному виду</FONT></FONT> 
+<hr size=-1 color="#1a1a6f" width="99%">  
+<Table align=center valign="top" width="99%"><Tr><Td valign=top>
+<EM><b><FONT face="MS Sans Serif"><FONT size=3 color=black>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2. Методика определения неизвестных характерных параметров процесса</FONT></EM></B>
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим методику определения <a href="lek2_1_1.html#1">неизвестных характерных параметров</a>. 
+Для этого выразим переменные математической модели через характерные и безразмерные значения:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_1.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Затем подставим их в исходную систему уравнений <a href="lek2_1_1.html#2_1">(2.1)</a>:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_2.gif" border="0"></td>
+<td align=right width=100>(2.2)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим второе уравнение в системе (2.2), которое после 
+несложных преобразований можно представить в виде:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_3.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Для того чтобы полученное обезразмеренное уравнение совпало с <a href="lek2_1_1.html#2_1">исходным</a>, комплекс характерных 
+параметров, стоящий перед вторым слагаемым, необходимо приравнять единице:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_4.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Следовательно, характерное значение скорости роста кристаллов определяется по формуле:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_5.gif" border="0"></td>
+<td align=right width=100>(2.3)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рассмотрим теперь первое уравнение в системе (2.2), которое 
+после несложных преобразований можно привести к виду:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_6.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Для того чтобы полученное обезразмеренное уравнение совпало с <a href="lek2_1_1.html#2_1">исходным</a>, комплекс характерных 
+параметров, стоящий перед интегралом в правой части уравнения, необходимо приравнять единице:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_7.gif" border="0"></td>
+<td align=right width=100></td></tr></table>
+Отсюда, используя соотношение (2.3), получаем характерное значение плотности функции распределения 
+кристаллов по размерам:
+<table width="95%" cellspacing=0 cellpadding=0><tr><td width=100>&nbsp;</td>
+<td><IMG alt="" src="2_1_2_8.gif" border="0"></td>
+<td align=right width=100>(2.4)</td></tr></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Таким образом, если характерные значения скорости роста 
+кристаллов и плотности функции распределения кристаллов по размерам соответствуют выражениям (2.3), 
+(2.4), то оба уравнения в системе (2.2) полностью совпадают с исходными уравнениями математической 
+модели процесса кристаллизации <a href="lek2_1_1.html#2_1">(2.1)</a>. Однако порядки переменных в уравнениях системы <a href="lek2_1_1.html#2_1">(2.1)</a> 
+различны (например, функция <em>f</em> имеет порядок <IMG src="2_1_2_9.gif" style="vertical-align: middle">10<sup>20</sup>, а <IMG src="../etta.gif" style="vertical-align: bottom"> -  <IMG src="2_1_2_9.gif" style="vertical-align: middle">10<sup>-10</sup>), вследствие чего расчётные ошибки при 
+определении функции <em>f</em> , не значимые для неё самой, могут привести к сильным искажениям значений <IMG src="../etta.gif" style="vertical-align: bottom">. 
+В то же время при численном решении уравнений системы (2.2) этого не произойдёт, так как все 
+переменные в них имеют одинаковый порядок. 
+</p>
+</Td></Tr></Table>
+</body>
+</html>
