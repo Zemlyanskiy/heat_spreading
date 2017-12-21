@@ -73,11 +73,10 @@ int main() {
     for (double time = t; time <= T; time += deltaT, count++) {
   		for (int i = 0; i < Lx; i++)
   			prev[i] = points[i];
-  		for (int i = 1; i < Lx - 1; i++) {
+  		for (int i = 1; i < Lx - 1; i++)
   			points[i] = prev[i] + Sigma*deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
-        if (count%out_count == 0) {
-          Output("input1.txt", "a", points, Lx);
-        }
+      if (count%out_count == 0) {
+        Output("input1.txt", "a", points, Lx);
       }
     }
     fclose(fp);
