@@ -104,6 +104,9 @@ struct input ReadInput(char* PATH,int mode) {
 				}
 			}
 	}
+	for (int i = 0; i < temp.NumPoints; i++)
+		printf("%lf ", temp.values[i]);
+	printf("\n");
 	fclose(file);
 	return temp;
 }
@@ -125,7 +128,7 @@ int OutputArr(char* PATH, double* arr, int length) {
 	else {
 		fprintf(file, "\n");
 		for (int i = 0; i < length; i++)
-			fprintf(file, "%f ", arr[i]);
+			fprintf(file, "%lf ", arr[i]);
 		fclose(file);
 	}
 
@@ -179,18 +182,19 @@ int OutputCurrentTime(char* PATH, double currT) {
 
 int main(int argc, char *argv[]) {
 	char* inputFile;
-	int PROGRAMM_MODE = EILER;
+	int PROGRAMM_MODE = 1;
 	if (argc == 2) {
 		inputFile = argv[1];
 	}
 	else if (argc == 3) {
 		inputFile = argv[1];
-		if (argv[2] == 'e')
-			PROGRAMM_MODE = EILER;
-		if (argv[2] == 'r')
-			PROGRAMM_MODE = RUNGE_KUTTA;
-		if (argv[2] == 's')
-			PROGRAMM_MODE = START_STRING;
+		printf("%c", argv[2]);
+		if (argv[2][0] == 'e')
+			PROGRAMM_MODE = 1;
+		if (argv[2][0] == 'r')
+			PROGRAMM_MODE = 0;
+		if (argv[2][0] == 's')
+			PROGRAMM_MODE = 2;
 	}
 	else {
 		printf("Incorrect number of arguments");
@@ -202,6 +206,10 @@ int main(int argc, char *argv[]) {
 	double* prev;//array to previos state
 	double posX; //var for calculate first state
 	double step;
+
+	double *k1, *k2, *k3, *k4, *medium;
+	double *derivative;
+
 	double OutTime = 0;
 	int numOutputs;
 	int outCoun;
@@ -221,7 +229,7 @@ int main(int argc, char *argv[]) {
 		OutputArr(inputFile, points, data.NumPoints);
 	}
 	else
-	{	//START PROCESS(EILER)
+	{	//START PROCESS(EILER OR KUTTA)
 		for (int i = 0; i < data.NumPoints; i++) {
 			points[i] = data.values[i];
 		}
@@ -230,15 +238,70 @@ int main(int argc, char *argv[]) {
 		outCoun = (int)(data.T - data.t) / data.deltaT;
 		outCoun = outCoun / numOutputs;
 		count = 0;
-		for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
-			for (int i = 0; i < data.NumPoints; i++)
-				prev[i] = points[i];//make pointers swap
-			for (int i = 1; i < data.NumPoints - 1; i++)
-				points[i] = prev[i] + data.Sigma*data.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
-			if (count%outCoun == 0) {
-				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-				OutputCurrentTime(inputFile, OutTime);
-				OutTime += data.deltaOut;
+		int a;
+		double der_r, der_e;
+		if (PROGRAMM_MODE == 1)//EILER
+			for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
+				for (int i = 0; i < data.NumPoints; i++)
+					prev[i] = points[i];//make pointers swap
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					points[i] = prev[i] + data.Sigma*data.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
+				if (count%outCoun == 0) {
+					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
+					OutputCurrentTime(inputFile, OutTime);
+					OutTime += data.deltaOut;
+				}
+			}
+		if (PROGRAMM_MODE == 0) {//RUNGE_KUTTA
+			k1 = (double*)malloc(sizeof(double)*data.NumPoints);
+			k2 = (double*)malloc(sizeof(double)*data.NumPoints);
+			k3 = (double*)malloc(sizeof(double)*data.NumPoints);
+			k4 = (double*)malloc(sizeof(double)*data.NumPoints);
+			medium = (double*)malloc(sizeof(double)*data.NumPoints);
+			derivative = (double*)malloc(sizeof(double)*data.NumPoints);
+			double* eiler_derivative = (double*)malloc(sizeof(double)*data.NumPoints);
+			for (int i = 0; i < data.NumPoints; i++) {
+				k1[i] = 0;
+				k2[i] = 0;
+				k3[i] = 0;
+				k4[i] = 0;
+				medium[i] = 0;
+				derivative[i] = 0;
+				eiler_derivative[i] = 0;
+			}
+			for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
+				for (int i = 0; i < data.NumPoints; i++)
+					prev[i] = points[i];//make pointers swap
+				//DERIVATIVE CALCULATING
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					k1[i] = data.deltaT*data.Sigma*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
+				for (int i = 0; i < data.NumPoints; i++)
+					medium[i] = prev[i] + k1[i] / 2; 
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					k2[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) / pow(step, 2);
+				for (int i = 0; i < data.NumPoints; i++)
+					medium[i] = prev[i] + k2[i] / 2;
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					k3[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) / pow(step, 2);
+				for (int i = 0; i < data.NumPoints; i++)
+					medium[i] = prev[i] + k2[i]; 
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					k4[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) / pow(step, 2);
+				for (int i = 1; i < data.NumPoints - 1; i++) {
+					derivative[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+					eiler_derivative[i]	= data.deltaT*data.Sigma*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
+					der_r = derivative[i];
+					der_e = eiler_derivative[i];
+					a = 0;
+				}
+				//NEXT POINT CALCULATING
+				for (int i = 1; i < data.NumPoints - 1; i++)
+					points[i] = prev[i] + derivative[i];
+				if (count%outCoun == 0) {
+					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
+					OutputCurrentTime(inputFile, OutTime);
+					OutTime += data.deltaOut;
+				}
 			}
 		}
 	}
