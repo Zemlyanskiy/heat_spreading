@@ -7,7 +7,7 @@
 #define RUNGE_KUTTA 1;
 #define START_STRING 2;
 
-struct inputDATA {
+struct input {
   //Input data
   double t;//Start time
   double T;//End time
@@ -20,9 +20,9 @@ struct inputDATA {
   double *values;//Last array with values
 };
 
-struct inputDATA Read(char *DATA,int PROGRAMM_MODE) {
+struct input Read(char *DATA,int PROGRAMM_MODE) {
   FILE *file = fopen(DATA, "r");
-  struct inputDATA temp;
+  struct input temp;
   char str[5000];
   int pos;
   char *lexeme;
@@ -32,6 +32,8 @@ struct inputDATA Read(char *DATA,int PROGRAMM_MODE) {
     printf("Can`t open file\n");
     exit(-1);
   } else {
+    printf("Read input file:\n");
+    for (int i = 0; fgets(str, sizeof(str), file) != NULL; i++) {
     fscanf(file, "t=%lf\n", &temp.t);
     fscanf(file, "T=%lf\n", &temp.T);
     fscanf(file, "deltaT=%lf\n", &temp.deltaT);
@@ -45,29 +47,41 @@ struct inputDATA Read(char *DATA,int PROGRAMM_MODE) {
     for(int i = 0; i < temp.Lx; i++)
       temp.values[i] = 0;
 
-    if(PROGRAMM_MODE == 2 && fgets(str, sizeof(str), file) == NULL)
+    if(PROGRAMM_MODE == 2)
       printf("Wrong line\n");
     else {
       pos = 0;
       lexeme = strtok(str, " ");
       while (lexeme != NULL) {
-        buffer = strtod(lexeme, NULL);
+        buffer = strtof(lexeme, NULL);
         temp.values[pos] = buffer;
         lexeme = strtok(NULL, " ");
         pos++;
       }
     }
   }
+}
+printf("%f\n",temp.t);
+printf("%f\n",temp.T);
+printf("%f\n",temp.deltaT);
+printf("%f\n",temp.XMin);
+printf("%f\n",temp.XMax);
+printf("%i\n",temp.Lx);
+printf("%f\n",temp.Sigma);
+printf("%f\n",temp.deltaOut);
+  for (int i = 0; i < temp.Lx; i++)
+		printf("%lf ", temp.values[i]);
+	printf("\n");
   fclose(file);
   return temp;
 }
 
 int CurrentTime(char* DATA, double currentT) {
-	FILE* file = fopen(DATA, "r");
+	FILE* file = fopen(DATA, "r+");
 	int ERR_CODE,num_of_space=15-8;
 	int tmp=(int)currentT;
 	if (file == NULL)
-		printf("Cant open file\n");
+		printf("Can't open file\n");
 	else {
 		while (tmp > 10) {
 			tmp /= 10;
@@ -81,6 +95,7 @@ int CurrentTime(char* DATA, double currentT) {
 		ERR_CODE = ftell(file);
 		fclose(file);
 	}
+  return 0;
 }
 
 int Output(char* DATA,char* mode,double* arr,int length) {
@@ -97,14 +112,14 @@ int Output(char* DATA,char* mode,double* arr,int length) {
 
 int main(int argc, char *argv[]) {
     //FILE *fp = fopen("input1.txt", "r");
-    char* FILE = argv[1];
-    int PROGRAMM_MODE;
+    char* file = argv[1];
+    int prog_mode;
     if(argv[2][0] == 'e')
-      PROGRAMM_MODE = 0;
+      prog_mode = 0;
     if(argv[2][0] == 'r')
-      PROGRAMM_MODE = 1;
+      prog_mode = 1;
     if(argv[2][0] == 's')
-      PROGRAMM_MODE = 2;
+      prog_mode = 2;
 
     //AD calculate data
     double step;
@@ -117,63 +132,58 @@ int main(int argc, char *argv[]) {
     double OutTime = 0;
 
     //Reading data
-    struct inputDATA DATA = Read(FILE, PROGRAMM_MODE);
+    struct input data = Read(file, prog_mode);
 
     double *k1, *k2, *k3, *k4, *medium;
     double *derivative;
 
-    step = (DATA.XMax - DATA.XMin) / DATA.Lx;
-    points = (double*)malloc(sizeof(double)*DATA.Lx);
-    posX = DATA.XMin;
-    printf("%f\n",DATA.t);
-    printf("%f\n",DATA.T);
-    printf("%f\n",DATA.deltaT);
-    printf("%f\n",DATA.XMin);
-    printf("%f\n",DATA.XMax);
-    printf("%i\n",DATA.Lx);
-    printf("%f\n",DATA.Sigma);
-    printf("%f\n",DATA.deltaOut);
+    step = (data.XMax - data.XMin) / data.Lx;
+    points = (double*)malloc(sizeof(double)*data.Lx);
+    posX = data.XMin;
+
     //Calculate data
-    if(PROGRAMM_MODE == 2) {
-      for (int i = 0; i < DATA.Lx; i++) {
+    if(prog_mode == 2) {//Start_string
+      for (int i = 0; i < data.Lx; i++) {
         if ((posX >= -0.5) && (posX <= 0.5))
     		  points[i] = cos(posX*3.141592);
-    	     else
-    		     points[i] = 0;
-  		         posX += step;
+    	  else
+    		  points[i] = 0;
+  		  posX += step;
   	    }
+      //First output result
+      Output(file, "a", points, data.Lx);
     } else {
-        for(int i = 0; i < DATA.Lx; i++) {
-          points[i] = DATA.values[i];
+        for(int i = 0; i < data.Lx; i++) {
+          points[i] = data.values[i];
         }
         //Calculate data
-        prev = (double*)malloc(sizeof(double)*DATA.Lx);
-        numbers_of_out =(int) (DATA.T - DATA.t) / DATA.deltaOut;
-      	out_count = (int)(DATA.T - DATA.t) / DATA.deltaT;
+        prev = (double*)malloc(sizeof(double)*data.Lx);
+        numbers_of_out =(int) (data.T - data.t) / data.deltaOut;
+      	out_count = (int)(data.T - data.t) / data.deltaT;
       	out_count = out_count / numbers_of_out;
       	count = 0;
-        if(PROGRAMM_MODE == 0) {//Euler
-          for (double time = DATA.t; time <= DATA.T; time += DATA.deltaT, count++) {
-            for (int i = 0; i < DATA.Lx; i++)
+        if(prog_mode == 0) {//Euler
+          for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
+            for (int i = 0; i < data.Lx; i++)
               prev[i] = points[i];
-            for (int i = 1; i < DATA.Lx - 1; i++)
-              points[i] = prev[i] + DATA.Sigma*DATA.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
+            for (int i = 1; i < data.Lx - 1; i++)
+              points[i] = prev[i] + data.Sigma*data.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
             if (count%out_count == 0) {
-              Output(FILE, "a", points, DATA.Lx);
-              CurrentTime(FILE, OutTime);
-              OutTime += DATA.deltaOut;
+              Output(file, "a", points, data.Lx);
+              CurrentTime(file, OutTime);
+              OutTime += data.deltaOut;
             }
           }
         }
-        if(PROGRAMM_MODE == 1) {//Runge_Kutta
-          k1 = (double*)malloc(sizeof(double)*DATA.Lx);
-    			k2 = (double*)malloc(sizeof(double)*DATA.Lx);
-    			k3 = (double*)malloc(sizeof(double)*DATA.Lx);
-    			k4 = (double*)malloc(sizeof(double)*DATA.Lx);
-    			medium = (double*)malloc(sizeof(double)*DATA.Lx);
-    			derivative = (double*)malloc(sizeof(double)*DATA.Lx);
-    			double* eiler_derivative = (double*)malloc(sizeof(double)*DATA.Lx);
-          for (int i = 0; i < DATA.Lx; i++) {
+        if(prog_mode == 1) {//Runge_Kutta
+          k1 = (double*)malloc(sizeof(double)*data.Lx);
+    			k2 = (double*)malloc(sizeof(double)*data.Lx);
+    			k3 = (double*)malloc(sizeof(double)*data.Lx);
+    			k4 = (double*)malloc(sizeof(double)*data.Lx);
+    			medium = (double*)malloc(sizeof(double)*data.Lx);
+    			derivative = (double*)malloc(sizeof(double)*data.Lx);
+    			double* eiler_derivative = (double*)malloc(sizeof(double)*data.Lx);
+          for (int i = 0; i < data.Lx; i++) {
     				k1[i] = 0;
     				k2[i] = 0;
     				k3[i] = 0;
@@ -185,13 +195,6 @@ int main(int argc, char *argv[]) {
         }
       }
 
-    //Writing
-    //First step
-    //fprintf(fp,"\n");
-    //Output("input1.txt", "a", points, DATA.Lx);
-    //Next steps
-
-    //fclose(fp);
     free(points);
     free(prev);
     printf("THE END\n");
