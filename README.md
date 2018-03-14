@@ -6,3 +6,6 @@
 - theory - директория, содержащая полезную для прочтения теорию 
 - output - директория, для результатов работы программы
 - plot.py скрипт на python3, который на вход первым аргументом принимает путь до output файла, записанного в формате файла в папке ./output/kochin
+
+### Ссылка на google tables с прогрессом выполненных работ
+https://docs.google.com/spreadsheets/d/1lB3FmFKFB7q18l4DT2Du4OaNHE5iWzYff9KtUYwZyxE/edit#gid=0
