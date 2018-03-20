@@ -2,12 +2,13 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <omp.h>
 
 #define EILER 0;
 #define RUNGE_KUTTA 1;
 #define START_STRING 2;
 
-struct input {
+struct input_data {
   //Input data
   double t;//Start time
   double T;//End time
@@ -20,9 +21,9 @@ struct input {
   double *values;//Last array with values
 };
 
-struct input Read(char *DATA,int PROGRAMM_MODE) {
+struct input_data Read(char *DATA,int PROGRAMM_MODE) {
   FILE *file = fopen(DATA, "r");
-  struct input temp;
+  struct input_data temp;
   char str[5000];
   int pos;
   char *lexeme;
@@ -111,7 +112,12 @@ int Output(char* DATA,char* mode,double* arr,int length) {
 }
 
 int main(int argc, char *argv[]) {
-    //FILE *fp = fopen("input1.txt", "r");
+    /*char* start_in_name = "..//..//samples";
+    char* start_out_name = "..//..//output/zemlyanskiy/";
+    char* end_in_name = argv[1];
+    char* end_out_name = argv[2];
+    char* in_file = strcat(start_in_name, end_in_name);
+    char* out_file = strcat(start_out_name, end_out_name);*/
     char* file = argv[1];
     int prog_mode;
     if(argv[2][0] == 'e')
@@ -123,80 +129,124 @@ int main(int argc, char *argv[]) {
 
     //AD calculate data
     double step;
-    double *points;
-    double *prev;
+    double quad_step;
+    double *cur_points;
+    double *prev_points;
     double posX;
     int numbers_of_out;
     int out_count;
     int count;
-    double OutTime = 0;
+    double CurTime = 0;
+    double start, end;
+    double Restime;
 
     //Reading data
-    struct input data = Read(file, prog_mode);
+    struct input_data data = Read(file, prog_mode);
 
-    double *k1, *k2, *k3, *k4, *medium;
-    double *derivative;
+    double *k1, *k2, *k3, *k4, *middle;
 
     step = (data.XMax - data.XMin) / data.Lx;
-    points = (double*)malloc(sizeof(double)*data.Lx);
+    quad_step = pow(step, 2);
+    cur_points = (double*)malloc(sizeof(double)*data.Lx);
     posX = data.XMin;
 
     //Calculate data
     if(prog_mode == 2) {//Start_string
       for (int i = 0; i < data.Lx; i++) {
         if ((posX >= -0.5) && (posX <= 0.5))
-    		  points[i] = cos(posX*3.141592);
+    		  cur_points[i] = cos(posX*3.141592);
     	  else
-    		  points[i] = 0;
+    		  cur_points[i] = 0;
   		  posX += step;
   	    }
       //First output result
-      Output(file, "a", points, data.Lx);
+      Output(file, "a", cur_points, data.Lx);
     } else {
         for(int i = 0; i < data.Lx; i++) {
-          points[i] = data.values[i];
+          cur_points[i] = data.values[i];
         }
+      }
         //Calculate data
-        prev = (double*)malloc(sizeof(double)*data.Lx);
-        numbers_of_out =(int) (data.T - data.t) / data.deltaOut;
+        prev_points = (double*)malloc(sizeof(double)*data.Lx);
+        numbers_of_out = (int) (data.T - data.t) / data.deltaOut;
       	out_count = (int)(data.T - data.t) / data.deltaT;
       	out_count = out_count / numbers_of_out;
       	count = 0;
         if(prog_mode == 0) {//Euler
+          start = omp_get_wtime();
           for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
+            //#pragma omp parallel shared(prev_points,cur_points,data.Lx) {
+            //#pragma omp for
+
             for (int i = 0; i < data.Lx; i++)
-              prev[i] = points[i];
+              prev_points[i] = cur_points[i];
+            //#pragma omp for
             for (int i = 1; i < data.Lx - 1; i++)
-              points[i] = prev[i] + data.Sigma*data.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) / pow(step, 2);
+              cur_points[i] = prev_points[i] + data.Sigma*data.deltaT*(prev_points[i - 1]
+                                              - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
             if (count%out_count == 0) {
-              Output(file, "a", points, data.Lx);
-              CurrentTime(file, OutTime);
-              OutTime += data.deltaOut;
+              Output(file, "a", cur_points, data.Lx);
+              CurrentTime(file, CurTime);
+              CurTime += data.deltaOut;
             }
+
           }
+          end = omp_get_wtime();
+          Restime = end - start;
+          printf("Lead time in sec: \n");
+          printf("%lf\n", Restime);
         }
         if(prog_mode == 1) {//Runge_Kutta
           k1 = (double*)malloc(sizeof(double)*data.Lx);
     			k2 = (double*)malloc(sizeof(double)*data.Lx);
     			k3 = (double*)malloc(sizeof(double)*data.Lx);
     			k4 = (double*)malloc(sizeof(double)*data.Lx);
-    			medium = (double*)malloc(sizeof(double)*data.Lx);
-    			derivative = (double*)malloc(sizeof(double)*data.Lx);
-    			double* eiler_derivative = (double*)malloc(sizeof(double)*data.Lx);
+    			middle = (double*)malloc(sizeof(double)*data.Lx);
           for (int i = 0; i < data.Lx; i++) {
     				k1[i] = 0;
     				k2[i] = 0;
     				k3[i] = 0;
     				k4[i] = 0;
-    				medium[i] = 0;
-    				derivative[i] = 0;
-    				eiler_derivative[i] = 0;
+    				middle[i] = 0;
     			}
+          start = omp_get_wtime();
+          for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
+    				for (int i = 0; i < data.Lx; i++)
+    					prev_points[i] = cur_points[i];
+            for(int i = 1; i < data.Lx - 1; i++) {
+              k1[i] = data.Sigma*data.deltaT*(prev_points[i - 1] - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+
+              k2[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k1[i - 1] / 2)
+                                                - 2 * (prev_points[i] + k1[i] / 2)
+                                                + (prev_points[i + 1] + k1[i + 1] / 2));
+
+              k3[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k2[i - 1] / 2)
+                                                - 2 * (prev_points[i] + k2[i] / 2)
+                                                + (prev_points[i + 1] + k2[i + 1] / 2));
+
+              k4[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k3[i - 1])
+                                                - 2 * (prev_points[i] + k3[i])
+                                                + (prev_points[i + 1] + k3[i + 1]));
+              middle[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+          }
+          // Calculate next steps
+          for(int i = 0; i < data.Lx; i++)
+            cur_points[i] = prev_points[i] + middle[i];
+
+          if (count%out_count == 0) {
+            Output(file, "a", cur_points, data.Lx);
+            CurrentTime(file, CurTime);
+            CurTime += data.deltaOut;
+          }
         }
+        end = omp_get_wtime();
+        Restime = end - start;
+        printf("Lead time in sec: \n");
+        printf("%lf\n", Restime);
       }
 
-    free(points);
-    free(prev);
+    free(cur_points);
+    free(prev_points);
     printf("THE END\n");
     return 0;
 }
