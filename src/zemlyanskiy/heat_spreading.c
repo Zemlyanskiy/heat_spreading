@@ -112,12 +112,6 @@ int Output(char* DATA,char* mode,double* arr,int length) {
 }
 
 int main(int argc, char *argv[]) {
-    /*char* start_in_name = "..//..//samples";
-    char* start_out_name = "..//..//output/zemlyanskiy/";
-    char* end_in_name = argv[1];
-    char* end_out_name = argv[2];
-    char* in_file = strcat(start_in_name, end_in_name);
-    char* out_file = strcat(start_out_name, end_out_name);*/
     char* file = argv[1];
     int prog_mode;
     if(argv[2][0] == 'e')
@@ -126,7 +120,7 @@ int main(int argc, char *argv[]) {
       prog_mode = 1;
     if(argv[2][0] == 's')
       prog_mode = 2;
-
+    int num_threads = atoi(argv[3]);
     //AD calculate data
     double step;
     double quad_step;
@@ -173,23 +167,24 @@ int main(int argc, char *argv[]) {
       	out_count = out_count / numbers_of_out;
       	count = 0;
         if(prog_mode == 0) {//Euler
+          omp_set_num_threads(num_threads);
           start = omp_get_wtime();
           for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
-            //#pragma omp parallel shared(prev_points,cur_points,data.Lx) {
-            //#pragma omp for
-
-            for (int i = 0; i < data.Lx; i++)
-              prev_points[i] = cur_points[i];
-            //#pragma omp for
-            for (int i = 1; i < data.Lx - 1; i++)
-              cur_points[i] = prev_points[i] + data.Sigma*data.deltaT*(prev_points[i - 1]
-                                              - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+            #pragma omp parallel
+            {
+              #pragma omp for
+              for (int i = 0; i < data.Lx; i++)
+                prev_points[i] = cur_points[i];
+              #pragma omp for
+              for (int i = 1; i < data.Lx - 1; i++)
+                cur_points[i] = prev_points[i] + data.Sigma*data.deltaT*(prev_points[i - 1]
+                                                - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+            }
             if (count%out_count == 0) {
               Output(file, "a", cur_points, data.Lx);
               CurrentTime(file, CurTime);
               CurTime += data.deltaOut;
             }
-
           }
           end = omp_get_wtime();
           Restime = end - start;
@@ -209,30 +204,31 @@ int main(int argc, char *argv[]) {
     				k4[i] = 0;
     				middle[i] = 0;
     			}
+          omp_set_num_threads(num_threads);
           start = omp_get_wtime();
           for (double time = data.t; time <= data.T; time += data.deltaT, count++) {
-    				for (int i = 0; i < data.Lx; i++)
-    					prev_points[i] = cur_points[i];
-            for(int i = 1; i < data.Lx - 1; i++) {
-              k1[i] = data.Sigma*data.deltaT*(prev_points[i - 1] - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+            #pragma omp parallel
+            {
+              #pragma omp for
+    				  for (int i = 0; i < data.Lx; i++)
+    					   prev_points[i] = cur_points[i];
+              #pragma omp for
+              for(int i = 1; i < data.Lx - 1; i++) {
+                k1[i] = data.Sigma*data.deltaT*(prev_points[i - 1] - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
 
-              k2[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k1[i - 1] / 2)
-                                                - 2 * (prev_points[i] + k1[i] / 2)
-                                                + (prev_points[i + 1] + k1[i + 1] / 2));
+                k2[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k1[i - 1] / 2) - 2 * (prev_points[i] + k1[i] / 2) + (prev_points[i + 1] + k1[i + 1] / 2)) / quad_step;
 
-              k3[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k2[i - 1] / 2)
-                                                - 2 * (prev_points[i] + k2[i] / 2)
-                                                + (prev_points[i + 1] + k2[i + 1] / 2));
+                k3[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k2[i - 1] / 2) - 2 * (prev_points[i] + k2[i] / 2) + (prev_points[i + 1] + k2[i + 1] / 2)) / quad_step;
 
-              k4[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k3[i - 1])
-                                                - 2 * (prev_points[i] + k3[i])
-                                                + (prev_points[i + 1] + k3[i + 1]));
-              middle[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+                k4[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k3[i - 1]) - 2 * (prev_points[i] + k3[i]) + (prev_points[i + 1] + k3[i + 1])) / quad_step;
+
+                middle[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+              }
+              // Calculate next steps
+              #pragma omp for
+              for(int i = 0; i < data.Lx; i++)
+                cur_points[i] = prev_points[i] + middle[i];
           }
-          // Calculate next steps
-          for(int i = 0; i < data.Lx; i++)
-            cur_points[i] = prev_points[i] + middle[i];
-
           if (count%out_count == 0) {
             Output(file, "a", cur_points, data.Lx);
             CurrentTime(file, CurTime);
