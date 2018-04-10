@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
     double *k1, *k2, *k3, *k4, *middle;
 
     step = (data.XMax - data.XMin) / data.Lx;
-    quad_step = pow(step, 2);
+    quad_step = 1 / pow(step, 2);
     cur_points = (double*)malloc(sizeof(double)*data.Lx);
     posX = data.XMin;
 
@@ -178,7 +178,7 @@ int main(int argc, char *argv[]) {
               #pragma omp for
               for (int i = 1; i < data.Lx - 1; i++)
                 cur_points[i] = prev_points[i] + data.Sigma*data.deltaT*(prev_points[i - 1]
-                                                - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+                                                - 2 * prev_points[i] + prev_points[i + 1]) * quad_step;
             }
             if (count%out_count == 0) {
               Output(file, "a", cur_points, data.Lx);
@@ -214,15 +214,15 @@ int main(int argc, char *argv[]) {
     					   prev_points[i] = cur_points[i];
               #pragma omp for
               for(int i = 1; i < data.Lx - 1; i++) {
-                k1[i] = data.Sigma*data.deltaT*(prev_points[i - 1] - 2 * prev_points[i] + prev_points[i + 1]) / quad_step;
+                k1[i] = data.Sigma*data.deltaT*(prev_points[i - 1] - 2 * prev_points[i] + prev_points[i + 1]) * quad_step;
 
-                k2[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k1[i - 1] / 2) - 2 * (prev_points[i] + k1[i] / 2) + (prev_points[i + 1] + k1[i + 1] / 2)) / quad_step;
+                k2[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k1[i - 1] * 0.5) - 2 * (prev_points[i] + k1[i] * 0.5) + (prev_points[i + 1] + k1[i + 1] * 0.5)) * quad_step;
 
-                k3[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k2[i - 1] / 2) - 2 * (prev_points[i] + k2[i] / 2) + (prev_points[i + 1] + k2[i + 1] / 2)) / quad_step;
+                k3[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k2[i - 1] * 0.5) - 2 * (prev_points[i] + k2[i] * 0.5) + (prev_points[i + 1] + k2[i + 1] * 0.5)) * quad_step;
 
-                k4[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k3[i - 1]) - 2 * (prev_points[i] + k3[i]) + (prev_points[i + 1] + k3[i + 1])) / quad_step;
+                k4[i] = data.Sigma*data.deltaT*((prev_points[i - 1] + k3[i - 1]) - 2 * (prev_points[i] + k3[i]) + (prev_points[i + 1] + k3[i + 1])) * quad_step;
 
-                middle[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+                middle[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) * 0,166666667;
               }
               // Calculate next steps
               #pragma omp for
