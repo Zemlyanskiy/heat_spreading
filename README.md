@@ -6,6 +6,7 @@
 - theory - директория, содержащая полезную для прочтения теорию 
 - output - директория, для результатов работы программы
 - plot.py скрипт на python3, который на вход первым аргументом принимает путь до output файла, записанного в формате файла в папке ./output/kochin
+- plot_2.0.py скрипт на python3, для визуального сравнения двух output файлов, пример запуска: python3 plot_2.0.py input1.txt input2.txt, где input1.txt и input2.txt - файлы, записанные в формате файла в папке ./output/kochin (у них должно быть одинаковое количество чисел в строке и строк в файле)
 
 ### Ссылка на google tables с прогрессом выполненных работ
 https://docs.google.com/spreadsheets/d/1lB3FmFKFB7q18l4DT2Du4OaNHE5iWzYff9KtUYwZyxE/edit#gid=0

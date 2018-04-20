@@ -183,12 +183,9 @@ int OutputCurrentTime(char* PATH, double currT) {
 
 void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
 {
-//	#pragma omp parallel threads_num(4)
-//	{
-//		printf("hello");
-//	}
+	int i;
 	#pragma omp parallel for
-	for (int i = 0; i < size; i++) {
+	for (i = 0; i < size; i++) {
 		result[i] = 0;
 		for (int j = LineFirst[i]; j < LineFirst[i + 1]; j++)
 			result[i] += Values[j] * Array[ColumnNum[j]];
