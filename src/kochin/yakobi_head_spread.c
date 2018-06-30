@@ -257,10 +257,11 @@ int main(int argc, char *argv[]) {
 	posX = data.Xmin;
 	step = (data.Xmax - data.Xmin) / data.NumPoints;
 	//CSR Compressed Sparse Row
-	double * Values = (double*)malloc(sizeof(double)*(data.NumPoints - 2) * 3);
-	int* ColumnNum = (int*)malloc(sizeof(int)*(data.NumPoints - 2) * 3);
+	double * Values = (double*)malloc(sizeof(double)*(data.NumPoints - 2) * 3+2);
+	int* ColumnNum = (int*)malloc(sizeof(int)*(data.NumPoints - 2) * 3+2);
 	int* LineFirst = (int*)malloc(sizeof(int)*(data.NumPoints + 1));
-
+	
+	double * MainDiag = (double*)malloc(sizeof(double)*data.NumPoints);
 
 	double OutTime = data.t;
 	int OutCount = (int)(data.T - data.t) / data.deltaOut;
@@ -279,9 +280,8 @@ int main(int argc, char *argv[]) {
 	else
 	{	//START PROCESS(EILER OR KUTTA)
 		omp_set_num_threads(NUMBER_OF_THREADS);
-		double delta=0.00001;
+		double delta=0.0000000001;
 		double* discrepancy = (double*)malloc(sizeof(double)*data.NumPoints);
-		double* yakobi_approximation = (double*)malloc(sizeof(double)*data.NumPoints);
 		int i, flag = 0;
 		double sum, divider = 1 / (step*step);
 		for (int i = 0; i < data.NumPoints; i++) {
@@ -289,144 +289,71 @@ int main(int argc, char *argv[]) {
 		}
 		//INITIALIZE CSR
 		for (int i = 0; i < data.NumPoints - 2; i++) {
-			Values[i * 3] = -data.Sigma * data.deltaT * divider;
-			Values[i * 3 + 1] = 1 + 2 * data.Sigma * data.deltaT * divider;
-			Values[i * 3 + 2] = -data.Sigma * data.deltaT * divider;
-			ColumnNum[i * 3] = i;
-			ColumnNum[i * 3 + 1] = i + 1;
-			ColumnNum[i * 3 + 2] = i + 2;
-			LineFirst[i + 1] = i * 3;
+			Values[i * 3+1] = -data.Sigma * data.deltaT * divider;
+			Values[i * 3 + 2] = 1 + 2 * data.Sigma * data.deltaT * divider;
+			Values[i * 3 + 3] = -data.Sigma * data.deltaT * divider;
+			ColumnNum[i * 3+1] = i;
+			ColumnNum[i * 3 + 2] = i + 1;
+			ColumnNum[i * 3 + 3] = i + 2;
+			LineFirst[i + 1] = i * 3+1;
 		}
-		LineFirst[0] = LineFirst[1];
-		LineFirst[data.NumPoints - 1] = LineFirst[data.NumPoints - 2];
-		LineFirst[data.NumPoints] = (data.NumPoints - 2) * 3;
+		Values[0] = 1;
+		ColumnNum[0] = 0;
+		LineFirst[0] = 0;
+
+		Values[(data.NumPoints - 2) * 3 +1] = 1;
+		ColumnNum[(data.NumPoints - 2) * 3 +1 ] = data.NumPoints - 1;
+		LineFirst[data.NumPoints - 1] = LineFirst[data.NumPoints - 2] + 3;
+
+		LineFirst[data.NumPoints] = (data.NumPoints - 2) * 3 + 2;
 		//END OF INITIALIZATION
 		prev = (double*)malloc(sizeof(double)*data.NumPoints);
 
 		double time;
 		double out_time;
-		if (PROGRAMM_MODE == 1)//EILER
-		{
-			printf("\n");
-			for (i = 0; i < data.NumPoints; i++)
-				printf("%f ", CrsAccess(Values, ColumnNum, LineFirst, 13, i, data.NumPoints));
-			printf("\n");
-				
-			for (count = 0; count <= maxCount; count++) {
-				flag = 1;
-				for (i = 0; i < data.NumPoints; i++)
-					prev[i] = points[i];//make pointers swap
-				while (flag) {
-					flag = 0;
-					//TRY TO CHECK DISCREPANCY DELTA
-					CsrMult(Values, ColumnNum, LineFirst, points, data.NumPoints, discrepancy);
-					for (i = 0; i < data.NumPoints; i++) {
-						discrepancy[i] -= prev[i];
-						if (fabs(discrepancy[i]) >= delta) {
-							flag = 1;
-							break;
-						}
-					}
-					if (!flag) 
-						break;
-					for (i = 0; i < data.NumPoints; i++) {
-							sum = 0;
-							for (int j = 0; j < data.NumPoints; j++)
-								//if (j != i)
-									sum += CrsAccess(Values, ColumnNum, LineFirst, i, j, data.NumPoints)*points[i];
-							points[i] =(1 / CrsAccess(Values, ColumnNum, LineFirst, i, i, data.NumPoints))*(points[i]-sum);
-					}
-				}
-				
-			}
-			/*time = omp_get_wtime();
-			for (count = 0; count <= maxCount; count++) {
-				#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					prev[i] = points[i];//make pointers swap
-				CsrMult(Values, ColumnNum, LineFirst, prev, data.NumPoints, points);
-				out_time = omp_get_wtime();
-				if (count%OutCount == 0) {
-					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-					OutputCurrentTime(inputFile, OutTime);
-					OutTime += data.deltaOut;
-				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
-			}*/
+		for (int i = 0; i < data.NumPoints; i++) {
+			MainDiag[i] = 1 / CrsAccess(Values, ColumnNum, LineFirst, i, i, data.NumPoints);
 		}
-		if (PROGRAMM_MODE == 0) {//RUNGE_KUTTA
-			k1 = (double*)malloc(sizeof(double)*data.NumPoints);
-			k2 = (double*)malloc(sizeof(double)*data.NumPoints);
-			k3 = (double*)malloc(sizeof(double)*data.NumPoints);
-			k4 = (double*)malloc(sizeof(double)*data.NumPoints);
-			medium = (double*)malloc(sizeof(double)*data.NumPoints);
-			derivative = (double*)malloc(sizeof(double)*data.NumPoints);
-			for (int i = 0; i < data.NumPoints; i++) {
-				k1[i] = 0;
-				k2[i] = 0;
-				k3[i] = 0;
-				k4[i] = 0;
-				medium[i] = 0;
-				derivative[i] = 0;
-			}
-			time = omp_get_wtime();
-			for (count = 0; count <= maxCount; count++) {
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					prev[i] = points[i];//make pointers swap
-										//DERIVATIVE CALCULATING
-										//1
-				CsrMult(Values, ColumnNum, LineFirst, prev, data.NumPoints, k1);
-				//				#pragma omp parallel for
-				//				for (i = 1; i < data.NumPoints - 1; i++)
-				//					//1 - write, 5 - reads
-				//					k1[i] = prev[i]+data.deltaT*data.Sigma*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) * divider;
 
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					medium[i] = (prev[i] + k1[i]) * 0.5;
-				//2
-				CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k2);
-				//				#pragma omp parallel for
-				//				for (i = 1; i < data.NumPoints - 1; i++)
-				//					k2[i] = prev[i] + data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					medium[i] = (prev[i] + k2[i]) * 0.5;
-				//3
-				CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k3);
-				//				#pragma omp parallel for
-				//				for (i = 1; i < data.NumPoints - 1; i++)
-				//					k3[i] = prev[i] + data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					medium[i] = k2[i];
-				//4
-				CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k4);
-				//				#pragma omp parallel for
-				//				for (i = 1; i < data.NumPoints - 1; i++)
-				//					k4[i] = prev[i]+data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-				for (i = 1; i < data.NumPoints - 1; i++) {
-					derivative[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) * 0.1666666666;
+		for (count = 0; count <= maxCount; count++) {
+			flag = 1;
+			for (i = 0; i < data.NumPoints; i++)
+				prev[i] = points[i];//make pointers swap
+// 			printf("check");
+			while (flag) {
+				flag = 0;
+				//TRY TO CHECK DISCREPANCY DELTA
+				CsrMult(Values, ColumnNum, LineFirst, points, data.NumPoints, discrepancy);
+				for (i = 0; i < data.NumPoints; i++) {
+					discrepancy[i] -= prev[i];
+					discrepancy[i] = fabs(discrepancy[i]);
+					if (discrepancy[i] >= delta) {
+						flag = 1;
+					}
 				}
-				//NEXT POINT CALCULATING
-#pragma omp parallel for
-				for (i = 1; i < data.NumPoints - 1; i++)
-					points[i] = derivative[i];
-				out_time = omp_get_wtime();
-				if (count%OutCount == 0) {
-					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-					OutputCurrentTime(inputFile, OutTime);
-					OutTime += data.deltaOut;
+				if (!flag) 
+					break;
+				for (i = 0; i < data.NumPoints; i++)
+					discrepancy[i] = points[i];
+
+				for (i = 0; i < data.NumPoints; i++) {
+					sum = 0;
+					for (int j = 0; j < data.NumPoints; j++)
+						if (j != i)
+							sum += CrsAccess(Values, ColumnNum, LineFirst, i, j, data.NumPoints)*discrepancy[j];
+					points[i] = MainDiag[i]*(prev[i] - sum);
 				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
+			}
+
+			if (count%OutCount == 0) {
+				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
+				OutputCurrentTime(inputFile, OutTime);
+				OutTime += data.deltaOut;
 			}
 		}
-		time = omp_get_wtime() - time;
-		printf("\nTIME IS %f%\n", time);
+	
+//		time = omp_get_wtime() - time;
+//		printf("\nTIME IS %f%\n", time);
 		scanf_s("ENTER ANY KEY TO EXIT %f", &time);
 	}
 	printf("\nEND\n");
