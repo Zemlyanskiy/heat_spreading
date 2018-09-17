@@ -278,7 +278,7 @@ int main(int argc, char *argv[]) {
 		OutputArr(inputFile, points, data.NumPoints);
 	}
 	else
-	{	//START PROCESS(EILER OR KUTTA)
+	{	//START PROCESS(EILER)
 		omp_set_num_threads(NUMBER_OF_THREADS);
 		double delta=0.0000000001;
 		double* discrepancy = (double*)malloc(sizeof(double)*data.NumPoints);
