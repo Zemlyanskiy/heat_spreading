@@ -189,7 +189,7 @@ int OutputCurrentTime(char* PATH, double currT) {
 void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
 {
 	int i;
-#pragma omp parallel for
+	#pragma omp parallel for
 	for (i = 0; i < size; i++) {
 		result[i] = 0;
 		for (int j = LineFirst[i]; j < LineFirst[i + 1]; j++)
@@ -250,11 +250,8 @@ int main(int argc, char *argv[]) {
 	double* prev;//array to previos state
 	double posX; //var for calculate first state
 	double step;
-
-	double *k1 = NULL, *k2 = NULL, *k3 = NULL, *k4 = NULL, *medium = NULL, *derivative = NULL;
-	double *Values = NULL;
-	int *ColumnNum = NULL , *LineFirst = NULL;
-
+	
+	int count = 0, i = 0;
 
 	data = ReadInput(inputFile, PROGRAMM_MODE);
 	points = (double*)malloc(sizeof(double)*data.NumPoints);
@@ -262,17 +259,31 @@ int main(int argc, char *argv[]) {
 	posX = data.Xmin;
 	step = (data.Xmax - data.Xmin) / data.NumPoints;
 
+	//IF PROGRAM MODE == START_STRING - GENERATE IT AND COMPLETE PROGRAMM
+	if (PROGRAMM_MODE == START_STRING) {
+		for (i = 0; i < data.NumPoints; i++) {
+			points[i] = CalcFunc(posX);
+			posX += step;
+		}
+		//OUTPUT FIRST RESULTS
+		OutputArr(inputFile, points, data.NumPoints);
+		return 0;
+	}
+
+	double *k1 = NULL, *k2 = NULL, *k3 = NULL, *k4 = NULL,
+		   *medium = NULL, *derivative = NULL, 
+		   *discrepancy = NULL, *MainDiag = NULL;
+	double *Values = NULL;
+	int *ColumnNum = NULL, *LineFirst = NULL;
+
 	double OutTime = data.t;
 	int OutCount = (int)(data.T - data.t) / data.deltaOut;
 	int maxCount = (int)(data.T - data.t) / data.deltaT;
 	OutCount = maxCount / OutCount;
-	int count = 0, i = 0;
-
+	
 	double divider = 1 / (step*step);
 	double delta, sum;
 	int flag;
-	double* discrepancy = NULL;
-	double *MainDiag = NULL;
 	
 	//INITIALIZE CUSTOM VARIABLES
 	//CSR Compressed Sparse Row
@@ -354,31 +365,21 @@ int main(int argc, char *argv[]) {
 			derivative[i] = 0;
 		}
 	}
-
-	//ENV PREPARATION
-	omp_set_num_threads(NUMDER_OF_THREADS);
-	double time = omp_get_wtime();
-	double out_time;
-	//IF PROGRAM MODE == START_STRING - GENERATE IT AND COMPLETE PROGRAMM
-	if (PROGRAMM_MODE == START_STRING) {
-		for (i = 0; i < data.NumPoints; i++) {
-			points[i] = CalcFunc(posX);
-			posX += step;
-		}
-		//OUTPUT FIRST RESULTS
-		OutputArr(inputFile, points, data.NumPoints);
-		return 0;
-	}
 	
 	//CAN'T DO IT EARLIER, BECAUSE IN START STRING WE INITIALIZE THAT VALUES
 	for (i = 0; i < data.NumPoints; i++) {
 		points[i] = data.values[i];
 	}
-
+	
+	//ENV PREPARATION
+	omp_set_num_threads(NUMDER_OF_THREADS);
+	double time = 0;
+	double out_time;
 	//START CALCULATING
 	if (PROGRAMM_MODE == EILER)
 		{
 			for (count = 0; count <= maxCount; count++) {
+				out_time = omp_get_wtime();
 				#pragma omp parallel for
 				for (i = 0; i < data.NumPoints; i++)
 					prev[i] = points[i];//make pointers swap
@@ -386,19 +387,17 @@ int main(int argc, char *argv[]) {
 				for (i = 1; i < data.NumPoints - 1; i++)
 					points[i] = prev[i] + data.Sigma*data.deltaT*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) * divider;
 				//delete output time from time calculating
-				out_time = omp_get_wtime();
+				time += omp_get_wtime() - out_time;
 				if (count%OutCount == 0) {
 					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
 					OutputCurrentTime(inputFile, OutTime);
 					OutTime += data.deltaOut;
 				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
 			}
 		}
 	if (PROGRAMM_MODE == RUNGE_KUTTA) {
-
 			for (count = 0; count <= maxCount; count++) {
+				out_time = omp_get_wtime();
 				#pragma omp parallel for
 				for (i = 0; i < data.NumPoints; i++)
 					prev[i] = points[i];//make pointers swap
@@ -437,35 +436,33 @@ int main(int argc, char *argv[]) {
 				#pragma omp parallel for
 				for (i = 1; i < data.NumPoints - 1; i++)
 					points[i] = prev[i] + derivative[i];
-				out_time = omp_get_wtime();
+				time += omp_get_wtime() - out_time;
 				if (count%OutCount == 0) {
 					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
 					OutputCurrentTime(inputFile, OutTime);
 					OutTime += data.deltaOut;
 				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
 			}
 		}
 	if (PROGRAMM_MODE == MATRIX_EILER) {
 			for (count = 0; count <= maxCount; count++) {
+				out_time = omp_get_wtime();
 				#pragma omp parallel for
 				for (i = 0; i < data.NumPoints; i++)
 					prev[i] = points[i];//make pointers swap
 
 				CsrMult(Values, ColumnNum, LineFirst, prev, data.NumPoints, points);
-				out_time = omp_get_wtime();
+				time += omp_get_wtime() - out_time;
 				if (count%OutCount == 0) {
 					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
 					OutputCurrentTime(inputFile, OutTime);
 					OutTime += data.deltaOut;
 				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
 			}
 		}
 	if (PROGRAMM_MODE == MATRIX_RUNGE_KUTTA) {
 			for (count = 0; count <= maxCount; count++) {
+				out_time = omp_get_wtime();
 				#pragma omp parallel for
 				for (i = 0; i < data.NumPoints; i++)
 					prev[i] = points[i];//make pointers swap
@@ -496,30 +493,26 @@ int main(int argc, char *argv[]) {
 				#pragma omp parallel for
 				for (i = 1; i < data.NumPoints - 1; i++)
 					points[i] = derivative[i];
-				out_time = omp_get_wtime();
+				time += omp_get_wtime() - out_time;
 				if (count%OutCount == 0) {
 					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
 					OutputCurrentTime(inputFile, OutTime);
 					OutTime += data.deltaOut;
 				}
-				out_time = omp_get_wtime() - out_time;
-				time = time + out_time;
 			}
-			time = omp_get_wtime() - time;
-			printf("\nTIME IS %f%\n", time);
-			scanf_s("ENTER ANY KEY TO EXIT %f", &time);
 		}
 	if (PROGRAMM_MODE == YAKOBI) {
-			
-
 			for (count = 0; count <= maxCount; count++) {
+				out_time = omp_get_wtime();
 				flag = 1;
+				#pragma omp parallel for
 				for (i = 0; i < data.NumPoints; i++)
 					prev[i] = points[i];//make pointers swap
 				while (flag) {
 					flag = 0;
 					//TRY TO CHECK DISCREPANCY DELTA
 					CsrMult(Values, ColumnNum, LineFirst, points, data.NumPoints, discrepancy);
+					#pragma omp parallel for
 					for (i = 0; i < data.NumPoints; i++) {
 						discrepancy[i] -= prev[i];
 						discrepancy[i] = fabs(discrepancy[i]);
@@ -529,6 +522,8 @@ int main(int argc, char *argv[]) {
 					}
 					if (!flag)
 						break;
+					
+					#pragma omp parallel for
 					for (i = 0; i < data.NumPoints; i++)
 						discrepancy[i] = points[i];
 
@@ -540,7 +535,7 @@ int main(int argc, char *argv[]) {
 						points[i] = MainDiag[i] * (prev[i] - sum);
 					}
 				}
-
+				time += omp_get_wtime() - out_time;
 				if (count%OutCount == 0) {
 					OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
 					OutputCurrentTime(inputFile, OutTime);
@@ -549,6 +544,9 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+	
+	printf("\nTIME IS %f%\n", time);
+	scanf_s("ENTER ANY KEY TO EXIT %f", &time);
 	printf("\nEND");
 
 	return 0;
