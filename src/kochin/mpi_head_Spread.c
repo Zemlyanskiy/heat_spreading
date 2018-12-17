@@ -324,7 +324,7 @@ int main(int argc, char *argv[]) {
 
 	double divider = 1 / (step*step);
 	double delta, sum;
-	int flag;
+	int flag, result;
 
     //ENV PREPARATION FOR MPI
     int * sendcounts = malloc(sizeof(int)*proc_num);
@@ -383,44 +383,45 @@ int main(int argc, char *argv[]) {
 #endif /*MATRIX_EILER ||  MATRIX_RUNGE_KUTTA*/
 
 #if YAKOBI
-		Values = (double*)malloc(sizeof(double)*((sendcounts[rank] - 2) * 3 + 2));
-		ColumnNum = (int*)malloc(sizeof(int)*((sendcounts[rank] - 2) * 3 + 2));
-		LineFirst = (int*)malloc(sizeof(int)*(sendcounts[rank] + 1));
+        Values = (double*)malloc(sizeof(double)*((sendcounts[rank] - 2) * 3 + 2));
+        ColumnNum = (int*)malloc(sizeof(int)*((sendcounts[rank] - 2) * 3 + 2));
+        LineFirst = (int*)malloc(sizeof(int)*(sendcounts[rank] + 1));
+        for (i = 0; i < (sendcounts[rank] - 2) * 3 + 2; i++) {
+            Values[i] = 0;
+            ColumnNum[i] = 0;
+        }
+        for (i = 0; i < sendcounts[rank] + 1; i++) {
+            LineFirst[i] = 0;
+        }
+        //INITIALIZE CSR
+        for (i = 0; i < sendcounts[rank] - 2; i++) {
+            Values[i * 3 + 1] = - data.Sigma * data.deltaT * divider;
+            Values[i * 3 + 2] = 1 + 2 * data.Sigma * data.deltaT * divider;
+            Values[i * 3 + 3] = - data.Sigma * data.deltaT * divider;
+            ColumnNum[i * 3 + 1] = i;
+            ColumnNum[i * 3 + 2] = i + 1;
+            ColumnNum[i * 3 + 3] = i + 2;
+            LineFirst[i + 1] = i * 3 + 1;
+        }
+        Values[0] = 1;
+        LineFirst[0] = 0;
+        ColumnNum[0] = 0;
 
+        Values[(sendcounts[rank] - 2) * 3 + 1] = 1;
+        ColumnNum[(sendcounts[rank] - 2) * 3 + 1] = sendcounts[rank] - 1;
+        LineFirst[sendcounts[rank] - 1] = LineFirst[sendcounts[rank] - 2] + 3;
 
-		//INITIALIZE CSR
-		for (i = 0; i < sendcounts[rank] - 2; i++) {
-			Values[i * 3 + 1] = -data.Sigma * data.deltaT * divider;
-			Values[i * 3 + 2] = 1 + 2 * data.Sigma * data.deltaT * divider;
-			Values[i * 3 + 3] = -data.Sigma * data.deltaT * divider;
-			ColumnNum[i * 3 + 1] = i;
-			ColumnNum[i * 3 + 2] = i + 1;
-			ColumnNum[i * 3 + 3] = i + 2;
-			LineFirst[i + 1] = i * 3 + 1;
-		}
+        LineFirst[sendcounts[rank]] = (sendcounts[rank] - 2) * 3 + 2;
 
-		Values[0] = 1;
-		ColumnNum[0] = 0;
-		LineFirst[0] = 0;
-
-		Values[(sendcounts[rank] - 2) * 3 + 1] = 1;
-		ColumnNum[(sendcounts[rank] - 2) * 3 + 1] = sendcounts[rank] - 1;
-		LineFirst[sendcounts[rank] - 1] = LineFirst[sendcounts[rank] - 2] + 3;
-
-		LineFirst[sendcounts[rank]] = (sendcounts[rank] - 2) * 3 + 2;
-
-		delta = 0.00000000001;
-		discrepancy = (double*)malloc(sizeof(double)*sendcounts[rank]);
-		flag = 0;
-		sum;
+		delta = 0.00001;
+		discrepancy = (double*)malloc(sizeof(double)*data.NumPoints);
+        flag = 0;
 
 		MainDiag = (double*)malloc(sizeof(double)*sendcounts[rank]);
-		for (i = 0; i < data.NumPoints; i++) {
+		for (i = 0; i < sendcounts[rank]; i++) {
 			MainDiag[i] = 1 / CrsAccess(Values, ColumnNum, LineFirst, i, i, sendcounts[rank]);
 		}
-
 		//END OF INITIALIZATION
-
 #endif /*YAKOBI*/
 #if RUNGE_KUTTA || MATRIX_RUNGE_KUTTA
 		k1 = (double*)malloc(sizeof(double)*data.NumPoints);
@@ -554,7 +555,7 @@ int main(int argc, char *argv[]) {
 #if YAKOBI
                 flag = 1;
 #pragma omp parallel for
-                for (i = 0; i < sendcounts[rank]; i++)
+                for (i = 0; i < sendcounts[rank]; i++) 
                     prev[i] = points[i];//make pointers swap
                 while (flag) {
                     flag = 0;
@@ -565,11 +566,15 @@ int main(int argc, char *argv[]) {
                     for (i = 0; i < sendcounts[rank]; i++) {
                         discrepancy[i] -= prev[i];
                         discrepancy[i] = fabs(discrepancy[i]);
-                        if (discrepancy[i] >= delta) {
+                        if (discrepancy[i] > delta) {
                             flag = 1;
                         }
                     }
-                    if (!flag)
+                    result = 0;
+
+                    MPI_Allreduce( &flag, &result, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+                    //printf("result %d\n", result);
+                    if (!result)
                         break;
 
                     #pragma omp parallel for
@@ -592,7 +597,7 @@ int main(int argc, char *argv[]) {
             if(!rank) time += omp_get_wtime() - out_time;
             if (count%OutCount == 0 && count) {
                 if (!rank) {
-
+            
                     //Can't send-receive from 0 process to himself
                     for (int i = 0; i < elements_per_process; i++)
                         print_array[i] = points[i];
@@ -615,157 +620,6 @@ int main(int argc, char *argv[]) {
                     MPI_Send(points + 1, elements_per_process, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
             }
         }
-
-#if 0
-	if (PROGRAMM_MODE == RUNGE_KUTTA) {
-		for (count = 0; count <= maxCount; count++) {
-			out_time = omp_get_wtime();
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				prev[i] = points[i];//make pointers swap
-									//DERIVATIVE CALCULATING
-									//1
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				//1 - write, 4 - reads, store 1/pow(step, 2) in separate variable
-				k1[i] = data.deltaT*data.Sigma*(prev[i - 1] - 2 * prev[i] + prev[i + 1]) * divider;
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = prev[i] + k1[i] * 0.5;
-			//2
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				k2[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = prev[i] + k2[i] * 0.5;
-			//3
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				k3[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = prev[i] + k2[i];
-			//4
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				k4[i] = data.deltaT*data.Sigma*(medium[i - 1] - 2 * medium[i] + medium[i + 1]) * divider;
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++) {
-				derivative[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) * 0.1666666666;
-			}
-			//NEXT POINT CALCULATING
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				points[i] = prev[i] + derivative[i];
-			time += omp_get_wtime() - out_time;
-			if (count%OutCount == 0) {
-				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-				OutputCurrentTime(inputFile, OutTime);
-				OutTime += data.deltaOut;
-			}
-		}
-	}
-	if (PROGRAMM_MODE == MATRIX_EILER) {
-		for (count = 0; count <= maxCount; count++) {
-			out_time = omp_get_wtime();
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				prev[i] = points[i];//make pointers swap
-
-			CsrMult(Values, ColumnNum, LineFirst, prev, data.NumPoints, points);
-			time += omp_get_wtime() - out_time;
-			if (count%OutCount == 0) {
-				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-				OutputCurrentTime(inputFile, OutTime);
-				OutTime += data.deltaOut;
-			}
-		}
-	}
-	if (PROGRAMM_MODE == MATRIX_RUNGE_KUTTA) {
-		for (count = 0; count <= maxCount; count++) {
-			out_time = omp_get_wtime();
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				prev[i] = points[i];//make pointers swap
-									//DERIVATIVE CALCULATING
-									//1
-			CsrMult(Values, ColumnNum, LineFirst, prev, data.NumPoints, k1);
-
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = (prev[i] + k1[i]) * 0.5;
-			//2
-			CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k2);
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = (prev[i] + k2[i]) * 0.5;
-			//3
-			CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k3);
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				medium[i] = k2[i];
-			//4
-			CsrMult(Values, ColumnNum, LineFirst, medium, data.NumPoints, k4);
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++) {
-				derivative[i] = (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) * 0.1666666666;
-			}
-			//NEXT POINT CALCULATING
-#pragma omp parallel for
-			for (i = 1; i < data.NumPoints - 1; i++)
-				points[i] = derivative[i];
-			time += omp_get_wtime() - out_time;
-			if (count%OutCount == 0) {
-				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-				OutputCurrentTime(inputFile, OutTime);
-				OutTime += data.deltaOut;
-			}
-		}
-	}
-	if (PROGRAMM_MODE == YAKOBI) {
-		for (count = 0; count <= maxCount; count++) {
-			out_time = omp_get_wtime();
-			flag = 1;
-#pragma omp parallel for
-			for (i = 0; i < data.NumPoints; i++)
-				prev[i] = points[i];//make pointers swap
-			while (flag) {
-				flag = 0;
-				//TRY TO CHECK DISCREPANCY DELTA
-				CsrMult(Values, ColumnNum, LineFirst, points, data.NumPoints, discrepancy);
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++) {
-					discrepancy[i] -= prev[i];
-					discrepancy[i] = fabs(discrepancy[i]);
-					if (discrepancy[i] >= delta) {
-						flag = 1;
-					}
-				}
-				if (!flag)
-					break;
-
-#pragma omp parallel for
-				for (i = 0; i < data.NumPoints; i++)
-					discrepancy[i] = points[i];
-
-				for (i = 0; i < data.NumPoints; i++) {
-					sum = 0;
-					for (int j = 0; j < data.NumPoints; j++)
-						if (j != i)
-							sum += CrsAccess(Values, ColumnNum, LineFirst, i, j, data.NumPoints)*discrepancy[j];
-					points[i] = MainDiag[i] * (prev[i] - sum);
-				}
-			}
-			time += omp_get_wtime() - out_time;
-			if (count%OutCount == 0) {
-				OutputArr(inputFile, points, data.NumPoints);//if ERROR will be after this line, numbers of lines and t parameter will be wrong
-				OutputCurrentTime(inputFile, OutTime);
-				OutTime += data.deltaOut;
-			}
-		}
-	}
-#endif /*0*/
     if(!rank)printf("\ntime: %f%\n", time);
 #endif /*!START_STRING*/
 	MPI_Finalize();
