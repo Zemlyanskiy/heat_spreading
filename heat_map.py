@@ -62,8 +62,6 @@ class FileFormat:
                 for i in range(0,self.Lx):
                     for j in range(0,self.Ly):
                         for k in range(0,self.Lz):
-                            #if float(tmp[i*self.Lx*self.Ly+j*self.Ly+k]) != 0:
-                            #    print(i,j,k)
                             data_snapshot[i][j][k] = float(tmp[i*self.Lx*self.Ly+j*self.Ly+k])
                 self.data.append(data_snapshot)
 # --------------------------------------READING FILE----------------------------------------
@@ -109,26 +107,26 @@ class Index(object):
 
     def nextSection(self, event):
         if self.index < len(file.data[0])-1:
-            self.PreSet()
             self.index += 1
+            self.PreSet()
             self.ReDraw()
 
     def prevSection(self, event):
         if self.index > 0:
-            self.PreSet()
             self.index -= 1
+            self.PreSet()
             self.ReDraw()
 
     def nextTime(self, event):
         if self.current_time < len(file.data)-1:
-            self.PreSet()
             self.current_time += 1
+            self.PreSet()
             self.ReDraw()
 
     def prevTime(self, event):
         if self.current_time > 0:
-            self.PreSet()
             self.current_time -= 1
+            self.PreSet()
             self.ReDraw()
 
 callback = Index()

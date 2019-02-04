@@ -7,14 +7,16 @@
 
 #define START_STRING 0
 #define EILER 1
+#define DEBUG 1
 
 // Array functions
+
 struct Array3D{
     // Number of points (x, y, z)
     int Lx;
     int Ly;
     int Lz;
-    double* values; //LAST ARRAY WITH VALUES
+    double* values;
 };
 
 inline void initArray3D(struct Array3D* arr, int X, int Y, int Z) {
@@ -25,14 +27,15 @@ inline void initArray3D(struct Array3D* arr, int X, int Y, int Z) {
 }
 
 inline double get(struct Array3D *arr, int x, int y, int z) {
-    return arr->values[z + y*arr->Ly + x*arr->Ly*arr->Lx];
+    return arr->values[z + y*arr->Ly + x*arr->Ly*arr->Lz];
 }
 
 inline void set(struct Array3D *arr, int x, int y, int z, double value) {
-    arr->values[z + y * arr->Ly + x * arr->Ly*arr->Lx] = value;
+    arr->values[z + y * arr->Ly + x * arr->Ly*arr->Lz] = value;
 }
 
 // Input functions
+
 struct input {
     double t;// Start time (t)
     double T;// End time (T)
@@ -43,8 +46,8 @@ struct input {
     double Ymax;
     double Zmin;
     double Zmax;
-    double Sigma; //THE COEFFICIENT OF QUATION
-    double deltaOut;//DELTA OF OUTPUT
+    double Sigma; // The coefficient of quation
+    double deltaOut;// Delta of output
     struct Array3D arr;
 };
 
@@ -59,14 +62,13 @@ inline struct input ReadInput(char* PATH) {
     int pos=0;
     double buf=0;
     char* string = (char*)calloc(10000000,sizeof(char));
-//    char string[1000];
 
     fopen_s(&file, PATH, "r");
     if (file == NULL) {
             printf("Can`t find file\n");
     }
     else {
-        for (int i = 0; fgets(string, 10000000*sizeof(char), file) != NULL; i++)
+        for (int i = 0; fgets(string, 10000000 * sizeof(char), file) != NULL; i++)
             switch (i) {
             case 0:
             {
@@ -158,7 +160,8 @@ inline struct input ReadInput(char* PATH) {
     return temp;
 }
 
-// Output function
+// Output functions
+
 inline void OutputArr(char* PATH, double* arr, int length) {
     FILE* file;
     fopen_s(&file, PATH, "a+");
@@ -183,7 +186,7 @@ double CalcFunc(double Xcoord, double Ycoord, double Zcoord) {
     return 0;
 }
 
-#else
+#endif /*START_STRING*/
 
 inline int OutputCurrentTime(char* PATH, double currT) {
     FILE* file;
@@ -209,6 +212,8 @@ inline int OutputCurrentTime(char* PATH, double currT) {
     return 0;
 }
 
+// CSR Functions
+#if 0
 inline void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
 {
     int i;
@@ -229,93 +234,72 @@ inline double CrsAccess(double* Values, int* ColumnNum, int* LineFirst, int i, i
         }
     return 0;
 }
+#endif
+// MPI Functions
 
-inline void SendBorderValues(struct Array3D* points, int sections_per_process, int rank, int proc_num) {
+inline void SendBorderValues(struct Array3D* points, int sendsections_for_rank, int rank, int proc_num) {
     if (proc_num != 1) {
         MPI_Status Status;
-        struct Array3D border_matrix;
-        initArray3D(&border_matrix, 1, points->Ly, points->Lz);
-        int message_size = points->Ly * points->Lz;
-
-        if (rank != proc_num - 1) {
-            for (int j = 0; j < points->Ly; j++)
-                for (int k = 0; k < points->Lz; k++)
-                    set(&border_matrix, 0, j, k, get(points, sections_per_process - 1, j, k));
-
-            // send pre last section to next process
-            MPI_Send(border_matrix.values, message_size, MPI_DOUBLE, rank + 1, rank, MPI_COMM_WORLD);
-        }
+        int message_size = points->Ly * points->Lz;\
 
         if (rank)
         {
-            for (int j = 0; j < points->Ly; j++)
-                for (int k = 0; k < points->Lz; k++)
-                    set(&border_matrix, 0, j, k, get(points, 1, j, k));
-
             // send second section to previos process
-            MPI_Send(border_matrix.values, message_size, MPI_DOUBLE, rank - 1, rank, MPI_COMM_WORLD);
+            MPI_Send(points->values + message_size, message_size, MPI_DOUBLE, rank - 1, rank, MPI_COMM_WORLD);
         }
 
         if (rank != proc_num - 1) {
-            // get last section from next process
-            MPI_Recv(border_matrix.values, message_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
-
-            for (int j = 0; j < points->Ly; j++)
-                for (int k = 0; k < points->Lz; k++)
-                    set(points, sections_per_process, j, k, get(&border_matrix, 0, j, k));
+            // send pre last section to next process
+            MPI_Send( points->values + (sendsections_for_rank - 2)*message_size,
+                      message_size, MPI_DOUBLE, rank + 1, rank, MPI_COMM_WORLD);
         }
 
         if (rank) {
             // get first section from previos process
-            MPI_Recv(border_matrix.values, message_size, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, &Status);
+            MPI_Recv(points->values, message_size, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, &Status);
+        }
 
-            for (int j = 0; j < points->Ly; j++)
-                for (int k = 0; k < points->Lz; k++)
-                    set(points, 0, j, k, get(&border_matrix, 0, j, k));
+        if (rank != proc_num - 1) {
+            // get last section from next process
+            MPI_Recv( points->values + (sendsections_for_rank - 1)*message_size,
+                      message_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
         }
     }
 }
 
-#endif
-
 int main(int argc, char* argv[])
 {
-    // MPI initialization
-    int rank, proc_num;
+    // MPI initialization ---
+    unsigned rank, proc_num;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &proc_num);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Status status;
 
-    //Processing command line arguments
+    // Processing command line arguments ---
     char* inputFile = NULL;
-    int NUMDER_OF_THREADS = 1;
+    unsigned number_of_threads = 1;
     {
 
         if (argc > 1)
             inputFile = argv[1];
         if (argc > 2)
-            NUMDER_OF_THREADS = strtol(argv[3], NULL, 0);
+            number_of_threads = strtol(argv[3], NULL, 0);
         if (argc > 3) {
             printf("Incorrect number of arguments");
             return 4;
         }
     }
 
-    //Read input data and intialize common variables
+    // Read input data and intialize common variables ---
     struct input data;
     data = ReadInput(inputFile);
 
     unsigned sections_per_process = data.arr.Lx / proc_num;
+    unsigned remainder = data.arr.Lx % proc_num;
     unsigned elements_per_process = sections_per_process * data.arr.Ly * data.arr.Lz;
 
-    struct Array3D points;// array for caclulation results
-    struct Array3D prev;// array for previos state
-    struct Array3D print_array;// array for previos state
-    initArray3D(&points, data.arr.Lx, data.arr.Ly, data.arr.Lz);
-    initArray3D(&prev, data.arr.Lx, data.arr.Ly, data.arr.Lz);
-    initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
-
-    int count = 0;
+    unsigned count = 0;
 
     double Xstep = (data.Xmax - data.Xmin) / data.arr.Lx;
     double Ystep = (data.Ymax - data.Ymin) / data.arr.Ly;
@@ -331,13 +315,16 @@ int main(int argc, char* argv[])
         double posY = data.Ymin;
         double posZ = data.Zmin;
 
-        for (int i = 0; i < data.arr.Lx; i++) {
+        struct Array3D points;
+        initArray3D(&points, data.arr.Lx, data.arr.Ly, data.arr.Lz);
+
+        for (unsigned i = 0; i < data.arr.Lx; i++) {
             posX += Xstep;
             posY = data.Ymin;
-            for (int j = 0; j < data.arr.Ly; j++) {
+            for (unsigned j = 0; j < data.arr.Ly; j++) {
                 posY += Ystep;
                 posZ = data.Zmin;
-                for (int k = 0; k < data.arr.Lz; k++) {
+                for (unsigned k = 0; k < data.arr.Lz; k++) {
                     posZ += Zstep;
                     set(&points, i, j, k, CalcFunc(posX, posY, posZ));
                 }
@@ -348,112 +335,145 @@ int main(int argc, char* argv[])
     }
     MPI_Finalize();
     return 0;
-#endif
+#endif /*START STRING*/
 
-    double OutTime = data.t;
-    int OutCount = (int)(data.T - data.t) / data.deltaOut;
-    int maxCount = (int)(data.T - data.t) / data.deltaT;
-    OutCount = maxCount / OutCount;
+    // Time variables initializing ---
+    double current_time = data.t;
+    unsigned out_freq = (int)(data.T - data.t) / data.deltaOut;
+    unsigned count_threshold = (int)(data.T - data.t) / data.deltaT;
+    out_freq = count_threshold / out_freq;
 
-    //ENV PREPARATION FOR MPI
-    int * sendsections = malloc(sizeof(int)*proc_num);
-    int * sendcounts = malloc(sizeof(int)*proc_num);
-    int * displs = malloc(sizeof(int)*proc_num);
-    for (int i = 0; i < proc_num; i++) {
-        sendcounts[i] = 0;
-        sendsections[i] = sections_per_process;
-        displs[i] = sections_per_process * i;
+    // Env preparation for MPI ---
+    int * sendsections = (int*)malloc(sizeof(int)*proc_num);
+    int * displssections = (int*)malloc(sizeof(int)*proc_num);
+
+    int * sendcounts = (int*)malloc(sizeof(int)*proc_num);
+    int * displscounts = (int*)malloc(sizeof(int)*proc_num);
+
+    int * returncounts = (int*)malloc(sizeof(int)*proc_num);
+    int * returndisplscounts = (int*)malloc(sizeof(int)*proc_num);
+
+    // Scatter preparation ---
+    for (unsigned proc_rank = 0; proc_rank < proc_num; proc_rank++) {
+        sendsections[proc_rank] = sections_per_process;
+        displssections[proc_rank] = sections_per_process * proc_rank;
     }
-    //remainder of the division
-    sendsections[proc_num - 1] += data.arr.Lx % proc_num;
-    //send one symbol from each side of sent array
+
     if (proc_num != 1) {
-        //add to end of array in first process one section
-        sendsections[0] += 1;
-        //and to begin of array in last process 1 element
-        displs[proc_num - 1] -= 1;
-        sendsections[proc_num - 1] += 1;
-        //add for 1 element to begin and end other processes
-        for (int i = 1; i < proc_num - 1; i++) {
-            displs[i] -= 1;
-            sendsections[i] += 2;
+        for (unsigned proc_rank = 0; proc_rank < proc_num; proc_rank++) {
+            // Distribute remainder
+            if (proc_rank < remainder) {
+                sendsections[proc_rank] += 1;
+                for (unsigned sub_count = proc_rank + 1; sub_count < proc_num; sub_count++)
+                    displssections[sub_count] += 1;
+            }
+
+            // Init return values
+            returncounts[proc_rank] = sendsections[proc_rank] * data.arr.Ly * data.arr.Lz;
+            returndisplscounts[proc_rank] = displssections[proc_rank] * data.arr.Ly * data.arr.Lz;
+
+
+            if (proc_rank != 0) {
+                // And section to begin of every process (exclude first)
+                displssections[proc_rank] -= 1;
+                sendsections[proc_rank] += 1;
+            }
+            if (proc_rank != proc_num - 1) {
+                // Add section to end of every process (exclude last)
+                sendsections[proc_rank] += 1;
+            }
         }
-        for (int i = 0; i < proc_num; i++) {
-            sendcounts[i] = sendsections[i] * data.arr.Lx * data.arr.Ly;
-            displs[i] *= data.arr.Lx * data.arr.Ly;
-        }
+    } 
+    else {
+        returncounts[0] = elements_per_process;
+        returndisplscounts[0] = 0;
     }
-    //ENV PREPARATION FOR OpenMP
-    omp_set_num_threads(NUMDER_OF_THREADS);
+
+    for (int proc_rank = 0; proc_rank < proc_num; proc_rank++) {
+        sendcounts[proc_rank] = sendsections[proc_rank] * data.arr.Ly * data.arr.Lz;
+        displscounts[proc_rank] = displssections[proc_rank] * data.arr.Ly * data.arr.Lz;
+    }
+
+    // Env preparation for OpenMP ---
+    omp_set_num_threads(number_of_threads);
     double time = 0;
     double out_time;
-    if (!rank) {
-        //for (int i = 0; i < data.arr.Lx * data.arr.Ly * data.arr.Lz; i++)
-        //    printf("%f\n", data.arr.values[i]);
-        printf("%d %d %d %d %d\n", sendsections[0], sendsections[1], sendsections[2], sendsections[3],
-            sendsections[0] + sendsections[1] + sendsections[2] + sendsections[3]);
-        printf("%d %d %d %d %d\n", sendcounts[0], sendcounts[1], sendcounts[2], sendcounts[3],
-                                   sendcounts[0] + sendcounts[1] + sendcounts[2] + sendcounts[3]);
-        printf("%d %d %d %d\n", displs[0], displs[1], displs[2], displs[3]);
-        printf("%d\n", data.arr.Lx * data.arr.Ly * data.arr.Lz);
-        printf("%d %d \n", elements_per_process, sections_per_process);
-    }
-    MPI_Status Status;
-    MPI_Scatterv(data.arr.values, sendcounts, displs,
-        MPI_DOUBLE, points.values, sendcounts[rank],
-        MPI_DOUBLE,
-        0, MPI_COMM_WORLD);
-    //START CALCULATING
 
-    for (count = 0; count <= maxCount; count++) {
-        if (!rank) out_time = omp_get_wtime();
-#if EILER
-#pragma omp parallel for
-        for (unsigned i = 0; i < sendcounts[rank]; i++)
-            prev.values[i] = points.values[i];//make pointers swap
-#pragma omp parallel for
-        for (unsigned i = 1; i < sendsections[rank] - 1; i++)
-            for (unsigned j = 1; j < points.Ly - 1; j++)
-                for (unsigned k = 1; k < points.Lz - 1; k++)
-                    set(&points, i, j, k,
-                        get(&prev, i, j, k) + data.Sigma*data.deltaT*(
-                        (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
-                        (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
-                        (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
-    
-#endif /*EILER*/
+    // Arrays initialization ---
+    struct Array3D points;// array for caclulation results
+    struct Array3D prev;// array for previos state
+    struct Array3D print_array;// array for previos state
+    initArray3D(&points, sendsections[rank], data.arr.Ly, data.arr.Lz);
+    initArray3D(&prev, sendsections[rank], data.arr.Ly, data.arr.Lz);
+    initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
 
-        // Sending and recieve border points
-        SendBorderValues(&points, sendsections[rank], rank, proc_num);
-
-        // delete output time from time calculating
-        if (!rank) time += omp_get_wtime() - out_time;
-
-        if (count%OutCount == 0 && count) {
-            if (!rank) {
-                //Can't send-receive from 0 process to himself
-                for (int i = 0; i < elements_per_process; i++)
-                    print_array.values[i] = points.values[i];
-                for (int sender_number = 1; sender_number < proc_num; sender_number++)
-                    MPI_Recv(&print_array.values[elements_per_process*sender_number],
-                        /* If we Recv from last process - getting remainder(ostatok) of the division */
-                        sender_number == proc_num - 1 ?
-                        elements_per_process + data.arr.Lx % proc_num * data.arr.Ly * data.arr.Lz :
-                        elements_per_process
-                        /* In other cases getting only elements_per_process count */
-                        , MPI_DOUBLE, sender_number, sender_number, MPI_COMM_WORLD, &Status);
-                OutputArr(inputFile, print_array.values, data.arr.Lx*data.arr.Ly*data.arr.Lz);
-                OutTime += data.deltaOut;
-                OutputCurrentTime(inputFile, OutTime);
-            }
-            // Send points from not root process to root for Outpt
-            else if (rank == proc_num - 1)
-                MPI_Send( points.values + data.arr.Ly * data.arr.Lz,
-                          elements_per_process + data.arr.Lx % proc_num * data.arr.Ly * data.arr.Lz, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
-            else
-                MPI_Send( points.values + data.arr.Ly * data.arr.Lz, elements_per_process, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+    if (DEBUG && rank == 0) {
+        printf("Lx: %d, Ly: %d, Lz: %d, SectionsPerProcess %d, Remainder:%d\n\n",
+            data.arr.Lx, data.arr.Ly, data.arr.Lz, sections_per_process, remainder);
+        for (int proc_rank = 0; proc_rank < proc_num; proc_rank++) {
+            printf("Process %d:\n", proc_rank);
+            printf("sendcounts: %d, sendsections: %d, displscounts: %d, displssections: %d\n",
+                sendcounts[proc_rank], sendsections[proc_rank], displscounts[proc_rank], displssections[proc_rank]);
+            printf("returncounts: %d, returndisplscounts %d \n", returncounts[proc_rank], returndisplscounts[proc_rank]);
+            printf("-----------------------------------------------------\n");
         }
     }
+
+    // Distribute data between processes ---
+    MPI_Scatterv(data.arr.values, sendcounts, displscounts, MPI_DOUBLE, points.values,
+        sendcounts[rank], MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+    // Calculation process ---
+    unsigned i, j, k;
+    for (count = 0; count <= count_threshold; count++) {
+        if (!rank) out_time = omp_get_wtime();
+
+#if EILER
+#pragma omp parallel for
+        for (i = 0; i < sendcounts[rank]; i++)
+            prev.values[i] = points.values[i];
+#pragma omp parallel for
+        for (i = 1; i < sendsections[rank] - 1; i++)
+            for (j = 1; j < points.Ly - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&points, i, j, k,
+                        get(&prev, i, j, k) + data.Sigma*data.deltaT*(
+                            (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
+                            (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
+                            (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
+                    // points[i][j][k] = prev[i][j][k] + data.Sigma*data.deltaT*((prev[i-1][j][k] - 2*prev[i][j][k] + prev[i+1][j][k]) * Xdivider +
+                    //                                                           (prev[i][j-1][k] - 2*prev[i][j][k] + prev[i][j+1][k]) * Ydivider +
+                    //                                                           (prev[i][j][k-1] - 2*prev[i][j][k] + prev[i][j][k+1]) * Zdivider);
+                }
+#endif /*EILER*/
+
+        SendBorderValues(&points, sendsections[rank], rank, proc_num);
+
+        // Delete output time from time calculating ---
+        if (!rank) time += omp_get_wtime() - out_time;
+
+        // Print ---
+        if (count%out_freq == 0 && count) {
+            if (!rank) {
+                //Can't send-receive from 0 process to himself
+                for (int count = 0; count < returncounts[rank]; count++)
+                    print_array.values[count] = points.values[count];
+                for (int sender_number = 1; sender_number < proc_num; sender_number++)
+                    MPI_Recv(&print_array.values[returndisplscounts[sender_number]], returncounts[sender_number],
+                        MPI_DOUBLE, sender_number, sender_number, MPI_COMM_WORLD, &status);
+
+                OutputArr(inputFile, print_array.values, data.arr.Lx*data.arr.Ly*data.arr.Lz);
+                current_time += data.deltaOut;
+                OutputCurrentTime(inputFile, current_time);
+            }
+            else {
+                MPI_Send(points.values + data.arr.Ly * data.arr.Lz, returncounts[rank], MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+            }
+        }
+    }
+
+    // End ---
+    if (!rank) printf("Time is: %lf\n", time);
     MPI_Finalize();
     return 0;
 }
