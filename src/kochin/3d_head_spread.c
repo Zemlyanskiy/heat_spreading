@@ -3,19 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <omp.h>
-#include<mpi.h>
+#include <mpi.h>
+#include <windows.h>
 
 #define START_STRING 0
 #define EILER 1
-#define DEBUG 1
+#define DEBUG 0
 
 // Array functions
 
 struct Array3D{
     // Number of points (x, y, z)
-    int Lx;
-    int Ly;
-    int Lz;
+    unsigned Lx, Ly, Lz;
     double* values;
 };
 
@@ -27,11 +26,11 @@ inline void initArray3D(struct Array3D* arr, int X, int Y, int Z) {
 }
 
 inline double get(struct Array3D *arr, int x, int y, int z) {
-    return arr->values[z + y*arr->Ly + x*arr->Ly*arr->Lz];
+    return arr->values[z + y*arr->Lz + x*arr->Ly*arr->Lz];
 }
 
 inline void set(struct Array3D *arr, int x, int y, int z, double value) {
-    arr->values[z + y * arr->Ly + x * arr->Ly*arr->Lz] = value;
+    arr->values[z + y*arr->Lz + x * arr->Ly*arr->Lz] = value;
 }
 
 // Input functions
@@ -144,7 +143,7 @@ inline struct input ReadInput(char* PATH) {
 #if START_STRING
                 printf("Mode: start string, Problem: file allready contain start string\n");
 #endif
-                initArray3D( &temp.arr, temp.arr.Lx, temp.arr.Ly, temp.arr.Lz );
+                initArray3D(&temp.arr, temp.arr.Lx, temp.arr.Ly, temp.arr.Lz);
                 token = strtok(string, " ");
                 while (token != NULL)
                 {
@@ -212,60 +211,59 @@ inline int OutputCurrentTime(char* PATH, double currT) {
     return 0;
 }
 
-// CSR Functions
-#if 0
-inline void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
-{
-    int i;
-#pragma omp parallel for
-    for (i = 0; i < size; i++) {
-        result[i] = 0;
-        for (int j = LineFirst[i]; j < LineFirst[i + 1]; j++)
-            result[i] += Values[j] * Array[ColumnNum[j]];
-    }
-}
-
-inline double CrsAccess(double* Values, int* ColumnNum, int* LineFirst, int i, int j, int length) {
-    if (i >= length)
-        return 0;
-    for (int k = LineFirst[i]; k<LineFirst[i + 1]; k++)
-        if (ColumnNum[k] == j) {
-            return Values[k];
-        }
-    return 0;
-}
-#endif
 // MPI Functions
 
-inline void SendBorderValues(struct Array3D* points, int sendsections_for_rank, int rank, int proc_num) {
-    if (proc_num != 1) {
-        MPI_Status Status;
-        int message_size = points->Ly * points->Lz;\
+inline void SendBorderValues2( struct Array3D* points , unsigned rank, 
+    unsigned process_per_axis, unsigned Xcube_pos, unsigned Ycube_pos
+) {
+    MPI_Status Status;
+    int section_size = points->Ly * points ->Lz;
+    // Send
+    if (Xcube_pos > 0) {
+        // send X border section to previos process
+        MPI_Send(points->values + section_size, section_size, MPI_DOUBLE, rank - 1, rank, MPI_COMM_WORLD);
+    }
+    if (Xcube_pos < process_per_axis - 1) {
+        // send X border section to next process
+        MPI_Send(points->values + (points->Lx - 2)*section_size, section_size, MPI_DOUBLE, rank + 1, rank, MPI_COMM_WORLD);
+    }
 
-        if (rank)
-        {
-            // send second section to previos process
-            MPI_Send(points->values + message_size, message_size, MPI_DOUBLE, rank - 1, rank, MPI_COMM_WORLD);
-        }
+    if (Ycube_pos > 0) {
+        // send Y border section to previos process
+        for (unsigned i = 0; i < points->Lx; i++)
+            MPI_Send(points->values + points->Lz + section_size * i, points->Lz, MPI_DOUBLE, rank - process_per_axis, rank, MPI_COMM_WORLD);
+    }
+    if (Ycube_pos < process_per_axis - 1) {
+        // send Y border section to next process
+        for (unsigned i = 0; i < points->Lx; i++)
+            MPI_Send(points->values + (i + 1)*section_size - points->Lz*2, points->Lz, MPI_DOUBLE, rank + process_per_axis, rank, MPI_COMM_WORLD);
+    }
 
-        if (rank != proc_num - 1) {
-            // send pre last section to next process
-            MPI_Send( points->values + (sendsections_for_rank - 2)*message_size,
-                      message_size, MPI_DOUBLE, rank + 1, rank, MPI_COMM_WORLD);
-        }
+    // Recieve
+    if (Xcube_pos > 0) {
+        // get X border section from previos process
+        MPI_Recv(points->values, section_size, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, &Status);
+    }
+    if (Xcube_pos < process_per_axis - 1) {
+        // get X border section from next process
+        MPI_Recv(points->values + (points->Lx - 1)*section_size,
+                 section_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
+    }
 
-        if (rank) {
-            // get first section from previos process
-            MPI_Recv(points->values, message_size, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, &Status);
-        }
-
-        if (rank != proc_num - 1) {
-            // get last section from next process
-            MPI_Recv( points->values + (sendsections_for_rank - 1)*message_size,
-                      message_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
-        }
+    if (Ycube_pos > 0) {
+        // get Y border section from previos process
+        for (unsigned i = 0; i < points->Lx; i++)
+            MPI_Recv(points->values + section_size * i, points->Lz,
+                     MPI_DOUBLE, rank - process_per_axis, rank - process_per_axis, MPI_COMM_WORLD, &Status);
+    }
+    if (Ycube_pos < process_per_axis - 1) {
+        // get Y border section from next process
+        for (unsigned i = 0; i < points->Lx; i++)
+            MPI_Recv(points->values + (i + 1)*section_size - points->Lz,
+                     points->Lz, MPI_DOUBLE, rank + process_per_axis, rank + process_per_axis, MPI_COMM_WORLD, &Status);
     }
 }
+
 
 int main(int argc, char* argv[])
 {
@@ -276,6 +274,12 @@ int main(int argc, char* argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Status status;
 
+    if ((sqrt(proc_num) - (unsigned)sqrt(proc_num)) != 0) {
+        printf("The number of processes must be able to proccess sqrt() without remainder.\n");
+        MPI_Finalize();
+        return 1;
+    }
+
     // Processing command line arguments ---
     char* inputFile = NULL;
     unsigned number_of_threads = 1;
@@ -284,30 +288,20 @@ int main(int argc, char* argv[])
         if (argc > 1)
             inputFile = argv[1];
         if (argc > 2)
-            number_of_threads = strtol(argv[3], NULL, 0);
+            number_of_threads = strtol(argv[2], NULL, 0);
         if (argc > 3) {
             printf("Incorrect number of arguments");
             return 4;
         }
     }
 
-    // Read input data and intialize common variables ---
+    // Read input data ---
     struct input data;
     data = ReadInput(inputFile);
-
-    unsigned sections_per_process = data.arr.Lx / proc_num;
-    unsigned remainder = data.arr.Lx % proc_num;
-    unsigned elements_per_process = sections_per_process * data.arr.Ly * data.arr.Lz;
-
-    unsigned count = 0;
 
     double Xstep = (data.Xmax - data.Xmin) / data.arr.Lx;
     double Ystep = (data.Ymax - data.Ymin) / data.arr.Ly;
     double Zstep = (data.Zmax - data.Zmin) / data.arr.Lz;
-
-    double Xdivider = 1 / (Xstep*Xstep);
-    double Ydivider = 1 / (Ystep*Ystep);
-    double Zdivider = 1 / (Zstep*Zstep);
 
 #if START_STRING
     if (!rank) {
@@ -337,61 +331,111 @@ int main(int argc, char* argv[])
     return 0;
 #endif /*START STRING*/
 
-    // Time variables initializing ---
+    // Variables initialization ---
     double current_time = data.t;
-    unsigned out_freq = (int)(data.T - data.t) / data.deltaOut;
-    unsigned count_threshold = (int)(data.T - data.t) / data.deltaT;
+    unsigned out_freq = (unsigned)(data.T - data.t) / data.deltaOut;
+    unsigned count_threshold = (unsigned)(data.T - data.t) / data.deltaT;
     out_freq = count_threshold / out_freq;
 
-    // Env preparation for MPI ---
-    int * sendsections = (int*)malloc(sizeof(int)*proc_num);
-    int * displssections = (int*)malloc(sizeof(int)*proc_num);
+    unsigned process_per_axis = (unsigned)sqrt(proc_num);
+    unsigned Xlines = data.arr.Lx / process_per_axis;
+    unsigned Ylines = data.arr.Ly / process_per_axis;
+    unsigned Xcube_pos = rank % process_per_axis;
+    unsigned Ycube_pos = rank / process_per_axis;
 
-    int * sendcounts = (int*)malloc(sizeof(int)*proc_num);
-    int * displscounts = (int*)malloc(sizeof(int)*proc_num);
+    // Add borders ---
+    if (Xcube_pos > 0)
+        Xlines++;
+    if (Xcube_pos < process_per_axis - 1)
+        Xlines++;
+    if (Ycube_pos > 0)
+        Ylines++;
+    if (Ycube_pos < process_per_axis - 1)
+        Ylines++;
 
-    int * returncounts = (int*)malloc(sizeof(int)*proc_num);
-    int * returndisplscounts = (int*)malloc(sizeof(int)*proc_num);
+    // Add remainder ---
+    if (Xcube_pos == process_per_axis - 1)
+        Xlines += data.arr.Lx % process_per_axis;
+    if (Ycube_pos == process_per_axis - 1)
+        Ylines += data.arr.Ly % process_per_axis;
 
-    // Scatter preparation ---
-    for (unsigned proc_rank = 0; proc_rank < proc_num; proc_rank++) {
-        sendsections[proc_rank] = sections_per_process;
-        displssections[proc_rank] = sections_per_process * proc_rank;
+    struct Array3D points;
+    struct Array3D prev;
+    initArray3D(&points, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&prev, Xlines, Ylines, data.arr.Lz);
+
+    struct Array3D print_array;
+    if (rank == 0) {
+        initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
     }
 
-    if (proc_num != 1) {
-        for (unsigned proc_rank = 0; proc_rank < proc_num; proc_rank++) {
-            // Distribute remainder
-            if (proc_rank < remainder) {
-                sendsections[proc_rank] += 1;
-                for (unsigned sub_count = proc_rank + 1; sub_count < proc_num; sub_count++)
-                    displssections[sub_count] += 1;
+    unsigned elements_per_process = Xlines * Ylines * data.arr.Lz;
+
+    unsigned Xstart_copy_line = Xcube_pos * data.arr.Lx / process_per_axis;
+    unsigned Ystart_copy_line = Ycube_pos * data.arr.Ly / process_per_axis;
+
+    if (Xcube_pos > 0)
+        Xstart_copy_line -= 1;
+    if (Ycube_pos > 0)
+        Ystart_copy_line -= 1;
+
+    for (unsigned i = 0; i < Xlines; i++)
+        for (unsigned j = 0; j < Ylines; j++)
+            for (unsigned k = 0; k < data.arr.Lz; k++) {
+                set(&points, i, j, k, get(&data.arr, Xstart_copy_line + i, Ystart_copy_line + j, k));
             }
 
-            // Init return values
-            returncounts[proc_rank] = sendsections[proc_rank] * data.arr.Ly * data.arr.Lz;
-            returndisplscounts[proc_rank] = displssections[proc_rank] * data.arr.Ly * data.arr.Lz;
+    double Xdivider = 1 / (Xstep*Xstep);
+    double Ydivider = 1 / (Ystep*Ystep);
+    double Zdivider = 1 / (Zstep*Zstep);
+
+    // Values for return collection (used only on root rank)
+    int* x_return_lines = (int*)malloc(proc_num * sizeof(int));
+    int* y_return_lines = (int*)malloc(proc_num * sizeof(int));
+    int* x_return_start = (int*)malloc(proc_num * sizeof(int));
+    int* y_return_start = (int*)malloc(proc_num * sizeof(int));
+    struct Array3D* buffer = (struct Array3D*)malloc(sizeof(struct Array3D)*proc_num);
 
 
-            if (proc_rank != 0) {
-                // And section to begin of every process (exclude first)
-                displssections[proc_rank] -= 1;
-                sendsections[proc_rank] += 1;
-            }
-            if (proc_rank != proc_num - 1) {
-                // Add section to end of every process (exclude last)
-                sendsections[proc_rank] += 1;
+    // Create on 1st process array of values for collect return data
+    if (rank == 0) {
+        x_return_lines[0] = Xlines;
+        y_return_lines[0] = Ylines;
+        x_return_start[0] = Xstart_copy_line;
+        y_return_start[0] = Ystart_copy_line;
+        initArray3D(&buffer[0], x_return_lines[0], y_return_lines[0], data.arr.Lz);
+
+        for (int i = 1; i < proc_num; i++) {
+            MPI_Recv(x_return_lines + i, 1, MPI_INT, i, i, MPI_COMM_WORLD, &status);
+            MPI_Recv(y_return_lines + i, 1, MPI_DOUBLE, i, i, MPI_COMM_WORLD, &status);
+            MPI_Recv(x_return_start + i, 1, MPI_DOUBLE, i, i, MPI_COMM_WORLD, &status);
+            MPI_Recv(y_return_start + i, 1, MPI_DOUBLE, i, i, MPI_COMM_WORLD, &status);
+            initArray3D(&buffer[i], x_return_lines[i], y_return_lines[i], data.arr.Lz);
+        }
+
+    }
+    else
+    {
+        MPI_Send(&Xlines, 1, MPI_INT, 0, rank, MPI_COMM_WORLD);
+        MPI_Send(&Ylines, 1, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+        MPI_Send(&Xstart_copy_line, 1, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+        MPI_Send(&Ystart_copy_line, 1, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+    }
+
+    if (DEBUG) {
+        printf("rank: %d xpos: %d ypos: %d proc_per_ax: %d\n"
+            "rank: %d xlines: %d ylines: %d zlines: %d\n"
+            "rank: %d x_start_copy %d y_start_copy %d\n",
+            rank, Xcube_pos, Ycube_pos, process_per_axis,
+            rank, Xlines, Ylines, data.arr.Lz,
+            rank, Xstart_copy_line, Ystart_copy_line);
+
+        if (rank == 0) {
+            for (int i = 0; i < proc_num; i++) {
+                printf("i: %d ret_x_l: %d, ret_y_l: %d ret_x_s: %d ret_y_s: %d\n",
+                    i, x_return_lines[i], y_return_lines[i], x_return_start[i], y_return_start[i]);
             }
         }
-    } 
-    else {
-        returncounts[0] = elements_per_process;
-        returndisplscounts[0] = 0;
-    }
-
-    for (int proc_rank = 0; proc_rank < proc_num; proc_rank++) {
-        sendcounts[proc_rank] = sendsections[proc_rank] * data.arr.Ly * data.arr.Lz;
-        displscounts[proc_rank] = displssections[proc_rank] * data.arr.Ly * data.arr.Lz;
     }
 
     // Env preparation for OpenMP ---
@@ -399,75 +443,62 @@ int main(int argc, char* argv[])
     double time = 0;
     double out_time;
 
-    // Arrays initialization ---
-    struct Array3D points;// array for caclulation results
-    struct Array3D prev;// array for previos state
-    struct Array3D print_array;// array for previos state
-    initArray3D(&points, sendsections[rank], data.arr.Ly, data.arr.Lz);
-    initArray3D(&prev, sendsections[rank], data.arr.Ly, data.arr.Lz);
-    initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
-
-    if (DEBUG && rank == 0) {
-        printf("Lx: %d, Ly: %d, Lz: %d, SectionsPerProcess %d, Remainder:%d\n\n",
-            data.arr.Lx, data.arr.Ly, data.arr.Lz, sections_per_process, remainder);
-        for (int proc_rank = 0; proc_rank < proc_num; proc_rank++) {
-            printf("Process %d:\n", proc_rank);
-            printf("sendcounts: %d, sendsections: %d, displscounts: %d, displssections: %d\n",
-                sendcounts[proc_rank], sendsections[proc_rank], displscounts[proc_rank], displssections[proc_rank]);
-            printf("returncounts: %d, returndisplscounts %d \n", returncounts[proc_rank], returndisplscounts[proc_rank]);
-            printf("-----------------------------------------------------\n");
-        }
-    }
-
-    // Distribute data between processes ---
-    MPI_Scatterv(data.arr.values, sendcounts, displscounts, MPI_DOUBLE, points.values,
-        sendcounts[rank], MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
     // Calculation process ---
-    unsigned i, j, k;
+    unsigned i, j, k, count;
     for (count = 0; count <= count_threshold; count++) {
         if (!rank) out_time = omp_get_wtime();
 
 #if EILER
 #pragma omp parallel for
-        for (i = 0; i < sendcounts[rank]; i++)
-            prev.values[i] = points.values[i];
-#pragma omp parallel for
-        for (i = 1; i < sendsections[rank] - 1; i++)
-            for (j = 1; j < points.Ly - 1; j++)
-                for (k = 1; k < points.Lz - 1; k++) {
-                    set(&points, i, j, k,
-                        get(&prev, i, j, k) + data.Sigma*data.deltaT*(
-                            (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
-                            (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
-                            (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
+        for (i = 0; i < elements_per_process; i++)
+             prev.values[i] = points.values[i];
+ #pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&points, i, j, k,
+                         get(&prev, i, j, k) + data.Sigma*data.deltaT*(
+                         (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
+                             (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
+                             (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
                     // points[i][j][k] = prev[i][j][k] + data.Sigma*data.deltaT*((prev[i-1][j][k] - 2*prev[i][j][k] + prev[i+1][j][k]) * Xdivider +
                     //                                                           (prev[i][j-1][k] - 2*prev[i][j][k] + prev[i][j+1][k]) * Ydivider +
                     //                                                           (prev[i][j][k-1] - 2*prev[i][j][k] + prev[i][j][k+1]) * Zdivider);
                 }
 #endif /*EILER*/
 
-        SendBorderValues(&points, sendsections[rank], rank, proc_num);
+        SendBorderValues2(&points, rank, process_per_axis, Xcube_pos, Ycube_pos);
 
         // Delete output time from time calculating ---
         if (!rank) time += omp_get_wtime() - out_time;
 
         // Print ---
         if (count%out_freq == 0 && count) {
-            if (!rank) {
+            if (rank == 0) {
                 //Can't send-receive from 0 process to himself
-                for (int count = 0; count < returncounts[rank]; count++)
-                    print_array.values[count] = points.values[count];
-                for (int sender_number = 1; sender_number < proc_num; sender_number++)
-                    MPI_Recv(&print_array.values[returndisplscounts[sender_number]], returncounts[sender_number],
+                for (unsigned i = 0; i < points.Lx; i++)
+                    for (unsigned j = 0; j < points.Ly; j++)
+                        for (unsigned k = 0; k < points.Lz; k++) {
+                            set(&print_array, i, j, k, get(&points, i, j, k));
+                        }
+
+                for (unsigned sender_number = 1; sender_number < proc_num; sender_number++) {
+                    MPI_Recv((buffer + sender_number) -> values, x_return_lines[sender_number] * y_return_lines[sender_number] * data.arr.Lz,
                         MPI_DOUBLE, sender_number, sender_number, MPI_COMM_WORLD, &status);
 
-                OutputArr(inputFile, print_array.values, data.arr.Lx*data.arr.Ly*data.arr.Lz);
+                    for (int i = 0; i < x_return_lines[sender_number]; i++)
+                        for (int j = 0; j < y_return_lines[sender_number]; j++)
+                            for (int k = 0; k < data.arr.Lz; k++) {
+                                set(&print_array, x_return_start[sender_number] + i, y_return_start[sender_number] + j, k, get(buffer + sender_number, i, j, k));
+                            }
+                }
+            
+                OutputArr(inputFile, print_array.values, print_array.Lx*print_array.Ly*print_array.Lz);
                 current_time += data.deltaOut;
                 OutputCurrentTime(inputFile, current_time);
             }
             else {
-                MPI_Send(points.values + data.arr.Ly * data.arr.Lz, returncounts[rank], MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
+                MPI_Send(points.values, points.Lx*points.Ly*points.Lz, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
             }
         }
     }
