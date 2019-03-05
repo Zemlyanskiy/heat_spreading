@@ -7,7 +7,8 @@
 #include <windows.h>
 
 #define START_STRING 0
-#define EILER 1
+#define EILER 0
+#define RUNGE_KUTTA 1
 #define DEBUG 0
 
 // Array functions
@@ -213,7 +214,7 @@ inline int OutputCurrentTime(char* PATH, double currT) {
 
 // MPI Functions
 
-inline void SendBorderValues2( struct Array3D* points , unsigned rank, 
+inline void SendBorderValues( struct Array3D* points , unsigned rank, 
     unsigned process_per_axis, unsigned Xcube_pos, unsigned Ycube_pos
 ) {
     MPI_Status Status;
@@ -303,6 +304,10 @@ int main(int argc, char* argv[])
     double Ystep = (data.Ymax - data.Ymin) / data.arr.Ly;
     double Zstep = (data.Zmax - data.Zmin) / data.arr.Lz;
 
+    double Xdivider = 1 / (Xstep*Xstep);
+    double Ydivider = 1 / (Ystep*Ystep);
+    double Zdivider = 1 / (Zstep*Zstep);
+
 #if START_STRING
     if (!rank) {
         double posX = data.Xmin;
@@ -358,17 +363,14 @@ int main(int argc, char* argv[])
         Xlines += data.arr.Lx % process_per_axis;
     if (Ycube_pos == process_per_axis - 1)
         Ylines += data.arr.Ly % process_per_axis;
-
+    
+    // Standart calculation arrays ---
     struct Array3D points;
     struct Array3D prev;
     initArray3D(&points, Xlines, Ylines, data.arr.Lz);
     initArray3D(&prev, Xlines, Ylines, data.arr.Lz);
 
-    struct Array3D print_array;
-    if (rank == 0) {
-        initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
-    }
-
+    // MPI communication variables ---
     unsigned elements_per_process = Xlines * Ylines * data.arr.Lz;
 
     unsigned Xstart_copy_line = Xcube_pos * data.arr.Lx / process_per_axis;
@@ -379,16 +381,6 @@ int main(int argc, char* argv[])
     if (Ycube_pos > 0)
         Ystart_copy_line -= 1;
 
-    for (unsigned i = 0; i < Xlines; i++)
-        for (unsigned j = 0; j < Ylines; j++)
-            for (unsigned k = 0; k < data.arr.Lz; k++) {
-                set(&points, i, j, k, get(&data.arr, Xstart_copy_line + i, Ystart_copy_line + j, k));
-            }
-
-    double Xdivider = 1 / (Xstep*Xstep);
-    double Ydivider = 1 / (Ystep*Ystep);
-    double Zdivider = 1 / (Zstep*Zstep);
-
     // Values for return collection (used only on root rank)
     int* x_return_lines = (int*)malloc(proc_num * sizeof(int));
     int* y_return_lines = (int*)malloc(proc_num * sizeof(int));
@@ -396,8 +388,7 @@ int main(int argc, char* argv[])
     int* y_return_start = (int*)malloc(proc_num * sizeof(int));
     struct Array3D* buffer = (struct Array3D*)malloc(sizeof(struct Array3D)*proc_num);
 
-
-    // Create on 1st process array of values for collect return data
+    // Create on 1st process array of values for collect return data ---
     if (rank == 0) {
         x_return_lines[0] = Xlines;
         y_return_lines[0] = Ylines;
@@ -422,6 +413,36 @@ int main(int argc, char* argv[])
         MPI_Send(&Ystart_copy_line, 1, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
     }
 
+    // Array for print result to file ---
+    struct Array3D print_array;
+    if (rank == 0) {
+        initArray3D(&print_array, data.arr.Lx, data.arr.Ly, data.arr.Lz);
+    }
+
+    // Env preparation for OpenMP ---
+    omp_set_num_threads(number_of_threads);
+    double time = 0;
+    double out_time;
+
+    // Read start state of array ---
+    for (unsigned i = 0; i < Xlines; i++)
+        for (unsigned j = 0; j < Ylines; j++)
+            for (unsigned k = 0; k < data.arr.Lz; k++) {
+                set(&points, i, j, k, get(&data.arr, Xstart_copy_line + i, Ystart_copy_line + j, k));
+            }
+
+    // Runge Kutta variables
+    struct Array3D k1, k2, k3, k4, medium, derivative;
+
+#if RUNGE_KUTTA
+    initArray3D(&k1, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&k2, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&k3, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&k4, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&medium, Xlines, Ylines, data.arr.Lz);
+    initArray3D(&derivative, Xlines, Ylines, data.arr.Lz);
+#endif /*RUNGE_KUTTA*/
+
     if (DEBUG) {
         printf("rank: %d xpos: %d ypos: %d proc_per_ax: %d\n"
             "rank: %d xlines: %d ylines: %d zlines: %d\n"
@@ -437,11 +458,6 @@ int main(int argc, char* argv[])
             }
         }
     }
-
-    // Env preparation for OpenMP ---
-    omp_set_num_threads(number_of_threads);
-    double time = 0;
-    double out_time;
 
     // Calculation process ---
     unsigned i, j, k, count;
@@ -466,8 +482,91 @@ int main(int argc, char* argv[])
                     //                                                           (prev[i][j][k-1] - 2*prev[i][j][k] + prev[i][j][k+1]) * Zdivider);
                 }
 #endif /*EILER*/
+#if RUNGE_KUTTA
+#pragma omp parallel for
+         for (i = 0; i < elements_per_process; i++)
+             prev.values[i] = points.values[i];
 
-        SendBorderValues2(&points, rank, process_per_axis, Xcube_pos, Ycube_pos);
+// k1 calculation ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&k1, i, j, k, data.Sigma*data.deltaT*(
+                         (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
+                         (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
+                         (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
+                 }
+#pragma omp parallel for
+         for (i = 0; i < Xlines; i++)
+             for (j = 0; j < Ylines; j++)
+                 for (k = 0; k < points.Lz; k++) {
+                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k1, i, j, k) * 0.5);
+                 }
+
+// k2 calculation ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&k2, i, j, k, data.Sigma*data.deltaT*(
+                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                 }
+#pragma omp parallel for
+         for (i = 0; i < Xlines; i++)
+             for (j = 0; j < Ylines; j++)
+                 for (k = 0; k < points.Lz; k++) {
+                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k) * 0.5);
+                 }
+
+// k3 calculation ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&k3, i, j, k, data.Sigma*data.deltaT*(
+                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                 }
+#pragma omp parallel for
+         for (i = 0; i < Xlines; i++)
+             for (j = 0; j < Ylines; j++)
+                 for (k = 0; k < points.Lz; k++) {
+                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k));
+                 }
+
+// k4 calculation ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&k4, i, j, k, data.Sigma*data.deltaT*(
+                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                 }
+
+// derivative calculation ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&derivative, i, j, k, (get(&k1, i, j, k)+ get(&k2, i, j, k)+ get(&k3, i, j, k)+ get(&k4, i, j, k))* 0.1666666666);
+                 }
+
+// final result ---
+#pragma omp parallel for
+         for (i = 1; i < Xlines - 1; i++)
+             for (j = 1; j < Ylines - 1; j++)
+                 for (k = 1; k < points.Lz - 1; k++) {
+                     set(&points, i, j, k, get(&prev, i, j, k) + get(&derivative, i, j, k));
+                 }
+#endif /*RUNGE_KUTTA*/
+
+        SendBorderValues(&points, rank, process_per_axis, Xcube_pos, Ycube_pos);
 
         // Delete output time from time calculating ---
         if (!rank) time += omp_get_wtime() - out_time;
