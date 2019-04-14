@@ -6,14 +6,24 @@
 #include <mpi.h>
 #include <windows.h>
 
+#define DEBUG 0
+
 #define START_STRING 0
 #define EILER 0
-#define RUNGE_KUTTA 1
-#define DEBUG 0
+#define RUNGE_KUTTA 0
+#define MATRIX_EILER 0
+#define MATRIX_RUNGE_KUTTA 1
+#define YAKOBI 0
+
+// TODO: change Array3D inline get() and set() functions to macros
+// TODO: optimize matrix methods (Delete 1 redundant operation)
+// TODO: realize yakobi method
+// TODO: check all methods validity
+// TODO: make runge-kutta without borders sending (add 4 levels to borders for each process)
 
 // Array functions
 
-struct Array3D{
+struct Array3D {
     // Number of points (x, y, z)
     unsigned Lx, Ly, Lz;
     double* values;
@@ -27,11 +37,37 @@ inline void initArray3D(struct Array3D* arr, int X, int Y, int Z) {
 }
 
 inline double get(struct Array3D *arr, int x, int y, int z) {
-    return arr->values[z + y*arr->Lz + x*arr->Ly*arr->Lz];
+    return arr->values[z + y * arr->Lz + x * arr->Ly*arr->Lz];
 }
 
 inline void set(struct Array3D *arr, int x, int y, int z, double value) {
-    arr->values[z + y*arr->Lz + x * arr->Ly*arr->Lz] = value;
+    arr->values[z + y * arr->Lz + x * arr->Ly*arr->Lz] = value;
+}
+
+// CSR Functions
+
+inline double CrsAccess(double* Values, int* ColumnNum, int* LineFirst, int i, int j, int length) {
+    if (i >= length)
+        return 0;
+    int n1 = LineFirst[i];
+    int n2 = LineFirst[i + 1];
+    int k;
+    for (k = n1; k<n2; k++)
+        if (ColumnNum[k] == j) {
+            return Values[k];
+        }
+    return 0;
+}
+
+inline void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
+{
+    int i;
+#pragma omp parallel for
+    for (i = 0; i < size; i++) {
+        result[i] = 0;
+        for (int j = LineFirst[i]; j < LineFirst[i + 1]; j++)
+            result[i] += Values[j] * Array[ColumnNum[j]];
+    }
 }
 
 // Input functions
@@ -54,18 +90,18 @@ struct input {
 inline struct input ReadInput(char* PATH) {
     FILE *file;
     struct input temp = { .t = 0,.T = 0,.deltaT = 0,
-                          .Xmin = 0,.Xmax = 0,.arr.Lx = 0,
-                          .Ymin = 0,.Ymax = 0,.arr.Ly = 0,
-                          .Zmin = 0,.Zmax = 0,.arr.Lz = 0,
-                          .Sigma = 0,.deltaOut = 0,.arr.values = 0 };
+        .Xmin = 0,.Xmax = 0,.arr.Lx = 0,
+        .Ymin = 0,.Ymax = 0,.arr.Ly = 0,
+        .Zmin = 0,.Zmax = 0,.arr.Lz = 0,
+        .Sigma = 0,.deltaOut = 0,.arr.values = 0 };
     char* token;
-    int pos=0;
-    double buf=0;
-    char* string = (char*)calloc(10000000,sizeof(char));
+    int pos = 0;
+    double buf = 0;
+    char* string = (char*)calloc(10000000, sizeof(char));
 
     fopen_s(&file, PATH, "r");
     if (file == NULL) {
-            printf("Can`t find file\n");
+        printf("Can`t find file\n");
     }
     else {
         for (int i = 0; fgets(string, 10000000 * sizeof(char), file) != NULL; i++)
@@ -165,7 +201,7 @@ inline struct input ReadInput(char* PATH) {
 inline void OutputArr(char* PATH, double* arr, int length) {
     FILE* file;
     fopen_s(&file, PATH, "a+");
-    if ( file == NULL)
+    if (file == NULL)
         printf("Cant open file\n");
     else {
         fprintf(file, "\n");
@@ -213,12 +249,11 @@ inline int OutputCurrentTime(char* PATH, double currT) {
 }
 
 // MPI Functions
-
-inline void SendBorderValues( struct Array3D* points , unsigned rank, 
+inline void SendBorderValues(struct Array3D* points, unsigned rank,
     unsigned process_per_axis, unsigned Xcube_pos, unsigned Ycube_pos
 ) {
     MPI_Status Status;
-    int section_size = points->Ly * points ->Lz;
+    int section_size = points->Ly * points->Lz;
     // Send
     if (Xcube_pos > 0) {
         // send X border section to previos process
@@ -237,7 +272,7 @@ inline void SendBorderValues( struct Array3D* points , unsigned rank,
     if (Ycube_pos < process_per_axis - 1) {
         // send Y border section to next process
         for (unsigned i = 0; i < points->Lx; i++)
-            MPI_Send(points->values + (i + 1)*section_size - points->Lz*2, points->Lz, MPI_DOUBLE, rank + process_per_axis, rank, MPI_COMM_WORLD);
+            MPI_Send(points->values + (i + 1)*section_size - points->Lz * 2, points->Lz, MPI_DOUBLE, rank + process_per_axis, rank, MPI_COMM_WORLD);
     }
 
     // Recieve
@@ -248,22 +283,83 @@ inline void SendBorderValues( struct Array3D* points , unsigned rank,
     if (Xcube_pos < process_per_axis - 1) {
         // get X border section from next process
         MPI_Recv(points->values + (points->Lx - 1)*section_size,
-                 section_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
+            section_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
     }
 
     if (Ycube_pos > 0) {
         // get Y border section from previos process
         for (unsigned i = 0; i < points->Lx; i++)
             MPI_Recv(points->values + section_size * i, points->Lz,
-                     MPI_DOUBLE, rank - process_per_axis, rank - process_per_axis, MPI_COMM_WORLD, &Status);
+                MPI_DOUBLE, rank - process_per_axis, rank - process_per_axis, MPI_COMM_WORLD, &Status);
     }
     if (Ycube_pos < process_per_axis - 1) {
         // get Y border section from next process
         for (unsigned i = 0; i < points->Lx; i++)
             MPI_Recv(points->values + (i + 1)*section_size - points->Lz,
-                     points->Lz, MPI_DOUBLE, rank + process_per_axis, rank + process_per_axis, MPI_COMM_WORLD, &Status);
+                points->Lz, MPI_DOUBLE, rank + process_per_axis, rank + process_per_axis, MPI_COMM_WORLD, &Status);
     }
 }
+
+#if DEBUG
+inline void SendBorderValues(struct Array3D* points, unsigned rank,
+    unsigned process_per_axis, unsigned Xcube_pos, unsigned Ycube_pos
+) {
+    MPI_Status Status;
+    int section_size = points->Ly * points->Lz;
+    // Send
+    if (Xcube_pos > 0) {
+        // send X border section to previos process
+        for (unsigned n = 0; n < 4; n++)
+            MPI_Send(points->values + section_size * (4 + n), section_size, MPI_DOUBLE, rank - 1, rank, MPI_COMM_WORLD);
+    }
+    if (Xcube_pos < process_per_axis - 1) {
+        // send X border section to next process
+        for (unsigned n = 0; n < 4; n++)
+            MPI_Send(points->values + (points->Lx - 5 + n)*section_size, section_size, MPI_DOUBLE, rank + 1, rank, MPI_COMM_WORLD);
+    }
+
+    if (Ycube_pos > 0) {
+        // send Y border section to previos process
+        for (unsigned n = 0; n < 4; n++)
+            for (unsigned i = 0; i < points->Lx; i++)
+                MPI_Send(points->values + section_size * i + points->Lz * (4 + n), points->Lz, MPI_DOUBLE, rank - process_per_axis, rank, MPI_COMM_WORLD);
+    }
+    if (Ycube_pos < process_per_axis - 1) {
+        // send Y border section to next process
+        for (unsigned n = 0; n < 4; n++)
+            for (unsigned i = 0; i < points->Lx; i++)
+                MPI_Send(points->values + (i + 1)*section_size - points->Lz * (5 + n), points->Lz, MPI_DOUBLE, rank + process_per_axis, rank, MPI_COMM_WORLD);
+    }
+
+    // Recieve
+    if (Xcube_pos > 0) {
+        // get X border section from previos process
+        for (unsigned n = 0; n < 4; n++)
+            MPI_Recv(points->values + section_size * n, section_size, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, &Status);
+    }
+    if (Xcube_pos < process_per_axis - 1) {
+        // get X border section from next process
+        for (unsigned n = 0; n < 4; n++)
+            MPI_Recv(points->values + (points->Lx - 4 + n)*section_size,
+                section_size, MPI_DOUBLE, rank + 1, rank + 1, MPI_COMM_WORLD, &Status);
+    }
+
+    if (Ycube_pos > 0) {
+        // get Y border section from previos process
+        for (unsigned n = 0; n < 4; n++)
+            for (unsigned i = 0; i < points->Lx; i++)
+                MPI_Recv(points->values + section_size * i + points->Lz * n, points->Lz,
+                    MPI_DOUBLE, rank - process_per_axis, rank - process_per_axis, MPI_COMM_WORLD, &Status);
+    }
+    if (Ycube_pos < process_per_axis - 1) {
+        // get Y border section from next process
+        for (unsigned n = 0; n < 4; n++)
+            for (unsigned i = 0; i < points->Lx; i++)
+                MPI_Recv(points->values + (i + 1)*section_size - points->Lz * (4 - n),
+                    points->Lz, MPI_DOUBLE, rank + process_per_axis, rank + process_per_axis, MPI_COMM_WORLD, &Status);
+    }
+}
+#endif /*DEBUG*/
 
 
 int main(int argc, char* argv[])
@@ -338,8 +434,8 @@ int main(int argc, char* argv[])
 
     // Variables initialization ---
     double current_time = data.t;
-    unsigned out_freq = (unsigned)(data.T - data.t) / data.deltaOut;
-    unsigned count_threshold = (unsigned)(data.T - data.t) / data.deltaT;
+    unsigned out_freq = (unsigned)((data.T - data.t) / data.deltaOut);
+    unsigned count_threshold = (unsigned)((data.T - data.t) / data.deltaT);
     out_freq = count_threshold / out_freq;
 
     unsigned process_per_axis = (unsigned)sqrt(proc_num);
@@ -348,22 +444,43 @@ int main(int argc, char* argv[])
     unsigned Xcube_pos = rank % process_per_axis;
     unsigned Ycube_pos = rank / process_per_axis;
 
-    // Add borders ---
-    if (Xcube_pos > 0)
-        Xlines++;
-    if (Xcube_pos < process_per_axis - 1)
-        Xlines++;
-    if (Ycube_pos > 0)
-        Ylines++;
-    if (Ycube_pos < process_per_axis - 1)
-        Ylines++;
-
     // Add remainder ---
     if (Xcube_pos == process_per_axis - 1)
         Xlines += data.arr.Lx % process_per_axis;
     if (Ycube_pos == process_per_axis - 1)
         Ylines += data.arr.Ly % process_per_axis;
-    
+
+    unsigned Xstart_copy_line = Xcube_pos * data.arr.Lx / process_per_axis;
+    unsigned Ystart_copy_line = Ycube_pos * data.arr.Ly / process_per_axis;
+
+    // Add borders ---
+    if (Xcube_pos > 0) {
+        Xlines++;
+        Xstart_copy_line--;
+    }
+    if (Xcube_pos < process_per_axis - 1)
+        Xlines++;
+    if (Ycube_pos > 0) {
+        Ylines++;
+        Ystart_copy_line--;
+    }
+    if (Ycube_pos < process_per_axis - 1)
+        Ylines++;
+#if DEBUG
+    if (Xcube_pos > 0) {
+        Xlines += 4;
+        Xstart_copy_line -= 4;
+    }
+    if (Xcube_pos < process_per_axis - 1)
+        Xlines += 4;
+    if (Ycube_pos > 0) {
+        Ylines += 4;
+        Ystart_copy_line -= 4;
+    }
+    if (Ycube_pos < process_per_axis - 1)
+        Ylines += 4;
+#endif
+
     // Standart calculation arrays ---
     struct Array3D points;
     struct Array3D prev;
@@ -373,14 +490,6 @@ int main(int argc, char* argv[])
     // MPI communication variables ---
     unsigned elements_per_process = Xlines * Ylines * data.arr.Lz;
 
-    unsigned Xstart_copy_line = Xcube_pos * data.arr.Lx / process_per_axis;
-    unsigned Ystart_copy_line = Ycube_pos * data.arr.Ly / process_per_axis;
-
-    if (Xcube_pos > 0)
-        Xstart_copy_line -= 1;
-    if (Ycube_pos > 0)
-        Ystart_copy_line -= 1;
-
     // Values for return collection (used only on root rank)
     int* x_return_lines = (int*)malloc(proc_num * sizeof(int));
     int* y_return_lines = (int*)malloc(proc_num * sizeof(int));
@@ -388,7 +497,7 @@ int main(int argc, char* argv[])
     int* y_return_start = (int*)malloc(proc_num * sizeof(int));
     struct Array3D* buffer = (struct Array3D*)malloc(sizeof(struct Array3D)*proc_num);
 
-    // Create on 1st process array of values for collect return data ---
+    // Create on 1st process array of values for collect output data ---
     if (rank == 0) {
         x_return_lines[0] = Xlines;
         y_return_lines[0] = Ylines;
@@ -431,10 +540,10 @@ int main(int argc, char* argv[])
                 set(&points, i, j, k, get(&data.arr, Xstart_copy_line + i, Ystart_copy_line + j, k));
             }
 
-    // Runge Kutta variables
+    // Runge Kutta variables ---
+#if RUNGE_KUTTA || MATRIX_RUNGE_KUTTA
     struct Array3D k1, k2, k3, k4, medium, derivative;
 
-#if RUNGE_KUTTA
     initArray3D(&k1, Xlines, Ylines, data.arr.Lz);
     initArray3D(&k2, Xlines, Ylines, data.arr.Lz);
     initArray3D(&k3, Xlines, Ylines, data.arr.Lz);
@@ -443,7 +552,154 @@ int main(int argc, char* argv[])
     initArray3D(&derivative, Xlines, Ylines, data.arr.Lz);
 #endif /*RUNGE_KUTTA*/
 
+    // CSR variables ---
+#if  MATRIX_EILER ||  MATRIX_RUNGE_KUTTA
+    double * values;
+    int* column_num;
+    int* line_first;
+
+    unsigned borders_number = Xlines * Ylines * 2 + Ylines * data.arr.Lz * 2 + Xlines * data.arr.Lz * 2 - 8 - Xlines * 4 - Ylines * 4 - data.arr.Lz * 4;
+    unsigned values_number = (elements_per_process - borders_number) * 7 + borders_number;
+    values = (double*)calloc(values_number, sizeof(double));
+    column_num = (unsigned*)calloc(values_number, sizeof(unsigned));
+    line_first = (unsigned*)calloc(elements_per_process + 1, sizeof(unsigned));
+
+    unsigned counter = 0;
+    for (unsigned i = 0; i < Xlines; i++)
+        for (unsigned j = 0; j < Ylines; j++)
+            for (unsigned k = 0; k < data.arr.Lz; k++) {
+
+                line_first[i*Ylines*data.arr.Lz + j * data.arr.Lz + k] = counter;
+                if (i == 0 || j == 0 || k == 0 || i == Xlines - 1 || j == Ylines - 1 || k == data.arr.Lz - 1) {
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter++] = 1;
+                }
+                else {
+                    // x y z central*3 z y x
+                    column_num[counter] = (i - 1) * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter++] = data.Sigma * data.deltaT * Xdivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + (j - 1) * data.arr.Lz + k;
+                    values[counter++] = data.Sigma * data.deltaT * Ydivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k - 1;
+                    values[counter++] = data.Sigma * data.deltaT * Zdivider;
+
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+#if MATRIX_EILER
+                    values[counter++] = 1 - 2 * data.Sigma * data.deltaT * (Xdivider + Ydivider + Zdivider);
+#else
+                    values[counter++] = -2 * data.Sigma * data.deltaT * (Xdivider + Ydivider + Zdivider);
+#endif
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k + 1;
+                    values[counter++] = data.Sigma * data.deltaT * Zdivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + (j + 1) * data.arr.Lz + k;
+                    values[counter++] = data.Sigma * data.deltaT * Ydivider;
+                    column_num[counter] = (i + 1) * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter++] = data.Sigma * data.deltaT * Xdivider;
+                }
+            }
+    line_first[elements_per_process] = counter;
+
     if (DEBUG) {
+        Sleep(100 * rank);
+        printf("\n");
+        printf("\n");
+        for (unsigned i = 0; i < values_number; i++)
+            printf("%f ", values[i]);
+        printf("\n");
+        for (unsigned i = 0; i < values_number; i++)
+            printf("%d ", column_num[i]);
+        printf("\n");
+        for (unsigned i = 0; i < elements_per_process + 1; i++)
+            printf("%d ", line_first[i]);
+        printf("\n");
+    }
+#endif /*MATRIX_EILER ||  MATRIX_RUNGE_KUTTA*/
+
+    // Yakobi variables ---
+#if YAKOBI
+    int flag, result, sum;
+    double delta;
+    double *MainDiag = NULL;
+    struct Array3D discrepancy;
+    initArray3D(&discrepancy, Xlines, Ylines, data.arr.Lz);
+
+    unsigned borders_number = Xlines * Ylines * 2 + Ylines * data.arr.Lz * 2 + Xlines * data.arr.Lz * 2 - Xlines * 4 - Ylines * 4 - data.arr.Lz * 4 - 8;
+    unsigned values_number = (elements_per_process - borders_number) * 7 + borders_number;
+    values = (double*)calloc(values_number, sizeof(double));
+    column_num = (unsigned*)calloc(values_number, sizeof(unsigned));
+    line_first = (unsigned*)calloc(elements_per_process + 1, sizeof(unsigned));
+    MainDiag = (double*)calloc(elements_per_process, sizeof(double));
+
+    unsigned counter = 0;
+    for (unsigned i = 0; i < Xlines; i++)
+        for (unsigned j = 0; j < Ylines; j++)
+            for (unsigned k = 0; k < data.arr.Lz; k++) {
+
+                line_first[i*Ylines*data.arr.Lz + j * data.arr.Lz + k] = counter;
+                if (i == 0 || j == 0 || k == 0 || i == Xlines - 1 || j == Ylines - 1 || k == data.arr.Lz - 1) {
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    MainDiag[i*Ylines*data.arr.Lz + j * data.arr.Lz + k] = 1;
+                    values[counter++] = 1;
+                }
+                else {
+                    // x y z central*3 z y x
+                    column_num[counter] = (i - 1) * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter++] = -data.Sigma * data.deltaT * Xdivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + (j - 1) * data.arr.Lz + k;
+                    values[counter++] = -data.Sigma * data.deltaT * Ydivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k - 1;
+                    values[counter++] = -data.Sigma * data.deltaT * Zdivider;
+
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter] = 1 + 2 * data.Sigma * data.deltaT * (Xdivider + Ydivider + Zdivider);
+                    MainDiag[i*Ylines*data.arr.Lz + j * data.arr.Lz + k] = 1 / values[counter];
+                    counter++;
+
+                    column_num[counter] = i * Ylines*data.arr.Lz + j * data.arr.Lz + k + 1;
+                    values[counter++] = -data.Sigma * data.deltaT * Zdivider;
+                    column_num[counter] = i * Ylines*data.arr.Lz + (j + 1) * data.arr.Lz + k;
+                    values[counter++] = -data.Sigma * data.deltaT * Ydivider;
+                    column_num[counter] = (i + 1) * Ylines*data.arr.Lz + j * data.arr.Lz + k;
+                    values[counter++] = -data.Sigma * data.deltaT * Xdivider;
+                }
+            }
+    line_first[elements_per_process] = counter;
+
+    delta = 0.0001;
+    flag = 0;
+
+    if (DEBUG) {
+        Sleep(100 * rank);
+        printf("\n");
+        printf("\n");
+        for (unsigned i = 0; i < values_number; i++)
+            printf("%f ", values[i]);
+        printf("\n");
+        for (unsigned i = 0; i < values_number; i++)
+            printf("%d ", column_num[i]);
+        printf("\n");
+        for (unsigned i = 0; i < elements_per_process + 1; i++)
+            printf("%d ", line_first[i]);
+        printf("\n");
+    }
+    //    for (i = 0; i < sendcounts[rank] - 2; i++) {
+    //        Values[i * 3 + 1] = -data.Sigma * data.deltaT * divider;
+    //        Values[i * 3 + 2] = 1 + 2 * data.Sigma * data.deltaT * divider;
+    //        Values[i * 3 + 3] = -data.Sigma * data.deltaT * divider;
+    //    }
+    //    delta = 0.00001;
+    //    discrepancy = (double*)malloc(sizeof(double)*data.NumPoints);
+    //    flag = 0;
+    //
+    //    MainDiag = (double*)malloc(sizeof(double)*sendcounts[rank]);
+    //    for (i = 0; i < sendcounts[rank]; i++) {
+    //        MainDiag[i] = 1 / CrsAccess(Values, ColumnNum, LineFirst, i, i, sendcounts[rank]);
+    //    }
+    //END OF INITIALIZATION
+#endif /*YAKOBI*/
+
+    if (DEBUG) {
+        Sleep(1000 * rank);
         printf("rank: %d xpos: %d ypos: %d proc_per_ax: %d\n"
             "rank: %d xlines: %d ylines: %d zlines: %d\n"
             "rank: %d x_start_copy %d y_start_copy %d\n",
@@ -467,16 +723,16 @@ int main(int argc, char* argv[])
 #if EILER
 #pragma omp parallel for
         for (i = 0; i < elements_per_process; i++)
-             prev.values[i] = points.values[i];
- #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&points, i, j, k,
-                         get(&prev, i, j, k) + data.Sigma*data.deltaT*(
-                         (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
-                             (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
-                             (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
+            prev.values[i] = points.values[i];
+#pragma omp parallel for
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&points, i, j, k,
+                        get(&prev, i, j, k) + data.Sigma*data.deltaT*(
+                        (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
+                            (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
+                            (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
                     // points[i][j][k] = prev[i][j][k] + data.Sigma*data.deltaT*((prev[i-1][j][k] - 2*prev[i][j][k] + prev[i+1][j][k]) * Xdivider +
                     //                                                           (prev[i][j-1][k] - 2*prev[i][j][k] + prev[i][j+1][k]) * Ydivider +
                     //                                                           (prev[i][j][k-1] - 2*prev[i][j][k] + prev[i][j][k+1]) * Zdivider);
@@ -484,87 +740,224 @@ int main(int argc, char* argv[])
 #endif /*EILER*/
 #if RUNGE_KUTTA
 #pragma omp parallel for
-         for (i = 0; i < elements_per_process; i++)
-             prev.values[i] = points.values[i];
+        for (i = 0; i < elements_per_process; i++)
+            prev.values[i] = points.values[i];
 
-// k1 calculation ---
+        // k1 calculation ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&k1, i, j, k, data.Sigma*data.deltaT*(
-                         (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
-                         (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
-                         (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&k1, i, j, k, data.Sigma*data.deltaT*(
+                        (get(&prev, i - 1, j, k) - 2 * get(&prev, i, j, k) + get(&prev, i + 1, j, k)) * Xdivider +
+                        (get(&prev, i, j - 1, k) - 2 * get(&prev, i, j, k) + get(&prev, i, j + 1, k)) * Ydivider +
+                        (get(&prev, i, j, k - 1) - 2 * get(&prev, i, j, k) + get(&prev, i, j, k + 1)) * Zdivider));
+                }
 #pragma omp parallel for
-         for (i = 0; i < Xlines; i++)
-             for (j = 0; j < Ylines; j++)
-                 for (k = 0; k < points.Lz; k++) {
-                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k1, i, j, k) * 0.5);
-                 }
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k1, i, j, k) * 0.5);
+                }
 
-// k2 calculation ---
+        // k2 calculation ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&k2, i, j, k, data.Sigma*data.deltaT*(
-                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
-                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
-                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&k2, i, j, k, data.Sigma*data.deltaT*(
+                        (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                        (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                        (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                }
 #pragma omp parallel for
-         for (i = 0; i < Xlines; i++)
-             for (j = 0; j < Ylines; j++)
-                 for (k = 0; k < points.Lz; k++) {
-                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k) * 0.5);
-                 }
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k) * 0.5);
+                }
 
-// k3 calculation ---
+        // k3 calculation ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&k3, i, j, k, data.Sigma*data.deltaT*(
-                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
-                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
-                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&k3, i, j, k, data.Sigma*data.deltaT*(
+                        (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                        (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                        (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                }
 #pragma omp parallel for
-         for (i = 0; i < Xlines; i++)
-             for (j = 0; j < Ylines; j++)
-                 for (k = 0; k < points.Lz; k++) {
-                     set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k));
-                 }
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k3, i, j, k));
+                }
 
-// k4 calculation ---
+        // k4 calculation ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&k4, i, j, k, data.Sigma*data.deltaT*(
-                         (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
-                         (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
-                         (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&k4, i, j, k, data.Sigma*data.deltaT*(
+                        (get(&medium, i - 1, j, k) - 2 * get(&medium, i, j, k) + get(&medium, i + 1, j, k)) * Xdivider +
+                        (get(&medium, i, j - 1, k) - 2 * get(&medium, i, j, k) + get(&medium, i, j + 1, k)) * Ydivider +
+                        (get(&medium, i, j, k - 1) - 2 * get(&medium, i, j, k) + get(&medium, i, j, k + 1)) * Zdivider));
+                }
 
-// derivative calculation ---
+        // derivative calculation ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&derivative, i, j, k, (get(&k1, i, j, k)+ get(&k2, i, j, k)+ get(&k3, i, j, k)+ get(&k4, i, j, k))* 0.1666666666);
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&derivative, i, j, k, (get(&k1, i, j, k) + get(&k2, i, j, k) * 2 + get(&k3, i, j, k) * 2 + get(&k4, i, j, k)) * 0.1666666666);
+                }
 
-// final result ---
+        // final result ---
 #pragma omp parallel for
-         for (i = 1; i < Xlines - 1; i++)
-             for (j = 1; j < Ylines - 1; j++)
-                 for (k = 1; k < points.Lz - 1; k++) {
-                     set(&points, i, j, k, get(&prev, i, j, k) + get(&derivative, i, j, k));
-                 }
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&points, i, j, k, get(&prev, i, j, k) + get(&derivative, i, j, k));
+                }
 #endif /*RUNGE_KUTTA*/
+#if MATRIX_EILER
+#pragma omp parallel for
+        for (i = 0; i < elements_per_process; i++)
+            prev.values[i] = points.values[i];
+
+        CsrMult(values, column_num, line_first, prev.values, elements_per_process, points.values);
+#endif /*MATRIX_EILER*/
+#if MATRIX_RUNGE_KUTTA
+#pragma omp parallel for
+        for (i = 0; i < elements_per_process; i++)
+            prev.values[i] = points.values[i];
+
+        // k1 calculation ---
+        CsrMult(values, column_num, line_first, prev.values, elements_per_process, k1.values);
+        SendBorderValues(&k1, rank, process_per_axis, Xcube_pos, Ycube_pos);
+#pragma omp parallel for
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k1, i, j, k) * 0.5);
+                }
+
+        // k2 calculation ---
+        CsrMult(values, column_num, line_first, medium.values, elements_per_process, k2.values);
+        SendBorderValues(&k2, rank, process_per_axis, Xcube_pos, Ycube_pos);
+#pragma omp parallel for
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k2, i, j, k) * 0.5);
+                }
+
+        // k3 calculation ---
+        CsrMult(values, column_num, line_first, medium.values, elements_per_process, k3.values);
+        SendBorderValues(&k3, rank, process_per_axis, Xcube_pos, Ycube_pos);
+#pragma omp parallel for
+        for (i = 0; i < Xlines; i++)
+            for (j = 0; j < Ylines; j++)
+                for (k = 0; k < points.Lz; k++) {
+                    set(&medium, i, j, k, get(&prev, i, j, k) + get(&k3, i, j, k));
+                }
+
+        // k4 calculation ---
+        CsrMult(values, column_num, line_first, medium.values, elements_per_process, k4.values);
+
+        // derivative calculation ---
+#pragma omp parallel for
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&derivative, i, j, k, (get(&k1, i, j, k) + 2 * get(&k2, i, j, k) + 2 * get(&k3, i, j, k) + get(&k4, i, j, k))* 0.1666666666);
+                }
+
+        // final result ---
+#pragma omp parallel for
+        for (i = 1; i < Xlines - 1; i++)
+            for (j = 1; j < Ylines - 1; j++)
+                for (k = 1; k < points.Lz - 1; k++) {
+                    set(&points, i, j, k, get(&prev, i, j, k) + get(&derivative, i, j, k));
+                }
+#endif /*MATRIX_RUNGE_KUTTA*/
+#if YAKOBI
+        flag = 1;
+#pragma omp parallel for
+        for (i = 0; i < elements_per_process; i++)
+            prev.values[i] = points.values[i];
+
+        while (flag) {
+            flag = 0;
+            CsrMult(values, column_num, line_first, points.values, elements_per_process, discrepancy.values);
+            SendBorderValues(&discrepancy, rank, process_per_axis, Xcube_pos, Ycube_pos);
+
+#pragma omp parallel for
+            for (i = 0; i < elements_per_process; i++) {
+                discrepancy.values[i] -= prev.values[i];
+                discrepancy.values[i] = fabs(discrepancy.values[i]);
+                if (discrepancy.values[i] > delta) {
+                    flag = 1;
+                    break;
+                }
+            }
+
+            result = 0;
+            MPI_Allreduce(&flag, &result, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+            if (result == 0)
+                break;
+
+#pragma omp parallel for
+            for (i = 0; i < elements_per_process; i++)
+                discrepancy.values[i] = points.values[i];
+
+            for (i = 0; i < elements_per_process; i++) {
+                sum = 0;
+                for (int j = 0; j < elements_per_process; j++)
+                    if (j != i)
+                        sum += CrsAccess(values, column_num, line_first, i, j, elements_per_process)*discrepancy.values[j];
+                points.values[i] = MainDiag[i] * (prev.values[i] - sum);
+            }
+        }
+
+        //          flag = 1;
+        // #pragma omp parallel for
+        //          for (i = 0; i < sendcounts[rank]; i++)
+        //              prev[i] = points[i];//make pointers swap
+        //          while (flag) {
+        //              flag = 0;
+        //              //TRY TO CHECK DISCREPANCY DELTA
+        //              CsrMult(Values, ColumnNum, LineFirst, points, sendcounts[rank], discrepancy);
+        //              SendBorderValues(discrepancy, sendcounts, rank, proc_num);
+        // #pragma omp parallel for
+        //              for (i = 0; i < sendcounts[rank]; i++) {
+        //                  discrepancy[i] -= prev[i];
+        //                  discrepancy[i] = fabs(discrepancy[i]);
+        //                  if (discrepancy[i] > delta) {
+        //                      flag = 1;
+        //                  }
+        //              }
+        //              result = 0;
+        // 
+        //              MPI_Allreduce(&flag, &result, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+        //              //printf("result %d\n", result);
+        //              if (!result)
+        //                  break;
+        // 
+        // #pragma omp parallel for
+        //              for (i = 0; i < sendcounts[rank]; i++)
+        //                  discrepancy[i] = points[i];
+        // 
+        //              for (i = 0; i < sendcounts[rank]; i++) {
+        //                  sum = 0;
+        //                  for (int j = 0; j < sendcounts[rank]; j++)
+        //                      if (j != i)
+        //                          sum += CrsAccess(Values, ColumnNum, LineFirst, i, j, sendcounts[rank])*discrepancy[j];
+        //                  points[i] = MainDiag[i] * (prev[i] - sum);
+        //              }
+        //          }
+#endif
 
         SendBorderValues(&points, rank, process_per_axis, Xcube_pos, Ycube_pos);
 
@@ -572,7 +965,7 @@ int main(int argc, char* argv[])
         if (!rank) time += omp_get_wtime() - out_time;
 
         // Print ---
-        if (count%out_freq == 0 && count) {
+        if (count % out_freq == 0 && count) {
             if (rank == 0) {
                 //Can't send-receive from 0 process to himself
                 for (unsigned i = 0; i < points.Lx; i++)
@@ -582,7 +975,7 @@ int main(int argc, char* argv[])
                         }
 
                 for (unsigned sender_number = 1; sender_number < proc_num; sender_number++) {
-                    MPI_Recv((buffer + sender_number) -> values, x_return_lines[sender_number] * y_return_lines[sender_number] * data.arr.Lz,
+                    MPI_Recv((buffer + sender_number)->values, x_return_lines[sender_number] * y_return_lines[sender_number] * data.arr.Lz,
                         MPI_DOUBLE, sender_number, sender_number, MPI_COMM_WORLD, &status);
 
                     for (int i = 0; i < x_return_lines[sender_number]; i++)
@@ -591,7 +984,7 @@ int main(int argc, char* argv[])
                                 set(&print_array, x_return_start[sender_number] + i, y_return_start[sender_number] + j, k, get(buffer + sender_number, i, j, k));
                             }
                 }
-            
+
                 OutputArr(inputFile, print_array.values, print_array.Lx*print_array.Ly*print_array.Lz);
                 current_time += data.deltaOut;
                 OutputCurrentTime(inputFile, current_time);
