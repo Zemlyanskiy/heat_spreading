@@ -420,7 +420,7 @@ int main(int argc, char* argv[])
             MPI_Recv(y_return_lines + i, 1, MPI_INT, i, i, MPI_COMM_WORLD, &status);
             MPI_Recv(x_return_start + i, 1, MPI_INT, i, i, MPI_COMM_WORLD, &status);
             MPI_Recv(y_return_start + i, 1, MPI_INT, i, i, MPI_COMM_WORLD, &status);
-            buffer[i] = (double*)calloc(x_return_lines[i] & y_return_lines[i] & data.Lz, sizeof(double));
+            buffer[i] = (double*)calloc(x_return_lines[i] * y_return_lines[i] * data.Lz, sizeof(double));
         }
 
     }
@@ -627,6 +627,8 @@ int main(int argc, char* argv[])
         if (rank==0) out_time = omp_get_wtime();
 
 #if EILER
+    //printf("count: %d rank: %d\n", count, rank);
+    //fflush(stdout);
 #pragma omp parallel for
         for (i = 0; i < elements_per_process; i++)
             prev[i] = points[i];
@@ -634,7 +636,7 @@ int main(int argc, char* argv[])
         for (i = 1; i < Xlines - 1; i++)
             for (j = 1; j < Ylines - 1; j++)
                 for (k = 1; k < data.Lz - 1; k++) {
-                    Get(points, i, j, k, Xlines, Ylines, data.Lz) = 
+                    Get(points, i, j, k, Xlines, Ylines, data.Lz) =
                         Get(prev, i, j, k, Xlines, Ylines, data.Lz) + data.Sigma*data.deltaT*(
                         (Get(prev, i - 1, j, k, Xlines, Ylines, data.Lz) - 2 * Get(prev, i, j, k, Xlines, Ylines, data.Lz) + Get(prev, i + 1, j, k, Xlines, Ylines, data.Lz)) * Xdivider +
                         (Get(prev, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(prev, i, j, k, Xlines, Ylines, data.Lz) + Get(prev, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
@@ -722,9 +724,9 @@ int main(int argc, char* argv[])
         for (i = 1; i < Xlines - 1; i++)
             for (j = 1; j < Ylines - 1; j++)
                 for (k = 1; k < data.Lz - 1; k++) {
-                    Get(derivative, i, j, k, Xlines, Ylines, data.Lz) = (Get(k1, i, j, k, Xlines, Ylines, data.Lz) + 
-                                                                         Get(k2, i, j, k, Xlines, Ylines, data.Lz) * 2 + 
-                                                                         Get(k3, i, j, k, Xlines, Ylines, data.Lz) * 2 + 
+                    Get(derivative, i, j, k, Xlines, Ylines, data.Lz) = (Get(k1, i, j, k, Xlines, Ylines, data.Lz) +
+                                                                         Get(k2, i, j, k, Xlines, Ylines, data.Lz) * 2 +
+                                                                         Get(k3, i, j, k, Xlines, Ylines, data.Lz) * 2 +
                                                                          Get(k4, i, j, k, Xlines, Ylines, data.Lz)) * 0.1666666666;
                 }
 
@@ -786,9 +788,9 @@ int main(int argc, char* argv[])
         for (i = 1; i < Xlines - 1; i++)
             for (j = 1; j < Ylines - 1; j++)
                 for (k = 1; k < data.Lz - 1; k++) {
-                    Get(derivative, i, j, k, Xlines, Ylines, data.Lz) = (Get(k1, i, j, k, Xlines, Ylines, data.Lz) + 
-                                                                      2 * Get(k2, i, j, k, Xlines, Ylines, data.Lz) + 
-                                                                      2 * Get(k3, i, j, k, Xlines, Ylines, data.Lz) + 
+                    Get(derivative, i, j, k, Xlines, Ylines, data.Lz) = (Get(k1, i, j, k, Xlines, Ylines, data.Lz) +
+                                                                      2 * Get(k2, i, j, k, Xlines, Ylines, data.Lz) +
+                                                                      2 * Get(k3, i, j, k, Xlines, Ylines, data.Lz) +
                                                                           Get(k4, i, j, k, Xlines, Ylines, data.Lz))* 0.1666666666;
                 }
 
@@ -825,6 +827,7 @@ int main(int argc, char* argv[])
             if (result == 0) {
                 break;
             }
+            flag = 1;
 
             // We must set discrepancy to points to calculate sum from previous calculated points.
             for (i = 0; i < elements_per_process; i++)
@@ -860,11 +863,11 @@ int main(int argc, char* argv[])
                 for (unsigned sender_number = 1; sender_number < proc_num; sender_number++) {
                     MPI_Recv(buffer[sender_number], x_return_lines[sender_number] * y_return_lines[sender_number] * data.Lz,
                         MPI_DOUBLE, sender_number, sender_number, MPI_COMM_WORLD, &status);
-                
+
                     for (int i = 0; i < x_return_lines[sender_number]; i++)
                         for (int j = 0; j < y_return_lines[sender_number]; j++)
                             for (int k = 0; k < data.Lz; k++) {
-                                Get(print_array, x_return_start[sender_number] + i, y_return_start[sender_number] + j, k, data.Lx, data.Ly, data.Lz) = 
+                                Get(print_array, x_return_start[sender_number] + i, y_return_start[sender_number] + j, k, data.Lx, data.Ly, data.Lz) =
                                 Get(buffer[sender_number], i, j, k, x_return_lines[sender_number], y_return_lines[sender_number], data.Lz);
                             }
                 }
