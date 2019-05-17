@@ -5,10 +5,11 @@ echo --- Setting initial variables
 
 set OUT_DIR=out
 set MPI_DIR=C:\work\MPI
-set PROCESS_NUMBER=4
-set COMPILE_FILE_NAME=3d_heat_spread
-set OUT_FILE_NAME=input1.txt
-set OUT_FILE_DIR=data
+
+rem 3d_heat_spread input1.txt 4
+set COMPILE_FILE_NAME=%1
+set OUT_FILE_NAME=%2
+set PROCESS_NUMBER=%3
 
 where cl.exe >nul 2>nul
 if %ERRORLEVEL% NEQ 0 (
@@ -21,15 +22,19 @@ if %ERRORLEVEL% NEQ 0 (
 echo --- Start building
 echo.
 
-rem /openmp
-cl %COMPILE_FILE_NAME%.c /EHsc                 ^
-   /Fo%OUT_DIR%\ /Fe%OUT_DIR%\                 ^
-   /I%MPI_DIR%\Include /I%MPI_DIR%\Include\x64 ^
-   /link                                       ^
+rem /openmp`
+cl src\%COMPILE_FILE_NAME%.c /EHsc                             ^
+   /Fo%OUT_DIR%\ /Fe%OUT_DIR%\                             ^
+   /I%MPI_DIR%\Include /I%MPI_DIR%\Include\x64 /I.\include ^
+   /link                                                   ^
    /LIBPATH:%MPI_DIR%\Lib\x64 msmpi.lib
 
 echo.
 echo --- Run
-echo.
 
-%MPI_DIR%\bin\mpiexec.exe -n %PROCESS_NUMBER% %OUT_DIR%\%COMPILE_FILE_NAME%.exe %OUT_FILE_DIR%\%OUT_FILE_NAME%
+if %ERRORLEVEL% NEQ 0 (
+    echo --- ERROR! COMPILATION FAILURE!
+    exit 1
+)
+
+%MPI_DIR%\bin\mpiexec.exe -n %PROCESS_NUMBER% %OUT_DIR%\%COMPILE_FILE_NAME%.exe data\%OUT_FILE_NAME%
