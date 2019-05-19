@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
         }
 
         OutputArr(inputFile, points, data.Lx * data.Ly * data.Lz);
+        OutputArr(inputFile, points, data.Lx * data.Ly * data.Lz);
     }
     MPI_Finalize();
     return 0;

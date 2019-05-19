@@ -1,6 +1,8 @@
 {
     "files.associations": {
-        "math.h": "c"
+        "math.h": "c",
+        "xlocale": "c"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "html.format.wrapLineLength": 0
 }

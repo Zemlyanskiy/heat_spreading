@@ -23,7 +23,7 @@ struct input {
     double Sigma; // The coefficient of quation
     double deltaOut;// Delta of output
     unsigned Lx, Ly, Lz;
-    double* arr;
+    double* arr[2];
 };
 
 inline struct input ReadInput(char* PATH) {
@@ -32,11 +32,14 @@ inline struct input ReadInput(char* PATH) {
                           .Xmin = 0,.Xmax = 0, .Lx = 0,
                           .Ymin = 0,.Ymax = 0, .Ly = 0,
                           .Zmin = 0,.Zmax = 0, .Lz = 0,
-                          .Sigma = 0,.deltaOut = 0, .arr = NULL };
+                          .Sigma = 0,.deltaOut = 0 };
+    temp.arr[0] = NULL;
+    temp.arr[1] = NULL;
     char* token;
     int pos = 0;
     double buf = 0;
     char* string = (char*)calloc(10000000, sizeof(char));
+    int count = 0;
 
     fopen_s(&file, PATH, "r");
     if (file == NULL) {
@@ -120,16 +123,17 @@ inline struct input ReadInput(char* PATH) {
                 printf("Mode: start string, Problem: file allready contain start string\n");
 #endif
                 token = strtok(string, " ");
-                if (temp.arr == NULL)
-                    temp.arr = (double*)calloc(temp.Lx * temp.Ly * temp.Lz, sizeof(double));
-                while (token != NULL)
+                if (temp.arr[count] == NULL)
+                    temp.arr[count] = (double*)calloc(temp.Lx * temp.Ly * temp.Lz, sizeof(double));
+                while ( pos < temp.Lx * temp.Ly * temp.Lz )
                 {
                     buf = strtof(token, NULL);
-                    temp.arr[pos] = buf;
+                    temp.arr[count][pos] = buf;
                     token = strtok(NULL, " ");
                     pos++;
                 }
                 pos = 0;
+                count = (count + 1) % 2;
             }
     }
 

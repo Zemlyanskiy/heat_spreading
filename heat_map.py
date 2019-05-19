@@ -57,7 +57,7 @@ class FileFormat:
                 self.deltaOut = float(re.search(r"[\d.]+", line).group())
             else:
                 data_snapshot =  np.zeros((self.Lx, self.Ly, self.Lz))
-                tmp = re.findall(r"[\d.]+", line)
+                tmp = re.findall(r"[-+]?\d*\.\d+|\d+", line)
 
                 for i in range(0,self.Lx):
                     for j in range(0,self.Ly):
@@ -102,6 +102,7 @@ class Index(object):
             for j in range(0, file.Ly - 1):
                 z[i][j] = file.data[self.current_time][i][j][self.index]
 
+        z_min, z_max = -np.abs(z).max(), np.abs(z).max()
         c = ax.pcolormesh(x, y, z, cmap='coolwarm', vmin=z_min, vmax=z_max)
         plt.draw()
 
