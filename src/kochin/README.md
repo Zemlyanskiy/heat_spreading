@@ -14,12 +14,11 @@
  - Optimize Matrix methods - delete 1 redundant operation
  - Remove brute force calculation in Implicit Euler
 
-### Questions:
-1. Initial conditions
-    - How we must initialize borders?
-    - Should the `prev` and `currrent` be the same at the beginnig?
-2. Matrix methods
+### Q:
+1. Matrix methods
     - How we would implement matrix multiplication with 3 times?
+### A:
+1. Add prev time in separate state.
 
 ### Build commands
 

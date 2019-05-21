@@ -56,6 +56,7 @@ int main(int argc, char* argv[])
         MPI_Finalize();
         return 0;
     }
+
     double current_time = data.t;
     unsigned out_freq = (unsigned)((data.T - data.t) / data.deltaOut);
     unsigned count_threshold = (unsigned)((data.T - data.t) / data.deltaT);

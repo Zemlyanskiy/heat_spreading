@@ -1,7 +1,10 @@
 {
     "files.associations": {
         "math.h": "c",
-        "xlocale": "c"
+        "xlocale": "c",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "cmath": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "html.format.wrapLineLength": 0
