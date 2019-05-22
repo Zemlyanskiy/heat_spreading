@@ -58,18 +58,19 @@ int main(int argc, char* argv[])
     unsigned Ystart_copy_line = Ycube_pos * data.Ly / process_per_axis;
 
     // Add borders ---
+    int border_size = 4;
     if (Xcube_pos > 0) {
-        Xlines++;
-        Xstart_copy_line--;
+        Xlines+=border_size;
+        Xstart_copy_line-=border_size;
     }
     if (Xcube_pos < process_per_axis - 1)
-        Xlines++;
+        Xlines+=border_size;
     if (Ycube_pos > 0) {
-        Ylines++;
-        Ystart_copy_line--;
+        Ylines+=border_size;
+        Ystart_copy_line-=border_size;
     }
     if (Ycube_pos < process_per_axis - 1)
-        Ylines++;
+        Ylines+=border_size;
 
     // Standart computation arrays ---
     double *prev, *current, *next;
@@ -149,7 +150,6 @@ int main(int argc, char* argv[])
                         (Get(current, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(current, i, j, k, Xlines, Ylines, data.Lz) + Get(current, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
                         (Get(current, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(current, i, j, k, Xlines, Ylines, data.Lz) + Get(current, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
                 }
-        SendBorderValues(k1, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -168,7 +168,6 @@ int main(int argc, char* argv[])
                         (Get(medium, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
                         (Get(medium, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
                 }
-        SendBorderValues(k2, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -187,7 +186,6 @@ int main(int argc, char* argv[])
                         (Get(medium, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
                         (Get(medium, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
                 }
-        SendBorderValues(k3, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -227,7 +225,7 @@ int main(int argc, char* argv[])
                 }
 #endif /*RUNGE_KUTTA*/
 
-        SendBorderValues(next, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num);
+        SendBorderValues(next, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num, border_size);
 
         // Delete output time from time calculating ---
         if (rank==0) time += omp_get_wtime() - out_time;

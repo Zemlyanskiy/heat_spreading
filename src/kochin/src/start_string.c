@@ -1,4 +1,6 @@
 #include "common.h"
+#include "mpi_communications.h"
+
 
 double CalcFunc(double Xcoord, double Ycoord, double Zcoord) {
     if (Xcoord >= -0.5 && Xcoord <= 0.5 &&
@@ -7,6 +9,11 @@ double CalcFunc(double Xcoord, double Ycoord, double Zcoord) {
         return cos(Xcoord*3.141592) + cos(Ycoord*3.141592) + cos(Zcoord*3.141592);
     }
     return 0;
+}
+
+double CalcFuncDebug(double x, double y, double z) {
+    static unsigned counter = 0;
+    return counter++;
 }
 
 int main(int argc, char* argv[])
