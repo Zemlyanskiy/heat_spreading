@@ -1,5 +1,4 @@
 #include "common.h"
-#include "mpi_communications.h"
 
 int main(int argc, char* argv[])
 {
@@ -40,49 +39,14 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    initialize_common_variables(data);
-
-    unsigned process_per_axis = (unsigned)sqrt(proc_num);
-    unsigned Xlines = data.Lx / process_per_axis;
-    unsigned Ylines = data.Ly / process_per_axis;
-    unsigned Xcube_pos = rank % process_per_axis;
-    unsigned Ycube_pos = rank / process_per_axis;
-
-    // Add remainder ---
-    if (Xcube_pos == process_per_axis - 1)
-        Xlines += data.Lx % process_per_axis;
-    if (Ycube_pos == process_per_axis - 1)
-        Ylines += data.Ly % process_per_axis;
-
-    unsigned Xstart_copy_line = Xcube_pos * data.Lx / process_per_axis;
-    unsigned Ystart_copy_line = Ycube_pos * data.Ly / process_per_axis;
-
-    // Add borders ---
     int border_size = 1;
-    if (Xcube_pos > 0) {
-        Xlines+=border_size;
-        Xstart_copy_line-=border_size;
-    }
-    if (Xcube_pos < process_per_axis - 1)
-        Xlines+=border_size;
-    if (Ycube_pos > 0) {
-        Ylines+=border_size;
-        Ystart_copy_line-=border_size;
-    }
-    if (Ycube_pos < process_per_axis - 1)
-        Ylines+=border_size;
+    initialize_common_variables(data, rank, proc_num, border_size);
 
     // Standart computation arrays ---
     double *prev, *current, *next;
     prev = (double*)calloc(Xlines * Ylines * data.Lz, sizeof(double));
     current = (double*)calloc(Xlines * Ylines * data.Lz, sizeof(double));
     next = (double*)calloc(Xlines * Ylines * data.Lz, sizeof(double));
-
-    // MPI communication variables ---
-    unsigned elements_per_process = Xlines * Ylines * data.Lz;
-
-    initialize_return_variables( Xlines, Ylines, data.Lz, Xstart_copy_line, Ystart_copy_line,
-                                 rank, proc_num );
 
     // Array for print result to file ---
     double* print_array = NULL;
