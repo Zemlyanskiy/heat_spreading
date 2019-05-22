@@ -1,4 +1,5 @@
 #include "common.h"
+#include "csr_api.h"
 
 int main(int argc, char* argv[])
 {
@@ -75,6 +76,49 @@ int main(int argc, char* argv[])
                 Get(next, i, j, k, Xlines, Ylines, data.Lz) = Get(data.arr[1], Xstart_copy_line + i, Ystart_copy_line + j, k, data.Lx, data.Ly, data.Lz);
             }
 
+    // Initialize matrix factory ---
+    double * values;
+    int* column_num;
+    int* line_first;
+
+    unsigned borders_number = Xlines * Ylines * 2 + Ylines * data.Lz * 2 + Xlines * data.Lz * 2 - 8 - Xlines * 4 - Ylines * 4 - data.Lz * 4;
+    unsigned values_number = (elements_per_process - borders_number) * 7 + borders_number;
+    values = (double*)calloc(values_number, sizeof(double));
+    column_num = (unsigned*)calloc(values_number, sizeof(unsigned));
+    line_first = (unsigned*)calloc(elements_per_process + 1, sizeof(unsigned));
+
+    unsigned counter = 0;
+    for (unsigned i = 0; i < Xlines; i++)
+        for (unsigned j = 0; j < Ylines; j++)
+            for (unsigned k = 0; k < data.Lz; k++) {
+
+                line_first[i*Ylines*data.Lz + j * data.Lz + k] = counter;
+                if (i == 0 || j == 0 || k == 0 || i == Xlines - 1 || j == Ylines - 1 || k == data.Lz - 1) {
+                    column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k;
+                    values[counter++] = 1;
+                }
+                else {
+                    // x y z central*3 z y x
+                    column_num[counter] = (i - 1) * Ylines*data.Lz + j * data.Lz + k;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
+                    column_num[counter] = i * Ylines*data.Lz + (j - 1) * data.Lz + k;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
+                    column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k - 1;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
+
+                    column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k;
+                    values[counter++] = -2 * pow(data.Sigma,2) * pow(data.deltaT,2)* (Xdivider + Ydivider + Zdivider);
+
+                    column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k + 1;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
+                    column_num[counter] = i * Ylines*data.Lz + (j + 1) * data.Lz + k;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
+                    column_num[counter] = (i + 1) * Ylines*data.Lz + j * data.Lz + k;
+                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
+                }
+            }
+    line_first[elements_per_process] = counter;
+
     // Calculation process ---
     unsigned i, j, k, count;
     for (count = 0; count <= count_threshold; count++) {
@@ -87,15 +131,7 @@ int main(int argc, char* argv[])
         }
 
         // k1 calculation ---
-#pragma omp parallel for
-        for (i = 1; i < Xlines - 1; i++)
-            for (j = 1; j < Ylines - 1; j++)
-                for (k = 1; k < data.Lz - 1; k++) {
-                    Get(k1, i, j, k, Xlines, Ylines, data.Lz) = pow(data.Sigma,2) * pow(data.deltaT,2)*(
-                        (Get(current, i - 1, j, k, Xlines, Ylines, data.Lz) - 2 * Get(current, i, j, k, Xlines, Ylines, data.Lz) + Get(current, i + 1, j, k, Xlines, Ylines, data.Lz)) * Xdivider +
-                        (Get(current, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(current, i, j, k, Xlines, Ylines, data.Lz) + Get(current, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
-                        (Get(current, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(current, i, j, k, Xlines, Ylines, data.Lz) + Get(current, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
-                }
+        CsrMult(values, column_num, line_first, current, elements_per_process, k1);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -105,15 +141,7 @@ int main(int argc, char* argv[])
                 }
 
         // k2 calculation ---
-#pragma omp parallel for
-        for (i = 1; i < Xlines - 1; i++)
-            for (j = 1; j < Ylines - 1; j++)
-                for (k = 1; k < data.Lz - 1; k++) {
-                    Get(k2, i, j, k, Xlines, Ylines, data.Lz) = pow(data.Sigma,2) * pow(data.deltaT,2)*(
-                        (Get(medium, i - 1, j, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i + 1, j, k, Xlines, Ylines, data.Lz)) * Xdivider +
-                        (Get(medium, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
-                        (Get(medium, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
-                }
+        CsrMult(values, column_num, line_first, medium, elements_per_process, k2);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -123,15 +151,7 @@ int main(int argc, char* argv[])
                 }
 
         // k3 calculation ---
-#pragma omp parallel for
-        for (i = 1; i < Xlines - 1; i++)
-            for (j = 1; j < Ylines - 1; j++)
-                for (k = 1; k < data.Lz - 1; k++) {
-                    Get(k3, i, j, k, Xlines, Ylines, data.Lz) = pow(data.Sigma,2) * pow(data.deltaT,2)*(
-                        (Get(medium, i - 1, j, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i + 1, j, k, Xlines, Ylines, data.Lz)) * Xdivider +
-                        (Get(medium, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
-                        (Get(medium, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
-                }
+        CsrMult(values, column_num, line_first, medium, elements_per_process, k3);
 
 #pragma omp parallel for
         for (i = 0; i < Xlines; i++)
@@ -141,15 +161,7 @@ int main(int argc, char* argv[])
                 }
 
         // k4 calculation ---
-#pragma omp parallel for
-        for (i = 1; i < Xlines - 1; i++)
-            for (j = 1; j < Ylines - 1; j++)
-                for (k = 1; k < data.Lz - 1; k++) {
-                    Get(k4, i, j, k, Xlines, Ylines, data.Lz) = pow(data.Sigma,2) * pow(data.deltaT,2)*(
-                        (Get(medium, i - 1, j, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i + 1, j, k, Xlines, Ylines, data.Lz)) * Xdivider +
-                        (Get(medium, i, j - 1, k, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j + 1, k, Xlines, Ylines, data.Lz)) * Ydivider +
-                        (Get(medium, i, j, k - 1, Xlines, Ylines, data.Lz) - 2 * Get(medium, i, j, k, Xlines, Ylines, data.Lz) + Get(medium, i, j, k + 1, Xlines, Ylines, data.Lz)) * Zdivider);
-                }
+        CsrMult(values, column_num, line_first, medium, elements_per_process, k4);
 
         // derivative calculation ---
 #pragma omp parallel for

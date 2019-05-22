@@ -9,10 +9,9 @@
  - build.bat - script for build and run computation
 
 ### Next steps
- - Realize wave equation process (Runge-Kutta, Implicit Euler, Matrix Multiplication method)
- - Realize 4 levels borders sending in Runge-Kutta
- - Optimize Matrix methods - delete 1 redundant operation
+ - Realize wave equation process (Implicit Euler)
  - Remove brute force calculation in Implicit Euler
+ - Fix heat_map script
 
 ### Q:
 1. Matrix methods

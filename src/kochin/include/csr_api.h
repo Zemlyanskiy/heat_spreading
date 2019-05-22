@@ -18,7 +18,7 @@ inline double CsrAccess(double* Values, int* ColumnNum, int* LineFirst, int i, i
     return 0;
 }
 
-inline void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result, unsigned rank)
+inline void CsrMult(double* Values, int* ColumnNum, int* LineFirst, double * Array, const int size, double* result)
 {
     int i;
 #pragma omp parallel for
