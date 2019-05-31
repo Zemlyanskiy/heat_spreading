@@ -1,5 +1,4 @@
 #include "common.h"
-#include "mpi_communications.h"
 
 
 double CalcFunc(double Xcoord, double Ycoord, double Zcoord) {

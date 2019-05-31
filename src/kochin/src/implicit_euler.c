@@ -68,12 +68,21 @@ int main(int argc, char* argv[])
                 Get(next, i, j, k, Xlines, Ylines, data.Lz) = Get(data.arr[1], Xstart_copy_line + i, Ystart_copy_line + j, k, data.Lx, data.Ly, data.Lz);
             }
 
-    // Initialize matrix factory ---
+    // Yakobi method variables ---
     double * values;
     int* column_num;
     int* line_first;
+    int flag, result;
+    double delta, sum;
+    double *MainDiag = NULL;
+    double* discrepancy;
+    discrepancy = (double*)calloc(elements_per_process,sizeof(double));
+    MainDiag = (double*)calloc(elements_per_process, sizeof(double));
+    delta = 0.00000000001;
+    flag = 0;
 
-    unsigned values_number = (Xlines - 2) * (Xlines - 2) * (data.Lz - 2) * 6 + Xlines*Ylines*data.Lz;
+    // Initialize matrix ---
+    unsigned values_number = (Xlines - 2) * (Ylines - 2) * (data.Lz - 2) * 6 + Xlines*Ylines*data.Lz;
     values = (double*)calloc(values_number, sizeof(double));
     column_num = (unsigned*)calloc(values_number, sizeof(unsigned));
     line_first = (unsigned*)calloc(elements_per_process + 1, sizeof(unsigned));
@@ -82,30 +91,32 @@ int main(int argc, char* argv[])
     for (unsigned i = 0; i < Xlines; i++)
         for (unsigned j = 0; j < Ylines; j++)
             for (unsigned k = 0; k < data.Lz; k++) {
-
                 line_first[i*Ylines*data.Lz + j * data.Lz + k] = counter;
                 if (i == 0 || j == 0 || k == 0 || i == Xlines - 1 || j == Ylines - 1 || k == data.Lz - 1) {
                     column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k;
+                    MainDiag[i*Ylines*data.Lz + j * data.Lz + k] = 1;
                     values[counter++] = 1;
                 }
                 else {
                     // x y z central*3 z y x
                     column_num[counter] = (i - 1) * Ylines*data.Lz + j * data.Lz + k;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
                     column_num[counter] = i * Ylines*data.Lz + (j - 1) * data.Lz + k;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
                     column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k - 1;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
 
                     column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k;
-                    values[counter++] = 2 - 2 * pow(data.Sigma,2) * pow(data.deltaT,2)* (Xdivider + Ydivider + Zdivider);
+                    values[counter] = 1 + 2 * pow(data.Sigma,2) * pow(data.deltaT,2)* (Xdivider + Ydivider + Zdivider);
+                    MainDiag[i*Ylines*data.Lz + j * data.Lz + k] = 1 / values[counter];
+                    counter++;
 
                     column_num[counter] = i * Ylines*data.Lz + j * data.Lz + k + 1;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Zdivider;
                     column_num[counter] = i * Ylines*data.Lz + (j + 1) * data.Lz + k;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Ydivider;
                     column_num[counter] = (i + 1) * Ylines*data.Lz + j * data.Lz + k;
-                    values[counter++] = pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
+                    values[counter++] = - pow(data.Sigma,2) * pow(data.deltaT,2)* Xdivider;
                 }
             }
     line_first[elements_per_process] = counter;
@@ -115,16 +126,48 @@ int main(int argc, char* argv[])
     for (count = 0; count <= count_threshold; count++) {
         if (rank==0) out_time = omp_get_wtime();
 
+        flag = 1;
 #pragma omp parallel for
         for (i = 0; i < elements_per_process; i++) {
             prev[i] = current[i];
             current[i] = next[i];
         }
 
-        CsrMult(values, column_num, line_first, current, elements_per_process, next);
+        while (flag) {
+            flag = 0;
+            CsrMult(values, column_num, line_first, next, elements_per_process, discrepancy);
 
-        for (i = 0; i < elements_per_process; i++) {
-            next[i]-=prev[i];
+#pragma omp parallel for
+            for (i = 0; i < elements_per_process; i++) {
+                discrepancy[i] = discrepancy[i] - 2 * current[i] + prev[i];
+                discrepancy[i] = fabs(discrepancy[i]);
+                if (discrepancy[i] > delta) {
+                    flag = 1;
+                    break;
+                }
+            }
+
+            result = 0;
+            MPI_Allreduce(&flag, &result, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+            if (result == 0) {
+                break;
+            }
+            flag = 1;
+
+            // We must set discrepancy to next to calculate sum from previous calculated points.
+            for (i = 0; i < elements_per_process; i++)
+                discrepancy[i] = next[i];
+
+            SendBorderValues(discrepancy, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num, border_size);
+
+            for (i = 0; i < elements_per_process; i++) {
+                sum = 0;
+                for (j = 0; j < elements_per_process; j++) {
+                    // TODO: remove brute force sum calculating
+                    if (i != j) sum += CsrAccess(values, column_num, line_first, i, j, elements_per_process)*discrepancy[j];
+                }
+                next[i] = MainDiag[i] * (2*current[i] - prev[i] - sum);
+            }
         }
 
         SendBorderValues(next, Xlines, Ylines, data.Lz, rank, process_per_axis, Xcube_pos, Ycube_pos, proc_num, border_size);

@@ -81,8 +81,7 @@ int main(int argc, char* argv[])
     int* column_num;
     int* line_first;
 
-    unsigned borders_number = Xlines * Ylines * 2 + Ylines * data.Lz * 2 + Xlines * data.Lz * 2 - 8 - Xlines * 4 - Ylines * 4 - data.Lz * 4;
-    unsigned values_number = (elements_per_process - borders_number) * 7 + borders_number;
+    unsigned values_number = (Xlines - 2) * (Xlines - 2) * (data.Lz - 2) * 6 + Xlines*Ylines*data.Lz;
     values = (double*)calloc(values_number, sizeof(double));
     column_num = (unsigned*)calloc(values_number, sizeof(unsigned));
     line_first = (unsigned*)calloc(elements_per_process + 1, sizeof(unsigned));
